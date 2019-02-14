@@ -18,7 +18,7 @@ public class SimpleServlet extends HttpServlet {
 	private int counter = 0;
 	private String mutex = ""; 
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see HttpServlet#HttpServlet() //
      */
     public SimpleServlet() {
         super();
@@ -36,7 +36,7 @@ public class SimpleServlet extends HttpServlet {
 	 *
 	 *
 	 */
-    
+     //test
     
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
     		throws ServletException, IOException
