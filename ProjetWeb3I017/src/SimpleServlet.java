@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import services.Operation;
+import services.OperationService;
 
 /**
  * Servlet implementation class Operation

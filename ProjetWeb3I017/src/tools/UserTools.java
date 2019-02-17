@@ -12,8 +12,17 @@ public class UserTools {
 		return true;
 	}
 
-	public static String getUserID(String login) {
-		return "0000";
+	public static String getUserID(String login) throws SQLException {
+		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
+		ResultSet res = tools.DataBaseTools.executeRequete(query);
+		// extract user id string from ResultSet
+		return "string";
 	}
+	
+	public static boolean verifyUserConnected(String login) throws SQLexception {
+		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
+	}
+	
+	
 
 }

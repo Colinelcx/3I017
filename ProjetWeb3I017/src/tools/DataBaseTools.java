@@ -8,9 +8,21 @@ import java.sql.Statement;
 
 
 public class DataBaseTools {
-	public static ResultSet executeRequete(String query) {
+	public static ResultSet executeRequete(String query) throws SQLException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			
+			Class.forName("com.mysql.jdbc.Driver")/*.newInstance()*/;
+			// à quoi sert le .newInstance()? eclipse dit que la méthode est "depreceated"
+			String url = "jdbc:mysql://localhost/lacoux_felten";
+			Connection conn;
+			conn = DriverManager.getConnection(url, "root", "root");
+			Statement st;
+			st = conn.createStatement();
+			return st.executeQuery(query);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -18,17 +30,6 @@ public class DataBaseTools {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String url = "jdbc:mysql://localhost/lacoux_felten";
-		Connection conn;
-		try {
-			conn = DriverManager.getConnection(url, "root", "root");
-			Statement st;
-			st = conn.createStatement();
-			return st.executeQuery(query);
-		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
