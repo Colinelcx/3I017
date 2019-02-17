@@ -50,22 +50,7 @@ public class UserTools {
 		
 	}
 	
-	public static boolean verifyUserConnected(String login) throws SQLException {
-		
-		String query = "SELECT user_id from Session WHERE user_id='" + login + "';";
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery(query);
-		
-		while (res.next()) {
-			String id = res.getString("user_id");
-		}
-		
-		res.close();
-		st.close();
-		conn.close();
-		return true; // return true or false if the string id has been assigned a value, meaning the user_id is in the session table
-	}
+	
 	
 	
 
