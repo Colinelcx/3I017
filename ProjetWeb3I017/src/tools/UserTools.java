@@ -28,6 +28,7 @@ public class UserTools {
 	}
 
 	public static String getUserID(String login) throws SQLException {
+		// il faut le transformer en int ou non?
 		
 		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
 		Connection conn = tools.DataBaseTools.getConnection();
@@ -37,7 +38,7 @@ public class UserTools {
 		
 		
 		while (res.next()) {
-			String id = res.getInt("user_id");
+			int id = res.getInt("user_id");
 		}
 		// normalement on devrait recevoir une seul ligne, contenant une seul column, let user_id
 		

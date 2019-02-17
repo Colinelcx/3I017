@@ -53,7 +53,7 @@ public class DataBaseTools {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InstantiationException e) {
+		} catch (InstantiationException e) { // ici il y un erreur commee j'ai commenté la methode .newInstance()
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
