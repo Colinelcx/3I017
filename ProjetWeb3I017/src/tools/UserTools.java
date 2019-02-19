@@ -10,45 +10,7 @@ import java.sql.Statement;
 
 public class UserTools {
 
-	public static boolean userExists(String login) throws SQLException {
-		// probleme: il faut changer le String login en int id, comme c'est notre primary key, ou non?
-		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery(query);
-		//System.out.println(res);
-		
-		while (res.next()) {
-			String id = res.getString("user_id");
-		}
-		
-		st.close();
-		conn.close();
-		return true; // return true or false if we could finf the login in the result set
-	}
-
-	public static String getUserID(String login) throws SQLException {
-		// il faut le transformer en int ou non?
-		
-		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery(query);
-		
-		
-		
-		while (res.next()) {
-			int id = res.getInt("user_id");
-		}
-		// normalement on devrait recevoir une seul ligne, contenant une seul column, let user_id
-		
-		res.close();
-		st.close();
-		conn.close();
-		return id;
-		
-		
-	}
+	
 	
 	
 	

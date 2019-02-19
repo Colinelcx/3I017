@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.UUID;
 
 public class AuthTools {
+	
+	// pas sur si login et logout vraiment ici, ou plutot dans le services
 		
 	public static void login(String login, String password) throws SQLException {
 		
@@ -39,7 +41,6 @@ public class AuthTools {
 		
 	}
 	
-	https://github.com/collab-uniba/socialcde4eclipse/wiki/How-to-import-a-GitHub-project-into-Eclipse
 	public static boolean verifyUserConnected(int id) throws SQLException {
 		
 		if (getSessionKey(id) == null) {
@@ -70,4 +71,51 @@ public class AuthTools {
 		return key;
 	}
 	
+	public static String insertSession(int id, boolean root) {
+		// cette methode est utilisee dans l'example donne au TME3 enonce
+	}
+	
+	public static boolean userExists(String login) throws SQLException {
+		// probleme: il faut changer le String login en int id, comme c'est notre primary key, ou non?
+		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		ResultSet res = st.executeQuery(query);
+		//System.out.println(res);
+		
+		while (res.next()) {
+			String id = res.getString("user_id");
+		}
+		
+		st.close();
+		conn.close();
+		return true; // return true or false if we could finf the login in the result set
+	}
+
+	public static String getUserID(String login) throws SQLException {
+		// il faut le transformer en int ou non?
+		
+		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		ResultSet res = st.executeQuery(query);
+		
+		
+		
+		while (res.next()) {
+			int id = res.getInt("user_id");
+		}
+		// normalement on devrait recevoir une seul ligne, contenant une seul column, let user_id
+		
+		res.close();
+		st.close();
+		conn.close();
+		return id;
+		
+		
+	}
+	
+	public static boolean checkPassword(String login, String password) {
+		
+	}
 }
