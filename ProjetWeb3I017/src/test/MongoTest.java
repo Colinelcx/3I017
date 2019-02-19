@@ -9,19 +9,21 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoTest {
 	public static void main(String[] args){
-	
-		 MongoClient mongo = MongoClients.create("mongodb://localhost:27017");
-		 
-		 MongoDatabase db = mongo.getDatabase("lacoux_felten"); // nimporte quel nom on veut
-		 
-		 MongoCollection<Document> coll = db.getCollection("test"); // nimporte quel nom on veut
 		
-		 Document query = new Document();
+		//normalement en ne met pas le strings, mais on les prend de DBStatic
+		
+		MongoClient mongo = MongoClients.create("mongodb://localhost:27017");
 		 
-		 query.append("id", 1);
-		 query.append("nom", "toto");
+		MongoDatabase db = mongo.getDatabase("lacoux_felten"); // nimporte quel nom on veut
 		 
-		 coll.insertOne(query); // utiliser insertOne pour un document, insert many pour multiple documents
+		MongoCollection<Document> coll = db.getCollection("test"); // nimporte quel nom on veut
+		
+		Document query = new Document();
+		 
+		query.append("id", 1);
+		query.append("nom", "toto");
+		
+		coll.insertOne(query); // utiliser insertOne pour un document, insert many pour multiple documents
 		 
 		 /*
 		  * si on l'execute, on recoit qqch comme ca:

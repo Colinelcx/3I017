@@ -40,8 +40,7 @@ import java.sql.Statement;
 public class DataBaseTools {
 	public static Connection getConnection() throws SQLException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver")/*.newInstance()*/;
-			// a quoi sert le .newInstance()? eclipse dit que la m�thode est "depreceated"
+			Class.forName("com.mysql.jdbc.Driver"); // pas besoin d'utiliser newInstance
 			String url = "jdbc:mysql://localhost/lacoux_felten";
 			Connection conn;
 			conn = DriverManager.getConnection(url, "root", "root");
@@ -53,12 +52,6 @@ public class DataBaseTools {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InstantiationException e) { // ici il y un erreur commee j'ai comment� la methode .newInstance()
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,6 +59,6 @@ public class DataBaseTools {
 		return null;
 	}
 	
-	public static MongoDatabase
+	//public static MongoDatabase
 	// mongo DB location: http://localhost:27017/
 }
