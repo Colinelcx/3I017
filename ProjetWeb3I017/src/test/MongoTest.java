@@ -5,6 +5,7 @@ import org.bson.Document;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoTest {
@@ -35,6 +36,24 @@ public class MongoTest {
 		  * 
 		  * ceci nous indique que tout a fonctionné
 		  */
+		
+		
+		//Document query2 = new Document();
+		 
+		//query2.append("id", 2);
+		//query2.append("nom", "tata");
+		
+		//coll.insertOne(query2);
+		
+		MongoCursor<Document> cursor = coll.find(query).iterator();
+		
+		while (cursor.hasNext()) {
+			Document o = cursor.next();
+			System.out.println(o);
+		}
+		
+		// ceci imprime ca: Document{{_id=5c6c13e27d471d785bf3a1cc, id=1, nom=toto}}
+		// ca fonctionne donc
 		 
 		 
 	}
