@@ -39,7 +39,7 @@ public class AuthTools {
 		
 	}
 	
-	
+	https://github.com/collab-uniba/socialcde4eclipse/wiki/How-to-import-a-GitHub-project-into-Eclipse
 	public static boolean verifyUserConnected(int id) throws SQLException {
 		
 		if (getSessionKey(id) == null) {
@@ -65,6 +65,7 @@ public class AuthTools {
 		res.close();
 		st.close();
 		conn.close();
+		//test
 		
 		return key;
 	}
