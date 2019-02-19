@@ -12,7 +12,7 @@ import java.sql.Statement;
 //		try {
 //			
 //			Class.forName("com.mysql.jdbc.Driver")/*.newInstance()*/;
-//			// à quoi sert le .newInstance()? eclipse dit que la méthode est "depreceated"
+//			// ï¿½ quoi sert le .newInstance()? eclipse dit que la mï¿½thode est "depreceated"
 //			String url = "jdbc:mysql://localhost/lacoux_felten";
 //			Connection conn;
 //			conn = DriverManager.getConnection(url, "root", "root");
@@ -41,7 +41,7 @@ public class DataBaseTools {
 	public static Connection getConnection() throws SQLException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver")/*.newInstance()*/;
-			// à quoi sert le .newInstance()? eclipse dit que la méthode est "depreceated"
+			// a quoi sert le .newInstance()? eclipse dit que la mï¿½thode est "depreceated"
 			String url = "jdbc:mysql://localhost/lacoux_felten";
 			Connection conn;
 			conn = DriverManager.getConnection(url, "root", "root");
@@ -53,7 +53,7 @@ public class DataBaseTools {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InstantiationException e) { // ici il y un erreur commee j'ai commenté la methode .newInstance()
+		} catch (InstantiationException e) { // ici il y un erreur commee j'ai commentï¿½ la methode .newInstance()
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -65,4 +65,7 @@ public class DataBaseTools {
 		}
 		return null;
 	}
+	
+	public static MongoDatabase
+	// mongo DB location: http://localhost:27017/
 }
