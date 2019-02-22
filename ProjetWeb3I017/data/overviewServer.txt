@@ -1,0 +1,53 @@
+===========Servlets===========
+
+createUserServlet
+
+
+
+
+
+===========Services===========
+
+
+
+===========Tools===========
+
+###ServiceTools###
+public static JSONObject ServiceRefused(String message, int code)
+public static JSONObject ServiceAccepted(String message)
+
+###FriendTools###
+public static void addFriend(int id_user1, int id_user2) throws SQLException
+public static void removeFriend(int id_user1, int id_user2) throws SQLException
+boolean isFriend
+ArrayList listFriend
+
+###DataBaseTools###
+public static Connection getConnection() throws SQLException
+
+###AuthTools###
+public static void login(String login, String password) throws SQLException 
+public static void logout(String login, String password) throws SQLException
+// peut etre mieux de les mettre comme service/servlet
+
+
+public static boolean verifyUserConnected(int id) throws SQLException
+public static String getSessionKey(int id) throws SQLException
+public static String insertSession(int id, boolean root)
+public static boolean userExists(String login) throws SQLException
+public static String getUserID(String login) throws SQLException
+
+###MessageTools### (aussi contenir les likes ici?)
+addLike
+deleteLike
+isLiked // peut etre pas necessaire
+listLike
+addMessage
+deleteMessage
+listMessages
+
+
+
+===========Errors===========
+
+
