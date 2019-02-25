@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.OperationService;
 import services.UserService;
+import tools.MessageTools;
 
 /**
  * Servlet implementation class Operation
@@ -31,13 +32,10 @@ public class CreateUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-
+		String user_id = request.getParameter("user_id");
+		String user_id2 = request.getParameter(user_id2);
 		PrintWriter out = response.getWriter();
-		JSONObject res = UserService.createUser(nom, prenom, login, password);
+		JSONObject res = MessageTools.removeFriend(user_id, user_id2);;
 		out.println(res);
 	}
 

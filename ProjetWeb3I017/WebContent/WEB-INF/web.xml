@@ -786,6 +786,31 @@ standard deployment descriptor.
     <servlet-name>simple</servlet-name>
     <servlet-class>SimpleServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>addComment</servlet-name>
+    <servlet-class>AddCommentServlet</servlet-class>
+  </servlet>
+  <servlet>
+      <servlet-name>addFriend</servlet-name>
+    <servlet-class>AddFriendServlet</servlet-class>
+  </servlet>
+  <servlet>
+      <servlet-name>login</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+      <servlet-name>logout</servlet-name>
+    <servlet-class>LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>removeFriend</servlet-name>
+    <servlet-class>RemoveFriendServlet</servlet-class>
+  </servlet>
+  <servlet>
+      <servlet-name>search</servlet-name>
+    <servlet-class>SearchServlet</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>hello</servlet-name>
     <url-pattern>/hello</url-pattern>
@@ -797,5 +822,33 @@ standard deployment descriptor.
   <servlet-mapping>
     <servlet-name>simple</servlet-name>
     <url-pattern>/simple</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addComment</servlet-name>
+    <url-pattern>/comment/add</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addFriend</servlet-name>
+    <url-pattern>/friends/add</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>createUser</servlet-name>
+    <url-pattern>/user/create</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>login</servlet-name>
+    <url-pattern>/auth/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/auth/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>removeFriend</servlet-name>
+    <url-pattern>/friends/remove</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
   </servlet-mapping>
 </web-app>

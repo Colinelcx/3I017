@@ -31,13 +31,10 @@ public class CreateUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String login = request.getParameter("login");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-
 		PrintWriter out = response.getWriter();
-		JSONObject res = UserService.createUser(nom, prenom, login, password);
+		JSONObject res = UserService.login(username, password);
 		out.println(res);
 	}
 
