@@ -33,7 +33,7 @@ public class MessageTools {
 		}
 		 
 		query.append("user_id", user_id);
-		query.append("nom", login);
+		query.append("login", login);
 		query.append("date", date);
 		query.append("content", message);
 

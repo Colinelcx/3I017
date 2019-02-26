@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import services.OperationService;
 import services.UserService;
 
@@ -15,13 +17,13 @@ import services.UserService;
  * Servlet implementation class Operation
  */
 
-public class CreateUserServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateUserServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import services.OperationService;
 import services.UserService;
+import tools.ServiceTools;
 
 /**
  * Servlet implementation class Operation
@@ -37,7 +40,8 @@ public class CreateUserServlet extends HttpServlet {
 		String prenom = request.getParameter("prenom");
 
 		PrintWriter out = response.getWriter();
-		JSONObject res = UserService.createUser(nom, prenom, login, password);
+		UserService.createUser(nom, prenom, login, password);
+		JSONObject res = ServiceTools.ServiceAccepted("création user OK");
 		out.println(res);
 	}
 

@@ -8,21 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import services.OperationService;
 import services.UserService;
 import tools.MessageTools;
+import tools.ServiceTools;
 
 /**
  * Servlet implementation class Operation
  */
 
-public class CreateUserServlet extends HttpServlet {
+public class AddCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateUserServlet() {
+    public AddCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +38,8 @@ public class CreateUserServlet extends HttpServlet {
 		String user_id = request.getParameter("user_id");
 		String text = request.getParameter("text");
 		PrintWriter out = response.getWriter();
-		JSONObject res = MessageTools.addMessage(user_id, message);;
+		MessageTools.addMessage(Integer.parseInt(user_id), text);
+		JSONObject res = ServiceTools.ServiceAccepted("insertion message OK");
 		out.println(res);
 	}
 
