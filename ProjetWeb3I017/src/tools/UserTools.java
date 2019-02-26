@@ -11,7 +11,7 @@ public class UserTools {
 
 	public static boolean userExists(String login) throws SQLException {
 		
-		String query = "SELECT user_id from User WHERE user_id='" + login + "';"; // il faut peut etre rendre ces queries SQL injection attack secure
+		String query = "SELECT user_id from User WH	ERE user_id='" + login + "';"; // il faut peut etre rendre ces queries SQL injection attack secure
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
