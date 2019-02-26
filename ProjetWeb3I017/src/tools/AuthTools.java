@@ -124,4 +124,24 @@ public class AuthTools {
 		
 		
 	}
+	
+	public int getSessionID(String key) throws SQLException {
+		
+		String query = "SELECT id_user from Session WHERE key='" + key + "';";
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		ResultSet res = st.executeQuery(query);
+		
+		int id = -1;
+		
+		while (res.next()) {
+			id = res.getInt("id_user");
+		}
+		
+		res.close();
+		st.close();
+		conn.close();
+		
+		return id;
+	}
 }
