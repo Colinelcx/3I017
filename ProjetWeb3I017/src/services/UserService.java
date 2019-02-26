@@ -24,6 +24,7 @@ public class UserService {
 			
 			//int id = tools.UserTools.getUserID(login);
 				
+					
 			return ServiceTools.ServiceAccepted("create user OK");
 			
 		} catch (SQLException e) {
@@ -32,7 +33,16 @@ public class UserService {
 			
 			return tools.ServiceTools.ServiceRefused("probleme sql" + login, 100);
 			
-		}		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return tools.ServiceTools.ServiceRefused("probleme JSON" + login, 1000);
+		}
+		
+		
+		
+		
 	}
 
 }
