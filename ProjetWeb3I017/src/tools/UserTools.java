@@ -11,7 +11,24 @@ public class UserTools {
 
 	public static boolean userExists(String login) throws SQLException {
 		
-		String query = "SELECT user_id from User WH	ERE user_id='" + login + "';"; // il faut peut etre rendre ces queries SQL injection attack secure
+		String query = "SELECT user_id from User WHERE login_user='" + login + "';"; // il faut peut etre rendre ces queries SQL injection attack secure
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		ResultSet res = st.executeQuery(query);
+		
+		boolean response = res.next();
+		
+		res.close(); // est-ce que c'est vraiment necessaire de fermer res?????
+		st.close();
+		conn.close();
+		
+		return response;
+	}
+	
+	public static boolean userExists(int id) throws SQLException {
+		
+		String query = "SELECT user_id from User WHERE user_id=" + id + ";"; // il faut peut etre rendre ces queries SQL injection attack secure
+		
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
