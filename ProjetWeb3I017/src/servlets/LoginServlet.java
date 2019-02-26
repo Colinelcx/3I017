@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import services.AuthService;
 import services.OperationService;
 import services.UserService;
 
@@ -15,13 +18,13 @@ import services.UserService;
  * Servlet implementation class Operation
  */
 
-public class CreateUserServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateUserServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +37,7 @@ public class CreateUserServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		PrintWriter out = response.getWriter();
-		JSONObject res = UserService.login(username, password);
+		JSONObject res = AuthService.login(username, password);
 		out.println(res);
 	}
 

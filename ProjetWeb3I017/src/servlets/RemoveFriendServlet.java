@@ -8,21 +8,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import services.FriendService;
 import services.OperationService;
 import services.UserService;
+import tools.FriendTools;
 import tools.MessageTools;
+import tools.ServiceTools;
 
 /**
  * Servlet implementation class Operation
  */
 
-public class CreateUserServlet extends HttpServlet {
+public class RemoveFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateUserServlet() {
+    public RemoveFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +40,8 @@ public class CreateUserServlet extends HttpServlet {
 		String user_id = request.getParameter("user_id");
 		String user_id2 = request.getParameter(user_id2);
 		PrintWriter out = response.getWriter();
-		JSONObject res = MessageTools.removeFriend(user_id, user_id2);;
+		FriendService.removeFriend(Integer.parseInt(user_id), Integer.parseInt(user_id2));
+		JSONObject res = ServiceTools.ServiceAccepted("ami supprimé");
 		out.println(res);
 	}
 
