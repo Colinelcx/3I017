@@ -9,52 +9,68 @@ import org.json.JSONObject;
 
 import tools.AuthTools;
 import tools.FriendTools;
+import tools.ServiceTools;
 
 public class FriendService {
 
-public static JSONObject addFriends(String id_user1, String id_user1) {
+	public static JSONObject addFriends(int id_user1, int id_user2) {
 	
 	
 		
-		if ((id_user1 == null) || (mdp == null)){
+		/*if ((id_user1 == null) || (id_user2 == null)){
 			return (tools.ServiceTools.ServiceRefused("Wrong arguments", 0));
 		}
-		
+		*/
 		try {
 			
-			boolean is_user1 = tools.UserTools.userExists(login);
 			
-			if (!is_user) return tools.ServiceTools.ServiceRefused("unknown user " + login, 1);
 			
-			boolean password_ok=tools.AuthTools.checkPassword(login, mdp);
+			boolean is_user1 = tools.UserTools.userExists(id_user1);
+			boolean is_user2 = tools.UserTools.userExists(id_user2);
 			
-			if (!password_ok) return tools.ServiceTools.ServiceRefused("bad password" + login, 2);
+			if (!is_user1) return tools.ServiceTools.ServiceRefused("unknown user " + id_user1, 1);
+			if (!is_user2) return tools.ServiceTools.ServiceRefused("unknown user " + id_user2, 1);
 			
-			int id_user = tools.UserTools.getUserID(login);
+			tools.FriendTools.insertFriendship(id_user1, id_user2);
 			
-			JSONObject retour = new JSONObject();
 			
-			String key = AuthTools.insertSession(id_user, false);
-			
-			retour.put("key", key);
-			
-			return retour;
+			return ServiceTools.ServiceAccepted("friendship created");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			return tools.ServiceTools.ServiceRefused("probleme sql" + login, 100);
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return tools.ServiceTools.ServiceRefused("probleme JSON" + login, 1000);
+			return tools.ServiceTools.ServiceRefused("probleme sql frienship", 100);
 		}
 				
 	}
-	if (areFriends(id_user1, id_user2)) {
-		return;
+
+	public static JSONObject removeFriends(int id_user1, int id_user2) {
+	
+
+		try {
+			
+			boolean is_user1 = tools.UserTools.userExists(id_user1);
+			boolean is_user2 = tools.UserTools.userExists(id_user2);
+			
+			if (!is_user1) return tools.ServiceTools.ServiceRefused("unknown user " + id_user1, 1);
+			if (!is_user2) return tools.ServiceTools.ServiceRefused("unknown user " + id_user2, 1);
+			
+			boolean friends = tools.FriendTools.areFriends(id_user1, id_user2);
+			
+			if (!friends) return tools.ServiceTools.ServiceRefused("already friends ", 1);
+			
+			tools.FriendTools.removeFriendship(id_user1, id_user2);
+			
+			
+			return ServiceTools.ServiceAccepted("friendship removed");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return tools.ServiceTools.ServiceRefused("probleme sql frienship", 100);
+		}
+			
 	}
 }

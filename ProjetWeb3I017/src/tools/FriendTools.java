@@ -25,7 +25,7 @@ public class FriendTools {
 		return response;
 	}
 	
-	public static void addFriend(int id_user1, int id_user2) throws SQLException {
+	public static void insertFriendship(int id_user1, int id_user2) throws SQLException {
 		
 		String query = "INSERT INTO Friendship (id_user1, id_user2, date_connexion)"
 				+ "VALUES (" + id_user1 + ", " + id_user2 + ", NOW());";
@@ -42,7 +42,7 @@ public class FriendTools {
 		return;
 	}
 	
-	public static void removeFriend(int id_user1, int id_user2) throws SQLException {
+	public static void removeFriendship(int id_user1, int id_user2) throws SQLException {
 
 		String query = "DELETE FROM Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ");";
 		
