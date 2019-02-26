@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tools.AuthTools;
+import tools.ServiceTools;
 
 public class UserService {
 	
@@ -19,15 +20,11 @@ public class UserService {
 			
 			if (is_user) return tools.ServiceTools.ServiceRefused("user already exists" + login, 1);
 									
-			tools.UserTools.insertUser(nom, prenom, login, password, email);
+			tools.UserTools.insertUser(login, nom, prenom, password, email);
 			
-			JSONObject retour = new JSONObject();
-			
-			String key = AuthTools.insertSession(id_user, false);
-			
-			retour.put("key", key);
-			
-			return retour;
+			//int id = tools.UserTools.getUserID(login);
+				
+			return ServiceTools.ServiceAccepted("create user OK");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -35,18 +32,7 @@ public class UserService {
 			
 			return tools.ServiceTools.ServiceRefused("probleme sql" + login, 100);
 			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return tools.ServiceTools.ServiceRefused("probleme JSON" + login, 1000);
-		}
-		
-		System.out.println("Création user : "+ nom + " " + prenom);
-		
-		return tools.ServiceTools.ServiceAccepted("ok");
-		
-		
+		}		
 	}
 
 }

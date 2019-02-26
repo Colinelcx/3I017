@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class UserTools {
+	private static int compt =0;
 
 	public static boolean userExists(String login) throws SQLException {
 		
@@ -15,7 +16,7 @@ public class UserTools {
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
 		
-		 
+		boolean response = res.next();
 		
 		res.close(); // est-ce que c'est vraiment necessaire de fermer res?????
 		st.close();
@@ -46,9 +47,9 @@ public class UserTools {
 
 	}
 	
-	public static void insertUser(int id, String login, String nom, String prenom, String password, String email) throws SQLException {
-		
-		String query = "INSERT INTO User (id_user, login_user, first_name_user, family_name_user, password_user, mail_user)"
+	public static void insertUser(String login, String nom, String prenom, String password, String email) throws SQLException {
+		int id = createID();
+		String query = "INSERT INTO User (user_id, login_user, first_name_user, family_name_user, password_user, mail_user)"
 				+ "VALUES (" + id + ", '" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "');";
 		
 		Connection conn = tools.DataBaseTools.getConnection();
@@ -84,13 +85,11 @@ public class UserTools {
 		return login; // si retour null, alors il y avait une erreur
 
 	}
-	
+
+	private static int createID() {
+		return compt++;
+	}
 }
-
-
-
-
-
 
 
 
