@@ -25,6 +25,38 @@ public class FriendTools {
 		return response;
 	}
 	
+	public static void addFriend(int id_user1, int id_user2) throws SQLException {
+		
+		String query = "INSERT INTO Friendship (id_user1, id_user2, date_connexion)"
+				+ "VALUES (" + id_user1 + ", " + id_user2 + ", NOW());";
+		// le NOW() fait la date automatiquement dans SQL
+		
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		
+		st.executeUpdate(query);
+		
+		st.close();
+		conn.close();
+		
+		return;
+	}
+	
+	public static void removeFriend(int id_user1, int id_user2) throws SQLException {
+
+		String query = "DELETE FROM Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ");";
+		
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		
+		st.executeUpdate(query);
+		
+		st.close();
+		conn.close();
+		
+		return;		
+	}
+	
 	
 	public static id[] iDFriendsList (int id_user1) throws SQLException {
 		//retourne une liste des ids des amis de user_1

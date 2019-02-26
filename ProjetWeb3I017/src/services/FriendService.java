@@ -4,49 +4,57 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import tools.AuthTools;
 import tools.FriendTools;
 
 public class FriendService {
 
-	public static void addFriend(int id_user1, int id_user2) throws SQLException {
+public static JSONObject addFriends(String id_user1, String id_user1) {
+	
+	
 		
-		if (Friend	Tools.areFriends(id_user1, id_user2)) {
-			return;
+		if ((id_user1 == null) || (mdp == null)){
+			return (tools.ServiceTools.ServiceRefused("Wrong arguments", 0));
+		}
+		
+		try {
+			
+			boolean is_user1 = tools.UserTools.userExists(login);
+			
+			if (!is_user) return tools.ServiceTools.ServiceRefused("unknown user " + login, 1);
+			
+			boolean password_ok=tools.AuthTools.checkPassword(login, mdp);
+			
+			if (!password_ok) return tools.ServiceTools.ServiceRefused("bad password" + login, 2);
+			
+			int id_user = tools.UserTools.getUserID(login);
+			
+			JSONObject retour = new JSONObject();
+			
+			String key = AuthTools.insertSession(id_user, false);
+			
+			retour.put("key", key);
+			
+			return retour;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return tools.ServiceTools.ServiceRefused("probleme sql" + login, 100);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return tools.ServiceTools.ServiceRefused("probleme JSON" + login, 1000);
 		}
 				
-		// supprimer la colonne root de la table Friendship, elle ne met aucun sens
-		
-		String query = "INSERT INTO Friendship (id_user1, id_user2, date_connexion)"
-				+ "VALUES (" + id_user1 + ", " + id_user2 + ", NOW());";
-		// le NOW() fait la date automatiquement dans SQL
-		
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		
-		st.executeUpdate(query);
-		
-		st.close();
-		conn.close();
-		
-		return;
 	}
-	
-	public static void removeFriend(int id_user1, int id_user2) throws SQLException {
-
-		if (FriendTools.areFriends(id_user1, id_user2) == false) {
-			return;
-		}
-		
-		String query = "DELETE FROM Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ");";
-		
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		
-		st.executeUpdate(query);
-		
-		st.close();
-		conn.close();
-		
-		return;		
+	if (areFriends(id_user1, id_user2)) {
+		return;
 	}
 }
