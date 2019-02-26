@@ -79,7 +79,7 @@ public class AuthTools {
 	}
 	
 	
-	public static String insertSession(int id, boolean root) {
+	public static String insertSession(int id, boolean root) throws SQLException {
 		// verify if user is actually logged out and not in session table anymore
 		// find out how timestamp works
 		
@@ -88,20 +88,40 @@ public class AuthTools {
 			rootInt = 1;
 		}
 		
-		String query = "INSERT INTO Session VALUES (" + id + ",'" + genKey() + "', " + /*timestamp*/ + ", " + rootInt + ";)";
+		String key = genKey();
+		
+		String query = "INSERT INTO Session VALUES (" + id + ",'" + key + "', NOW() , " + rootInt + ";)";
 		
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		st.executeUpdate(query);
 		
 		st.close();
-		conn.close();		
+		conn.close();
+		
+		return key;
 	}
 	
 	
 
 	
-	public static boolean checkPassword(String login, String password) {
+	public static boolean checkPassword(String login, String password) throws SQLException {
+		
+		int id =  tools.UserTools.getUserID(login);
+		
+		String query = "SELECT * from Session WHERE id_user=" + id + " AND password_user='" + password + "';";
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		ResultSet res = st.executeQuery(query);
+		
+		boolean response = res.next();
+		
+		res.close();
+		st.close();
+		conn.close();
+		
+		return response;
+		
 		
 	}
 }

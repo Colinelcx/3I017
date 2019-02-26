@@ -45,7 +45,7 @@ import com.mongodb.client.MongoDatabase;
 //}
 
 public class DataBaseTools {
-	public static Connection getConnection() throws SQLException {
+	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); // pas besoin d'utiliser newInstance
 			String url = "jdbc:mysql://localhost/lacoux_felten";
