@@ -42,10 +42,10 @@ public class AddFriendServlet extends HttpServlet {
 		String user_id2 = request.getParameter("user_id2");
 		PrintWriter out = response.getWriter();
 		try {
-			FriendService.addFriend(Integer.parseInt(user_id), Integer.parseInt(user_id2));
-		} catch (NumberFormatException | SQLException e) {
+			FriendService.addFriends(Integer.parseInt(user_id), Integer.parseInt(user_id2));
+		} catch (NumberFormatException  e) {
 			// TODO Auto-generated catch block
-			 JSONObject res =  ServiceTools.ServiceRefused("probleme sql", 100);
+			 JSONObject res =  ServiceTools.ServiceRefused("probleme parametres", 100);
 			 out.println(res);
 		};
 		JSONObject res = ServiceTools.ServiceAccepted("ami ajouté");

@@ -102,6 +102,21 @@ public class AuthTools {
 		return key;
 	}
 	
+	public static void removeSession(String key) throws SQLException {
+
+		String query = "DELETE FROM Session WHERE key_session = '" + key + "';";
+		
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		
+		st.executeUpdate(query);
+		
+		st.close();
+		conn.close();
+		
+		return;		
+	}
+	
 	
 
 	
@@ -125,7 +140,7 @@ public class AuthTools {
 		
 	}
 	
-	public int getSessionID(String key) throws SQLException {
+	public static int getSessionID(String key) throws SQLException {
 		
 		String query = "SELECT id_user from Session WHERE key='" + key + "';";
 		Connection conn = tools.DataBaseTools.getConnection();
@@ -143,6 +158,15 @@ public class AuthTools {
 		conn.close();
 		
 		return id;
-		//test
+	}
+	
+	public static boolean checkSession(String key) throws SQLException {
+		
+		int id = getSessionID(key);
+		
+		if (id == -1) return false;
+				
+		return true;		
+		
 	}
 }

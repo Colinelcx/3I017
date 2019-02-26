@@ -36,7 +36,7 @@ public class LogoutServlet extends HttpServlet {
 		String key = request.getParameter("key");
 
 		PrintWriter out = response.getWriter();
-		JSONObject res = UserService.logout(key);
+		JSONObject res = services.AuthService.logout(key);
 		out.println(res);
 	}
 

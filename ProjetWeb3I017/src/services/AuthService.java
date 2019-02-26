@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tools.AuthTools;
+import tools.ServiceTools;
 
 //test 
 
@@ -40,13 +41,13 @@ public class AuthService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			return tools.ServiceTools.ServiceRefused("probleme sql" + login, 100);
+			return tools.ServiceTools.ServiceRefused("probleme sql login" + login, 100);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			return tools.ServiceTools.ServiceRefused("probleme JSON" + login, 1000);
+			return tools.ServiceTools.ServiceRefused("probleme JSON login" + login, 1000);
 		}
 				
 	}
@@ -59,37 +60,19 @@ public static JSONObject logout(String key) {
 		
 		try {
 			
+			boolean session = tools.AuthTools.checkSession(key);
 			
-			boolean is_connected = AuthTools.verifyUserConnected(id)
-			boolean is_user=tools.UserTools.userExists(login);
+			if (!session) return tools.ServiceTools.ServiceRefused("session does not exist ", 1);
 			
-			if (!is_user) return tools.ServiceTools.ServiceRefused("unknown user " + login, 1);
+			tools.AuthTools.removeSession(key);
 			
-			boolean password_ok=tools.AuthTools.checkPassword(login, mdp);
-			
-			if (!password_ok) return tools.ServiceTools.ServiceRefused("bad password" + login, 2);
-			
-			int id_user = tools.UserTools.getUserID(login);
-			
-			JSONObject retour = new JSONObject();
-			
-			String key = AuthTools.insertSession(id_user, false);
-			
-			retour.put("key", key);
-			
-			return retour;
+			return ServiceTools.ServiceAccepted("logged out");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			return tools.ServiceTools.ServiceRefused("probleme sql" + login, 100);
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return tools.ServiceTools.ServiceRefused("probleme JSON" + login, 1000);
+			return tools.ServiceTools.ServiceRefused("probleme sql logout", 100);
 		}
 				
 	}

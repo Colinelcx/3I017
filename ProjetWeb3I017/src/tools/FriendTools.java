@@ -44,7 +44,7 @@ public class FriendTools {
 	
 	public static void removeFriendship(int id_user1, int id_user2) throws SQLException {
 
-		String query = "DELETE FROM Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ");";
+		String query = "DELETE FROM Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ";";
 		
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
