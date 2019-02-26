@@ -15,7 +15,7 @@ public class UserTools {
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
 		
-		boolean response = res.next();
+		 
 		
 		res.close(); // est-ce que c'est vraiment necessaire de fermer res?????
 		st.close();
@@ -46,10 +46,10 @@ public class UserTools {
 
 	}
 	
-	public static void insertUser(String id, String login, String nom, String prenom, String password, String email) throws SQLException {
+	public static void insertUser(int id, String login, String nom, String prenom, String password, String email) throws SQLException {
 		
 		String query = "INSERT INTO User (id_user, login_user, first_name_user, family_name_user, password_user, mail_user)"
-				+ "VALUES ('" + id + "', '" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "');";
+				+ "VALUES (" + id + ", '" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "');";
 		
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();

@@ -73,7 +73,7 @@ public class AuthTools {
 	public static String genKey() {
 		String key = UUID.randomUUID().toString();
 		// session id is key of length 32, we shorten it
-		key = key.substring(0, 31);
+		//key = key.substring(0, 31);
 		// verify that key does not exist
 		return key;
 	}

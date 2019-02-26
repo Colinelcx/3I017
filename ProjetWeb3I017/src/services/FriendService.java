@@ -10,7 +10,7 @@ public class FriendService {
 
 	public static void addFriend(int id_user1, int id_user2) throws SQLException {
 		
-		if (FriendTools.areFriends(id_user1, id_user2)) {
+		if (Friend	Tools.areFriends(id_user1, id_user2)) {
 			return;
 		}
 				

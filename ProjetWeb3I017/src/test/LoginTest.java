@@ -5,7 +5,7 @@ import services.UserService;
 
 public class LoginTest {
 	public static void main(String[] args){
-		JSONObject json = UserService.createUser("test", "Coline", "3670163", "ztfef");
+		JSONObject json = UserService.login("Coline", "3670163");
 		System.out.println(json.toString());
 	}
 }
