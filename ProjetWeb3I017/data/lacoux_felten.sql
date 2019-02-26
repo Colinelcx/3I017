@@ -52,7 +52,7 @@ CREATE TABLE `Session` (
 --
 
 CREATE TABLE `User` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `login_user` varchar(32) NOT NULL,
   `first_name_user` varchar(32) NOT NULL,
   `family_name_user` varchar(32) NOT NULL,
@@ -63,9 +63,6 @@ CREATE TABLE `User` (
 --
 -- Contenu de la table `User`
 --
-
-INSERT INTO `User` (`user_id`, `login_user`, `first_name_user`, `family_name_user`, `password_user`, `mail_user`) VALUES
-(3670163, 'test', 'Lacoux', 'Coline', 0x2a41313534433532353635453945374639344246433038413146453730323632344544384546464441, 'coline@gmail.com');
 
 --
 -- Index pour les tables exportées
@@ -88,7 +85,6 @@ ALTER TABLE `Session`
 -- Index pour la table `User`
 --
 ALTER TABLE `User`
-  ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `login_user` (`login_user`),
   ADD UNIQUE KEY `mail_user` (`mail_user`);
 

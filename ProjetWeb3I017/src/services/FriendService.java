@@ -13,9 +13,9 @@ import tools.ServiceTools;
 
 public class FriendService {
 
-	public static JSONObject addFriends(int id_user1, int id_user2) {
+	public static JSONObject addFriends(String login1, String login2) {
 	
-	
+		
 		
 		/*if ((id_user1 == null) || (id_user2 == null)){
 			return (tools.ServiceTools.ServiceRefused("Wrong arguments", 0));
@@ -23,6 +23,8 @@ public class FriendService {
 		*/
 		try {
 			
+			int id_user1 = tools.UserTools.getUserID(login1);
+			int id_user2 = tools.UserTools.getUserID(login2);
 			
 			
 			boolean is_user1 = tools.UserTools.userExists(id_user1);
@@ -45,10 +47,13 @@ public class FriendService {
 				
 	}
 
-	public static JSONObject removeFriends(int id_user1, int id_user2) {
+	public static JSONObject removeFriends(String login1, String login2) {
 	
 
 		try {
+			
+			int id_user1 = tools.UserTools.getUserID(login1);
+			int id_user2 = tools.UserTools.getUserID(login2);
 			
 			boolean is_user1 = tools.UserTools.userExists(id_user1);
 			boolean is_user2 = tools.UserTools.userExists(id_user2);

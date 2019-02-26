@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class UserTools {
-	private static int compt =0;
 
 	public static boolean userExists(String login) throws SQLException {
 		
@@ -65,9 +64,8 @@ public class UserTools {
 	}
 	
 	public static void insertUser(String login, String nom, String prenom, String password, String email) throws SQLException {
-		int id = createID();
-		String query = "INSERT INTO User (user_id, login_user, first_name_user, family_name_user, password_user, mail_user)"
-				+ "VALUES (" + id + ", '" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "');";
+		String query = "INSERT INTO User (login_user, first_name_user, family_name_user, password_user, mail_user)"
+				+ "VALUES ('" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "');";
 		
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
@@ -103,9 +101,7 @@ public class UserTools {
 
 	}
 
-	private static int createID() {
-		return compt++;
-	}
+
 }
 
 

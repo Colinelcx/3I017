@@ -10,7 +10,7 @@ import tools.ServiceTools;
 
 public class UserService {
 	
-	public static JSONObject createUser(String nom, String prenom, String login, String password, String email){
+	public static JSONObject createUser(String login, String nom, String prenom, String password, String email){
 		if (nom == null || prenom == null || login == null || password == null) {
 			return tools.ServiceTools.ServiceRefused("Wrong arguments", 0);			
 		}
@@ -33,11 +33,6 @@ public class UserService {
 			
 			return tools.ServiceTools.ServiceRefused("probleme sql" + login, 100);
 			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return tools.ServiceTools.ServiceRefused("probleme JSON" + login, 1000);
 		}
 		
 		
