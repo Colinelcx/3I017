@@ -26,7 +26,7 @@ public class UserTools {
 
 	public static int getUserID(String login) throws SQLException {
 		
-		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
+		String query = "SELECT user_id from User WHERE login_user='" + login + "';";
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
@@ -60,6 +60,28 @@ public class UserTools {
 		conn.close();
 		
 		return;
+
+	}
+	
+	public static String getLogin(int user_id) throws SQLException {
+		
+		String query = "SELECT login_user from User WHERE id_user=" + user_id + ";";
+		Connection conn = tools.DataBaseTools.getConnection();
+		Statement st = conn.createStatement();
+		ResultSet res = st.executeQuery(query);
+		
+		String login = null;
+		
+		while (res.next()) {
+			login = res.getString("login_user");
+		}
+		
+		res.close();
+		st.close();
+		conn.close();
+		
+		
+		return login; // si retour null, alors il y avait une erreur
 
 	}
 	

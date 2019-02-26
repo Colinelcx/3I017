@@ -1,5 +1,9 @@
 package tools;
 
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import org.bson.Document;
 import org.json.JSONObject;
 
@@ -13,13 +17,26 @@ public class MessageTools {
 	
 	public static void addMessage(int user_id, String message) {
 		
+		GregorianCalendar calendar = new java.util.GregorianCalendar();
+		Date date = calendar.getTime();
+		
 		MongoCollection<Document> coll = tools.DataBaseTools.getMongoCollection("messages");
 		
 		Document query = new Document();
+		
+		String login = null;
+		try {
+			login = tools.UserTools.getLogin(user_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 
 		query.append("user_id", user_id);
+		query.append("nom", login);
+		query.append("date", date);
 		query.append("content", message);
-		
+
 		coll.insertOne(query);
 		
 	}
@@ -51,6 +68,8 @@ public class MessageTools {
 			Document o = cursor.next();
 			System.out.println(o);
 		}
+		
+		
 		
 	}
 
