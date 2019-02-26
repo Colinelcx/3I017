@@ -58,7 +58,7 @@ public class FriendTools {
 	}
 	
 	
-	public static id[] iDFriendsList (int id_user1) throws SQLException {
+	public static int[] iDFriendsList (int id_user1) throws SQLException {
 		//retourne une liste des ids des amis de user_1
 		
 		String query = "SELECT id_user2 from Friendship WHERE id_user1 = " + id_user1 + ";";

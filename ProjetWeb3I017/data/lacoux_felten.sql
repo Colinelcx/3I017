@@ -1,9 +1,9 @@
- -- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.6.6deb4
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Mar 26 Février 2019 à 12:41
+-- Généré le :  Mar 26 Février 2019 à 15:28
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.0.33-0+deb9u1
 
@@ -45,6 +45,13 @@ CREATE TABLE `Session` (
   `root` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `Session`
+--
+
+INSERT INTO `Session` (`id_user`, `key_session`, `date_session`, `root`) VALUES
+(6, 'sldfjsl', '2019-02-26 14:15:51', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -52,17 +59,21 @@ CREATE TABLE `Session` (
 --
 
 CREATE TABLE `User` (
-  `user_id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `login_user` varchar(32) NOT NULL,
   `first_name_user` varchar(32) NOT NULL,
   `family_name_user` varchar(32) NOT NULL,
-  `password_user` blob NOT NULL,
+  `password_user` varchar(32) NOT NULL,
   `mail_user` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `User`
 --
+
+INSERT INTO `User` (`user_id`, `login_user`, `first_name_user`, `family_name_user`, `password_user`, `mail_user`) VALUES
+(5, 'collacoux', 'Lacoux', 'Coline', '3670163', 'ztfef'),
+(6, 'cha', 'felten', 'charel', 'jgjh', 'ddfg');
 
 --
 -- Index pour les tables exportées
@@ -85,9 +96,19 @@ ALTER TABLE `Session`
 -- Index pour la table `User`
 --
 ALTER TABLE `User`
+  ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `login_user` (`login_user`),
   ADD UNIQUE KEY `mail_user` (`mail_user`);
 
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `User`
+--
+ALTER TABLE `User`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Contraintes pour les tables exportées
 --

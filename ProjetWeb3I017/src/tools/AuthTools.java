@@ -124,7 +124,7 @@ public class AuthTools {
 		
 		int id =  tools.UserTools.getUserID(login);
 		
-		String query = "SELECT * from Session WHERE id_user=" + id + " AND password_user='" + password + "';";
+		String query = "SELECT * from User WHERE user_id=" + id + " AND password_user='" + password + "';";
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
