@@ -10,7 +10,7 @@ public class UserTools {
 
 	public static boolean userExists(String login) throws SQLException {
 		
-		String query = "SELECT user_id from User WHERE login_user='" + login + "';"; // il faut peut etre rendre ces queries SQL injection attack secure
+		String query = "SELECT id_user from User WHERE login_user='" + login + "';"; // il faut peut etre rendre ces queries SQL injection attack secure
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
@@ -26,7 +26,7 @@ public class UserTools {
 	
 	public static boolean userExists(int id) throws SQLException {
 		
-		String query = "SELECT user_id from User WHERE user_id=" + id + ";"; // il faut peut etre rendre ces queries SQL injection attack secure
+		String query = "SELECT id_user from User WHERE id_user=" + id + ";"; // il faut peut etre rendre ces queries SQL injection attack secure
 		
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
@@ -43,7 +43,7 @@ public class UserTools {
 
 	public static int getUserID(String login) throws SQLException {
 		
-		String query = "SELECT user_id from User WHERE login_user='" + login + "';";
+		String query = "SELECT id_user from User WHERE login_user='" + login + "';";
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
@@ -51,7 +51,7 @@ public class UserTools {
 		int id = -1;
 		
 		while (res.next()) {
-			id = res.getInt("user_id");
+			id = res.getInt("id_user");
 		}
 		
 		res.close();
@@ -66,6 +66,7 @@ public class UserTools {
 	public static void insertUser(String login, String nom, String prenom, String password, String email) throws SQLException {
 		String query = "INSERT INTO User (login_user, first_name_user, family_name_user, password_user, mail_user)"
 				+ "VALUES ('" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "');";
+		// on n'a pas besoin de mettre id_user comme c'est auto increment
 		
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
@@ -79,9 +80,9 @@ public class UserTools {
 
 	}
 	
-	public static String getLogin(int user_id) throws SQLException {
+	public static String getLogin(int id) throws SQLException {
 		
-		String query = "SELECT login_user from User WHERE id_user=" + user_id + ";";
+		String query = "SELECT login_user from User WHERE id_user=" + id + ";";
 		Connection conn = tools.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
@@ -100,38 +101,4 @@ public class UserTools {
 		return login; // si retour null, alors il y avait une erreur
 
 	}
-
-
 }
-
-
-
-
-//package tools;
-//
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//
-//public class UserTools {
-//
-//	public static boolean userExists(String login) throws SQLException {
-//		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
-//		ResultSet res = tools.DataBaseTools.executeRequete(query);
-//		System.out.println(res);
-//		return true;
-//	}
-//
-//	public static String getUserID(String login) throws SQLException {
-//		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
-//		ResultSet res = tools.DataBaseTools.executeRequete(query);
-//		// extract user id string from ResultSet
-//		return "string";
-//	}
-//	
-//	public static boolean verifyUserConnected(String login) throws SQLexception {
-//		String query = "SELECT user_id from User WHERE user_id='" + login + "';";
-//	}
-//	
-//	
-//
-//}

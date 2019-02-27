@@ -37,10 +37,10 @@ public class RemoveFriendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String user_id = request.getParameter("user_id");
-		String user_id2 = request.getParameter("user_id2");
+		String id_user1 = request.getParameter("id_user1");
+		String id_user2 = request.getParameter("id_user2");
 		PrintWriter out = response.getWriter();
-		FriendService.removeFriends(Integer.parseInt(user_id), Integer.parseInt(user_id2));
+		FriendService.removeFriends(Integer.parseInt(id_user1), Integer.parseInt(id_user2));
 		JSONObject res = ServiceTools.ServiceAccepted("ami supprimé");
 		out.println(res);
 	}

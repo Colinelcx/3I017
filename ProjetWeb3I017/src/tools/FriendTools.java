@@ -78,6 +78,8 @@ public class FriendTools {
 		friendsList = friendsArrayList.toArray(new int[0]); // voir pq ca ne fonctionne pas
 		
 		return friendsList;
+		
+		// ne fonctionne pas encore, devrait retourer un array avec des ids
 	}
 	
 	

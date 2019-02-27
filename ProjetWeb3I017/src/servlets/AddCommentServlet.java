@@ -35,10 +35,10 @@ public class AddCommentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String user_id = request.getParameter("user_id");
+		String id_user = request.getParameter("id_user");
 		String text = request.getParameter("text");
 		PrintWriter out = response.getWriter();
-		MessageTools.addMessage(Integer.parseInt(user_id), text);
+		MessageTools.addMessage(Integer.parseInt(id_user), text);
 		JSONObject res = ServiceTools.ServiceAccepted("insertion message OK");
 		out.println(res);
 	}

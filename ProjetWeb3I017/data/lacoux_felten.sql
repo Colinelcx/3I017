@@ -45,13 +45,6 @@ CREATE TABLE `Session` (
   `root` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `Session`
---
-
-INSERT INTO `Session` (`id_user`, `key_session`, `date_session`, `root`) VALUES
-(6, 'sldfjsl', '2019-02-26 14:15:51', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -59,7 +52,7 @@ INSERT INTO `Session` (`id_user`, `key_session`, `date_session`, `root`) VALUES
 --
 
 CREATE TABLE `User` (
-  `user_id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `login_user` varchar(32) NOT NULL,
   `first_name_user` varchar(32) NOT NULL,
   `family_name_user` varchar(32) NOT NULL,
@@ -67,13 +60,6 @@ CREATE TABLE `User` (
   `mail_user` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `User`
---
-
-INSERT INTO `User` (`user_id`, `login_user`, `first_name_user`, `family_name_user`, `password_user`, `mail_user`) VALUES
-(5, 'collacoux', 'Lacoux', 'Coline', '3670163', 'ztfef'),
-(6, 'cha', 'felten', 'charel', 'jgjh', 'ddfg');
 
 --
 -- Index pour les tables exportées
@@ -96,7 +82,7 @@ ALTER TABLE `Session`
 -- Index pour la table `User`
 --
 ALTER TABLE `User`
-  ADD PRIMARY KEY (`user_id`),
+  ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `login_user` (`login_user`),
   ADD UNIQUE KEY `mail_user` (`mail_user`);
 
@@ -108,7 +94,7 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT pour la table `User`
 --
 ALTER TABLE `User`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 --
 -- Contraintes pour les tables exportées
 --
@@ -117,14 +103,14 @@ ALTER TABLE `User`
 -- Contraintes pour la table `Friendship`
 --
 ALTER TABLE `Friendship`
-  ADD CONSTRAINT `user1_exist` FOREIGN KEY (`id_user1`) REFERENCES `User` (`user_id`),
-  ADD CONSTRAINT `user2_exist` FOREIGN KEY (`id_user2`) REFERENCES `User` (`user_id`);
+  ADD CONSTRAINT `user1_exist` FOREIGN KEY (`id_user1`) REFERENCES `User` (`id_user`),
+  ADD CONSTRAINT `user2_exist` FOREIGN KEY (`id_user2`) REFERENCES `User` (`id_user`);
 
 --
 -- Contraintes pour la table `Session`
 --
 ALTER TABLE `Session`
-  ADD CONSTRAINT `user_exist` FOREIGN KEY (`id_user`) REFERENCES `User` (`user_id`);
+  ADD CONSTRAINT `user_exist` FOREIGN KEY (`id_user`) REFERENCES `User` (`id_user`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

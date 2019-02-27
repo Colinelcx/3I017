@@ -15,7 +15,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class MessageTools {
 	
-	public static void addMessage(int user_id, String message) {
+	public static void addMessage(int id_user, String message) {
 		
 		GregorianCalendar calendar = new java.util.GregorianCalendar();
 		Date date = calendar.getTime();
@@ -26,13 +26,13 @@ public class MessageTools {
 		
 		String login = null;
 		try {
-			login = tools.UserTools.getLogin(user_id);
+			login = tools.UserTools.getLogin(id_user);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 
-		query.append("user_id", user_id);
+		query.append("id_user", id_user);
 		query.append("login", login);
 		query.append("date", date);
 		query.append("content", message);
@@ -41,13 +41,13 @@ public class MessageTools {
 		
 	}
 	
-	public static void deleteMessage(int user_id, String message) {
+	public static void deleteMessage(int id_user, String message) {
 		
 		MongoCollection<Document> coll = tools.DataBaseTools.getMongoCollection("messages");
 		
 		Document query = new Document();
 		 
-		query.append("id", id);
+		query.append("id_user", id_user);
 		query.append("content", message);
 		
 		coll.insertOne(query);
