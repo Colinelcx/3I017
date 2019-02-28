@@ -15,7 +15,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class MessageTools {
 	
-	public static void addMessage(int id_user, String message) {
+	public static void addMessage(int id_user, String content) {
 		
 		GregorianCalendar calendar = new java.util.GregorianCalendar();
 		Date date = calendar.getTime();
@@ -28,29 +28,72 @@ public class MessageTools {
 		try {
 			login = tools.UserTools.getLogin(id_user);
 		} catch (SQLException e) {
+			login = "unidentified_user";
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		Document comments = new Document();
 		 
 		query.append("id_user", id_user);
 		query.append("login", login);
 		query.append("date", date);
-		query.append("content", message);
+		query.append("content", content);
+		query.append("comments", comments);
 
 		coll.insertOne(query);
 		
 	}
 	
-	public static void deleteMessage(int id_user, String message) {
+	
+	// look how to do this... right now it is just a copy paste of the message code
+	/*public static void addComment(int id_user, String content) {
+		
+		GregorianCalendar calendar = new java.util.GregorianCalendar();
+		Date date = calendar.getTime();
 		
 		MongoCollection<Document> coll = tools.DataBaseTools.getMongoCollection("messages");
 		
 		Document query = new Document();
+		
+		String login = null;
+		try {
+			login = tools.UserTools.getLogin(id_user);
+		} catch (SQLException e) {
+			login = "unidentified_user";
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Document comments = new Document();
 		 
 		query.append("id_user", id_user);
+		query.append("login", login);
+		query.append("date", date);
 		query.append("content", message);
-		
+		query.append("comments", comments);
+
 		coll.insertOne(query);
+		
+	}*/
+	
+	
+	
+	
+	
+	public static void deleteMessage(int id_user, String id_) {
+		
+		// verify that the user has the right to delete this message
+		
+		MongoCollection<Document> coll = tools.DataBaseTools.getMongoCollection("messages");
+			
+		Document query = new Document();
+		 
+		query.append("id_", id_);
+		
+		MongoCursor<Document> cursor = coll.find(query).iterator();
+		// supprimer le message, je ne sais pas comment
+		
 	}
 
 	public static JSONObject getMessage(String message_id) {

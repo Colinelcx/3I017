@@ -59,6 +59,7 @@ public class FriendTools {
 	
 	
 	public static int[] iDFriendsList (int id_user1) throws SQLException {
+		
 		//retourne une liste des ids des amis de user_1
 		
 		String query = "SELECT id_user2 from Friendship WHERE id_user1 = " + id_user1 + ";";
@@ -70,16 +71,19 @@ public class FriendTools {
 		ArrayList<Integer> friendsArrayList = new ArrayList<Integer>();
 		
 		while (res.next()) {
-			friendsArrayList.add(res.getInt("id_user2");
+			friendsArrayList.add(res.getInt("id_user2"));
 		}
 		
-		int[] friendsList = new int[friendsArrayList.size()];
 		
-		friendsList = friendsArrayList.toArray(new int[0]); // voir pq ca ne fonctionne pas
+		int[] friendArray = friendsArrayList.stream().mapToInt(Integer::intValue).toArray();
+		// should transform the arrayList into a regular array
 		
-		return friendsList;
 		
-		// ne fonctionne pas encore, devrait retourer un array avec des ids
+		//int[] friendsList = friendsArrayList.toArray(new int[0]); // works only with Strings apparently
+		
+				
+		return friendArray;
+		
 	}
 	
 	
