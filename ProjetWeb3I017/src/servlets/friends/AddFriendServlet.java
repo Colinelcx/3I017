@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import services.FriendService;
-import services.OperationService;
 import services.UserService;
 import tools.FriendTools;
 import tools.MessageTools;

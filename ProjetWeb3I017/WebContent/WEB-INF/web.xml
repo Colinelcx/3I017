@@ -791,26 +791,25 @@ standard deployment descriptor.
     <servlet-class>AddCommentServlet</servlet-class>
   </servlet>
   <servlet>
-      <servlet-name>addFriend</servlet-name>
+    <servlet-name>addFriend</servlet-name>
     <servlet-class>AddFriendServlet</servlet-class>
   </servlet>
   <servlet>
-      <servlet-name>login</servlet-name>
+    <servlet-name>login</servlet-name>
     <servlet-class>LoginServlet</servlet-class>
   </servlet>
   <servlet>
-      <servlet-name>logout</servlet-name>
+    <servlet-name>logout</servlet-name>
     <servlet-class>LogoutServlet</servlet-class>
   </servlet>
   <servlet>
-  <servlet-name>removeFriend</servlet-name>
+    <servlet-name>removeFriend</servlet-name>
     <servlet-class>RemoveFriendServlet</servlet-class>
   </servlet>
   <servlet>
-      <servlet-name>search</servlet-name>
+    <servlet-name>search</servlet-name>
     <servlet-class>SearchServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>hello</servlet-name>
     <url-pattern>/hello</url-pattern>

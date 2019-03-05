@@ -8,46 +8,51 @@ import org.json.JSONObject;
 import tools.AuthTools;
 import tools.ServiceTools;
 
-//test 
 
 public class AuthService {
 	
-	public static JSONObject login(String login, String mdp) {
+	/**
+	 * Connection d'un utilisateur au site. Vérifie les paramètres (login puis password)
+	 * Puis génère une nouvelle clé de session
+	 * @param login : nom d'accès de l'utilisateur au site
+	 * @param password : mot de passe de l'utilisateur
+	 * @return {id, login, key} ou alors message d'erreur : {message, code}
+	 */
+	public static JSONObject login(String login, String password) {
 		
-		if ((login == null) || (mdp == null)){
-			return (tools.ServiceTools.ServiceRefused("Wrong arguments", 0));
+		// Vérification des arguments web
+		if ((login == null) || (password == null)){
+			return (tools.ServiceTools.ServiceRefused("Wrong arguments for login", -1));
 		}
 		
 		try {
+			
+			// Vérification du login
 			boolean is_user=tools.UserTools.userExists(login);
+			if (!is_user) 
+				return tools.ServiceTools.ServiceRefused("unknown user : " + login, 100000);
 			
-			if (!is_user) return tools.ServiceTools.ServiceRefused("unknown user " + login, 1);
-			
-			boolean password_ok=tools.AuthTools.checkPassword(login, mdp);
-			
-			if (!password_ok) return tools.ServiceTools.ServiceRefused("bad password" + login, 2);
-			
-			int id_user = tools.UserTools.getUserID(login);
-			
+			int id = tools.UserTools.getUserID(login);
+
+			//Vérification du mot de passe
+			boolean password_ok=tools.AuthTools.checkPassword(id, password);
+			if (!password_ok) 
+				return tools.ServiceTools.ServiceRefused("bad password" + login, 2);
+						
+			// Création du JSON
 			JSONObject retour = new JSONObject();
-			
-			String key = AuthTools.insertSession(id_user, false);
-			
+			String key = AuthTools.insertSession(id, false);
+			retour.put("id", id);
+			retour.put("login", login);
 			retour.put("key", key);
 			
 			return retour;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return tools.ServiceTools.ServiceRefused("probleme sql login" + login, 100);
+			return tools.ServiceTools.ServiceRefused(e.getMessage(), 1000);
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return tools.ServiceTools.ServiceRefused("probleme JSON login" + login, 1000);
+			return tools.ServiceTools.ServiceRefused(e.getMessage(), 100);
 		}
 				
 	}

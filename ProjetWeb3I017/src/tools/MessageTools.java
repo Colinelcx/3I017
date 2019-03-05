@@ -20,7 +20,7 @@ public class MessageTools {
 		GregorianCalendar calendar = new java.util.GregorianCalendar();
 		Date date = calendar.getTime();
 		
-		MongoCollection<Document> coll = tools.DataBaseTools.getMongoCollection("messages");
+		MongoCollection<Document> coll = databases.DataBaseTools.getMongoCollection("messages");
 		
 		Document query = new Document();
 		
@@ -85,7 +85,7 @@ public class MessageTools {
 		
 		// verify that the user has the right to delete this message
 		
-		MongoCollection<Document> coll = tools.DataBaseTools.getMongoCollection("messages");
+		MongoCollection<Document> coll = databases.DataBaseTools.getMongoCollection("messages");
 			
 		Document query = new Document();
 		 
@@ -98,7 +98,7 @@ public class MessageTools {
 
 	public static JSONObject getMessage(String message_id) {
 		
-		MongoCollection<Document> coll = tools.DataBaseTools.getMongoCollection("messages");
+		MongoCollection<Document> coll = databases.DataBaseTools.getMongoCollection("messages");
 		
 		Document query = new Document();
 		 

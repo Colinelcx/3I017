@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
-
-import services.OperationService;
 import services.UserService;
 import tools.MessageTools;
 import tools.ServiceTools;

@@ -12,7 +12,7 @@ public class FriendTools {
 		
 		String query = "SELECT * from Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ";";
 		
-		Connection conn = tools.DataBaseTools.getConnection();
+		Connection conn = databases.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
 		
@@ -31,7 +31,7 @@ public class FriendTools {
 				+ "VALUES (" + id_user1 + ", " + id_user2 + ", NOW());";
 		// le NOW() fait la date automatiquement dans SQL
 		
-		Connection conn = tools.DataBaseTools.getConnection();
+		Connection conn = databases.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		
 		st.executeUpdate(query);
@@ -46,7 +46,7 @@ public class FriendTools {
 
 		String query = "DELETE FROM Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ";";
 		
-		Connection conn = tools.DataBaseTools.getConnection();
+		Connection conn = databases.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		
 		st.executeUpdate(query);
@@ -64,7 +64,7 @@ public class FriendTools {
 		
 		String query = "SELECT id_user2 from Friendship WHERE id_user1 = " + id_user1 + ";";
 		
-		Connection conn = tools.DataBaseTools.getConnection();
+		Connection conn = databases.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
 		

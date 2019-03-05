@@ -6,60 +6,49 @@ import java.sql.Connection;
 //import java.sql.DriverManager;
 import java.sql.Statement;
 
+import databases.MySQLTools;
+
 public class UserTools {
 
-	public static boolean userExists(String login) throws SQLException {
-		
-		String query = "SELECT id_user from User WHERE login_user='" + login + "';"; // il faut peut etre rendre ces queries SQL injection attack secure
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery(query);
-		
-		boolean response = res.next();
-		
-		res.close(); // est-ce que c'est vraiment necessaire de fermer res?????
-		st.close();
-		conn.close();
-		
+	/**
+	 * vérifie si l'utilisateur est présent dans la base
+	 * @param id identifiant de l' utilisateur
+	 * @return true si l'utilisateur existe dans la base de bonnées, false sinon
+	 * @throws SQLException erreur requête SQL
+	 */
+	public static boolean userExists(int id) throws SQLException {
+
+		String query = "SELECT * from User WHERE id_user=" + id + ";"; // il faut peut être rendre ces queries SQL injection attack secure
+		ResultSet res = MySQLTools.executeQuery(query);
+		boolean response = res.next();	
 		return response;
 	}
 	
-	public static boolean userExists(int id) throws SQLException {
-		
-		String query = "SELECT id_user from User WHERE id_user=" + id + ";"; // il faut peut etre rendre ces queries SQL injection attack secure
-		
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery(query);
-		
-		boolean response = res.next();
-		
-		res.close(); // est-ce que c'est vraiment necessaire de fermer res?????
-		st.close();
-		conn.close();
-		
-		return response;
+	/**
+	 * vérifie si l'utilisateur est présent dans la base
+	 * @param login nom d'utilisateur
+	 * @return true si l'utilisateur existe dans la base de bonnées, false sinon
+	 * @throws SQLException erreur requête SQL
+	 */
+	public static boolean userExists(String login) throws SQLException {	
+		int id = getUserID(login);
+		return userExists(id);	
 	}
+	
 
+	/**
+	 * Retourne l'id du login en argument
+	 * @param login 
+	 * @return l'identifiant correspondant au login passé en argument
+	 * @throws SQLException problème requête SQL
+	 */
 	public static int getUserID(String login) throws SQLException {
 		
 		String query = "SELECT id_user from User WHERE login_user='" + login + "';";
-		Connection conn = tools.DataBaseTools.getConnection();
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery(query);
-		
-		int id = -1;
-		
-		while (res.next()) {
-			id = res.getInt("id_user");
-		}
-		
-		res.close();
-		st.close();
-		conn.close();
-		
-		
-		return id; // si retour -1, alors il y avait une erreur
+		ResultSet res = MySQLTools.executeQuery(query);
+		res.next();
+		int id = res.getInt("id_user");
+		return id; // erreur si -1
 
 	}
 	
@@ -68,7 +57,7 @@ public class UserTools {
 				+ "VALUES ('" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "');";
 		// on n'a pas besoin de mettre id_user comme c'est auto increment
 		
-		Connection conn = tools.DataBaseTools.getConnection();
+		Connection conn = databases.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		
 		st.executeUpdate(query);
@@ -83,7 +72,7 @@ public class UserTools {
 	public static String getLogin(int id) throws SQLException {
 		
 		String query = "SELECT login_user from User WHERE id_user=" + id + ";";
-		Connection conn = tools.DataBaseTools.getConnection();
+		Connection conn = databases.DataBaseTools.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(query);
 		
