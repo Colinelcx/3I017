@@ -1,4 +1,4 @@
-package servlets;
+package servlets.users;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -12,18 +12,19 @@ import org.json.JSONObject;
 
 import services.OperationService;
 import services.UserService;
+import tools.ServiceTools;
 
 /**
  * Servlet implementation class Operation
  */
 
-public class LogoutServlet extends HttpServlet {
+public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public CreateUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +34,15 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String key = request.getParameter("key");
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("mail");
 
 		PrintWriter out = response.getWriter();
-		JSONObject res = services.AuthService.logout(key);
+		UserService.createUser(nom, prenom, login, password, email);
+		JSONObject res = ServiceTools.ServiceAccepted("création user OK");
 		out.println(res);
 	}
 

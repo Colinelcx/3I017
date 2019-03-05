@@ -1,4 +1,4 @@
-package servlets;
+package servlets.search;
 
 public class SearchServlet {
 

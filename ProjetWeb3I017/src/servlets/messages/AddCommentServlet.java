@@ -1,4 +1,4 @@
-package servlets;
+package servlets.messages;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import services.AuthService;
 import services.OperationService;
 import services.UserService;
+import tools.MessageTools;
+import tools.ServiceTools;
 
 /**
  * Servlet implementation class Operation
  */
 
-public class LoginServlet extends HttpServlet {
+public class AddCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public AddCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,10 +35,11 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String id_user = request.getParameter("id_user");
+		String text = request.getParameter("text");
 		PrintWriter out = response.getWriter();
-		JSONObject res = AuthService.login(username, password);
+		MessageTools.addMessage(Integer.parseInt(id_user), text);
+		JSONObject res = ServiceTools.ServiceAccepted("insertion message OK");
 		out.println(res);
 	}
 
