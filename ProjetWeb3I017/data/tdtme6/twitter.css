@@ -1,0 +1,85 @@
+header {
+	height: auto;
+	border-style: solid;
+    border-width: 1px;
+	margin: 1px;
+	padding: 5px;
+	margin: 5px;
+	text-align: center;
+	background-color: lightblue;
+}
+
+footer {
+	height: 5em;
+	border-style: solid;
+    border-width: 1px;
+	margin: 1px;
+	padding: 5px;
+	margin: 5px;	
+	text-align: center;
+	background-color: lavender;
+}
+
+.header-class {
+	display:inline-block;
+	height: 5em;
+	border-style: solid;
+    border-width: 1px;
+	text-align: center;
+	padding: 5px;
+	margin: 5px;
+	background-color: lightyellow;
+	
+}
+
+#logo-header {
+	width: 20%;
+}
+
+#search-header {
+	width: 55%;
+}
+
+#loginlogout-header {
+	width: 20%;
+}
+
+#main {
+	border-style: solid;
+    border-width: 1px;
+	width: 86%;
+	display:inline-block;
+	padding: 5px;
+	margin: 5px;
+	text-align: center;
+	background-color: lightgreen;
+}
+
+section {
+	border-style: solid;
+    border-width: 1px;
+	text-align: center;
+	padding: 5px;
+	margin: 5px;
+	min-height: 5em; /* le nav est minimum 5em, mais peut etre plus grand s'il y a plus de contenu a afficher */
+	height: auto;
+	background-color: azure;
+}
+
+#new-message {
+	background-color: cornsilk;
+	/* ne contient pas de contenu, mais peut etre plus tard stylé différement */
+}
+
+nav {
+	vertical-align: top; /* https://stackoverflow.com/questions/8120466/missalignment-with-inline-block-other-elements-pushed-down */
+	display:inline-block;
+	border-style: solid;
+    border-width: 1px;
+	min-height: 40em; /* le nav est minimum 40em, mais peut etre plus grand s'il y a plus de contenu a afficher */
+	height: auto;
+	width: 10%;
+	padding: 5px;
+	margin: 5px;
+	background-color: lightgrey;
+}
