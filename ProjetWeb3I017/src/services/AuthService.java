@@ -22,7 +22,7 @@ public class AuthService {
 		
 		// Vérification des arguments web
 		if ((login == null) || (password == null)){
-			return (tools.ServiceTools.ServiceRefused("Wrong arguments for login", -1));
+			return (tools.ServiceTools.ServiceRefused("Miss arguments for login", -1));
 		}
 		
 		try {
@@ -30,14 +30,14 @@ public class AuthService {
 			// Vérification du login
 			boolean is_user=tools.UserTools.userExists(login);
 			if (!is_user) 
-				return tools.ServiceTools.ServiceRefused("unknown user : " + login, 100000);
+				return tools.ServiceTools.ServiceRefused("login : unknown user : " + login, 100000);
 			
 			int id = tools.UserTools.getUserID(login);
 
 			//Vérification du mot de passe
 			boolean password_ok=tools.AuthTools.checkPassword(id, password);
 			if (!password_ok) 
-				return tools.ServiceTools.ServiceRefused("bad password" + login, 2);
+				return tools.ServiceTools.ServiceRefused("login : bad password" + login, 2);
 						
 			// Création du JSON
 			JSONObject retour = new JSONObject();
@@ -53,32 +53,34 @@ public class AuthService {
 			
 		} catch (JSONException e) {
 			return tools.ServiceTools.ServiceRefused(e.getMessage(), 100);
-		}
-				
+		}			
 	}
 	
-public static JSONObject logout(String key) {
+	/**
+	 * Déconnecte l'utilisateur en supprimant sa session
+	 * @param key clé de session
+	 * @return {} si le lougout est réussi, ou alors message d'erreur : {message, code}
+	 */
+	public static JSONObject logout(String key) {
 		
+	// Vérification des arguments web
 		if (key == null) {
-			return (tools.ServiceTools.ServiceRefused("Wrong arguments", 0));
+			return (tools.ServiceTools.ServiceRefused("Miss argument for logout", 0));
 		}
 		
 		try {
 			
+			//Vérification de la session
 			boolean session = tools.AuthTools.checkSession(key);
+			if (!session) 
+				return tools.ServiceTools.ServiceRefused("logout : session does not exist ", 1);
 			
-			if (!session) return tools.ServiceTools.ServiceRefused("session does not exist ", 1);
-			
+			//Suppression de la session
 			tools.AuthTools.removeSession(key);
-			
 			return ServiceTools.ServiceAccepted("logged out");
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return tools.ServiceTools.ServiceRefused("probleme sql logout", 100);
+			return tools.ServiceTools.ServiceRefused(e.getMessage(), 1000);
 		}
-				
 	}
 }
