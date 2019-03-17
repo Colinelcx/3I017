@@ -7,6 +7,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MySQLTools {
+	private static Database database;
+	
+	/**
+	 * Création de connection à la base de données SQL
+	 * @return 
+	 * @throws SQLException
+	 */
+	public static Connection getMySQLConnection() throws SQLException {
+		if (DBStatic.mySQLPooling == false) {
+			return(DriverManager.getConnection("jdbc:mysql://" + DBStatic.mySQLHost + "/" + 
+					DBStatic.mySQLName, DBStatic.mySQLUser, DBStatic.mySQLPassword));
+		}
+		else {
+			if (database==null) {
+			database=new Database("jdbc/db");
+			} return(database.getConnection());
+			}
+		
+	}
 	
 		/**
 		 * Exécute une requête SQL de type interrogation, passée en argument en interrogeant la database du serveur
@@ -15,18 +34,9 @@ public class MySQLTools {
 		 * @throws SQLException erreur dans la requête
 		 */
 		public static ResultSet executeQuery(String query) throws SQLException {
-			try {	
-				
-				Class.forName(DBStatic.mySQLDriver);/*getDeclaredConstructor().newInstance;*/
-				String url = DBStatic.mySQLName;
-				Connection conn = DriverManager.getConnection(url, DBStatic.mySQLUser, DBStatic.mySQLPassword);
-				Statement st = conn.createStatement();
-				return st.executeQuery(query);
-				
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				return null;
-			}
+			Connection conn = getMySQLConnection();
+			Statement st = conn.createStatement();
+			return st.executeQuery(query);
 		}
 		
 		/**
@@ -36,18 +46,9 @@ public class MySQLTools {
 		 * @throws SQLException erreur dans la requête
 		 */
 		public static int executeUpdate(String query) throws SQLException {
-			try {	
-				
-				Class.forName(DBStatic.mySQLDriver);/*getDeclaredConstructor().newInstance;*/
-				String url = DBStatic.mySQLName;
-				Connection conn = DriverManager.getConnection(url, DBStatic.mySQLUser, DBStatic.mySQLPassword);
-				Statement st = conn.createStatement();
-				return st.executeUpdate(query);
-				
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				return 0;
-			}
+			Connection conn = getMySQLConnection();	
+			Statement st = conn.createStatement();
+			return st.executeUpdate(query);
 		}
 	}
 

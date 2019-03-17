@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import databases.DBStatic;
 import tools.AuthTools;
 import tools.ServiceTools;
 
@@ -39,9 +40,11 @@ public class AuthService {
 			if (!password_ok) 
 				return tools.ServiceTools.ServiceRefused("login : bad password" + login, 2);
 						
-			// Création du JSON
+			// Création de la session
+			String key = AuthTools.insertSession(id, DBStatic.mySQLPooling);
+			
+			//Création du JSON
 			JSONObject retour = new JSONObject();
-			String key = AuthTools.insertSession(id, false);
 			retour.put("id", id);
 			retour.put("login", login);
 			retour.put("key", key);
