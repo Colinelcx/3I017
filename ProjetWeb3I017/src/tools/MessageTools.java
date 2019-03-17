@@ -15,6 +15,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
+import databases.MongoDBTools;
+
 public class MessageTools {
 	
 	public static void addMessage(int id_user, String content) {
@@ -22,7 +24,7 @@ public class MessageTools {
 		GregorianCalendar calendar = new java.util.GregorianCalendar();
 		Date date = calendar.getTime();
 		
-		MongoCollection<Document> coll = databases.DataBaseTools.getMongoCollection("messages");
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		
 		Document query = new Document();
 		
@@ -31,7 +33,6 @@ public class MessageTools {
 			login = tools.UserTools.getLogin(id_user);
 		} catch (SQLException e) {
 			login = "unidentified_user";
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -65,9 +66,9 @@ public class MessageTools {
 		
 		
 		
-		MongoCollection<Document> coll = databases.DataBaseTools.getMongoCollection("messages");
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		
-		Document query = new Document("_id", /*get the id of the message and insert it here */);
+		Document query = new Document("_id" /*get the id of the message and insert it here */);
 		
 		MongoCursor<Document> cursor = coll.find(query).iterator();
 		
@@ -106,7 +107,7 @@ public class MessageTools {
 		
 		// verify that the user has the right to delete this message
 		
-		MongoCollection<Document> coll = databases.DataBaseTools.getMongoCollection("messages");
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 			
 		Document query = new Document();
 		 
@@ -119,7 +120,7 @@ public class MessageTools {
 
 	public static JSONObject listMessageOfId(int id_user) {
 		
-		MongoCollection<Document> coll = databases.DataBaseTools.getMongoCollection("messages");
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		
 		Document query = new Document();
 		JSONObject messageListJSON = new JSONObject();
