@@ -13,7 +13,7 @@ import services.UserService;
 import tools.ServiceTools;
 
 /**
- * Servlet implementation class Operation
+ * Servlet implementation class CreateUserServlet
  */
 
 public class CreateUserServlet extends HttpServlet {
@@ -24,14 +24,12 @@ public class CreateUserServlet extends HttpServlet {
      */
     public CreateUserServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		String nom = request.getParameter("nom");
@@ -40,7 +38,7 @@ public class CreateUserServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		UserService.createUser(nom, prenom, login, password, email);
-		JSONObject res = ServiceTools.ServiceAccepted("création user OK");
+		JSONObject res = ServiceTools.ServiceAccepted("création user " + login);
 		out.println(res);
 	}
 
@@ -48,7 +46,6 @@ public class CreateUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -2,7 +2,6 @@ package test;
 import org.json.JSONObject;
 
 import services.AuthService;
-import services.UserService;
 
 
 public class LoginTest {

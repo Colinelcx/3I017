@@ -21,6 +21,7 @@ public static void addFriend(int id_user1, int id_user2) throws SQLException
 public static void removeFriend(int id_user1, int id_user2) throws SQLException
 boolean isFriend
 ArrayList listFriend
+A ajouter peut-être : confirmer une amitié
 
 ###DataBaseTools###
 public static Connection getConnection() throws SQLException

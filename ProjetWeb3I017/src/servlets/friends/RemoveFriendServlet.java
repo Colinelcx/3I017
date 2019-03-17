@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,13 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import services.FriendService;
-import services.UserService;
-import tools.FriendTools;
-import tools.MessageTools;
 import tools.ServiceTools;
 
 /**
- * Servlet implementation class Operation
+ * Servlet implementation class RemoveFriendServlet
  */
 
 public class RemoveFriendServlet extends HttpServlet {
@@ -28,18 +24,16 @@ public class RemoveFriendServlet extends HttpServlet {
      */
     public RemoveFriendServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String id_user1 = request.getParameter("id_user1");
-		String id_user2 = request.getParameter("id_user2");
+		String key = request.getParameter("key");
+		String id_friend = request.getParameter("id_friend");
 		PrintWriter out = response.getWriter();
-		FriendService.removeFriends(Integer.parseInt(id_user1), Integer.parseInt(id_user2));
+		FriendService.removeFriend(key, Integer.parseInt(id_friend));
 		JSONObject res = ServiceTools.ServiceAccepted("ami supprimé");
 		out.println(res);
 	}

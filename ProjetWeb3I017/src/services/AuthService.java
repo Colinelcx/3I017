@@ -31,14 +31,14 @@ public class AuthService {
 			// Vérification du login
 			boolean is_user=tools.UserTools.userExists(login);
 			if (!is_user) 
-				return tools.ServiceTools.ServiceRefused("login : unknown user : " + login, 100000);
+				return tools.ServiceTools.ServiceRefused("login : unknown user : " + login, 1);
 			
 			int id = tools.UserTools.getUserID(login);
 
 			//Vérification du mot de passe
 			boolean password_ok=tools.AuthTools.checkPassword(id, password);
 			if (!password_ok) 
-				return tools.ServiceTools.ServiceRefused("login : bad password" + login, 2);
+				return tools.ServiceTools.ServiceRefused("login : bad password for " + login, 1);
 						
 			// Création de la session
 			String key = AuthTools.insertSession(id, DBStatic.mySQLPooling);
@@ -68,7 +68,7 @@ public class AuthService {
 		
 	// Vérification des arguments web
 		if (key == null) {
-			return (tools.ServiceTools.ServiceRefused("Miss argument for logout", 0));
+			return (tools.ServiceTools.ServiceRefused("Miss argument for logout", -1));
 		}
 		
 		try {

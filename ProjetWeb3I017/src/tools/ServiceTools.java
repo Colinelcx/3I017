@@ -13,10 +13,11 @@ public class ServiceTools {
 	 * Renvoie un JSON contenant un message d'erreur ainsi que son code
 	 * @param message : message d'erreur
 	 * @param code : - Code -1 erreur d’arguments passé au Web service (argument manquant, mauvais format, ...)
+ 					 - Code 1 erreur de valeur (mauvais login, mauvaise session, mauvais mot de passe...)
  					 - Code 100 erreur de JSON
  					 - Code 1000 erreur de SQL
  					 - Code 10000 erreur de JAVA
- 					 - Code 100000 erreur de valeur (mauvais login, mauvaise session, mauvais mot de passe...)
+ 			
 	 * @return le JSON contenant le message d'erreur et le code
 	 */
 	public static JSONObject ServiceRefused(String message, int code) {
