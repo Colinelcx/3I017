@@ -39,9 +39,15 @@ public class AuthService {
 			boolean password_ok=tools.AuthTools.checkPassword(id, password);
 			if (!password_ok) 
 				return tools.ServiceTools.ServiceRefused("login : bad password for " + login, 1);
-						
+		
+			//Vérifie que l'utilisateur n'est pas déja connecté
+			String key = AuthTools.getSessionKey(id);
+			boolean session = AuthTools.checkSession(key);
+			
 			// Création de la session
-			String key = AuthTools.insertSession(id, DBStatic.mySQLPooling);
+			if (!session) {
+				key = AuthTools.insertSession(id, DBStatic.mySQLPooling);
+			}
 			
 			//Création du JSON
 			JSONObject retour = new JSONObject();
@@ -72,7 +78,6 @@ public class AuthService {
 		}
 		
 		try {
-			
 			//Vérification de la session
 			boolean session = tools.AuthTools.checkSession(key);
 			if (!session) 

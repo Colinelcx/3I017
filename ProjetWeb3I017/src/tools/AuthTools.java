@@ -1,9 +1,9 @@
 package tools;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import databases.MySQLTools;
@@ -33,7 +33,6 @@ public class AuthTools {
 	 * @throws SQLException
 	 */
 	public static String insertSession(int id, boolean root) throws SQLException {
-		
 		//Conversion du root en entier pour SQL
 		int rootInt = 0;
 		if (root)
@@ -42,10 +41,9 @@ public class AuthTools {
 		//Création de la clé de session
 		String key = genKey();
 		
-		String query = "INSERT INTO Session VALUES (" + id + ",'" + key + "', NOW() , " + rootInt + ";)";
-		ResultSet res = MySQLTools.executeQuery(query);
-		res.next();
-		return res.getString("key_session");
+		String query = "INSERT INTO Session VALUES (" + id + ",'" + key + "', NOW() , " + rootInt + ");";
+		MySQLTools.executeUpdate(query);
+		return key;
 	}
 	
 	/** Supprime une session de la table Session
@@ -53,9 +51,11 @@ public class AuthTools {
 	 * @throws SQLException 
 	 */
 	public static void removeSession(String key) throws SQLException {
-
+		System.out.println("remove " + key);
 		String query = "DELETE FROM Session WHERE key_session = '" + key + "';";
-		MySQLTools.executeUpdate(query);
+		int i = MySQLTools.executeUpdate(query);
+		if (i==1)
+			System.out.println("Session supprimée");
 	}
 	
 	/**
@@ -67,17 +67,20 @@ public class AuthTools {
 	 * @throws SQLException
 	 */
 	public static boolean checkSession(String key) throws SQLException {
-		
-		String query = "SELECT date_session FROM Session WHERE key_session ='" + key + "';";
-		ResultSet res = MySQLTools.executeQuery(query);
-		if (!res.next())
+		if (key == "")
 			return false;
-		Date date = res.getDate("date_session");
-		LocalDate local_date = LocalDate.now();
-		Date limit_date = Date.valueOf(local_date);
-		if (date.before(limit_date))
+		String query = "SELECT date_session FROM Session WHERE key_session ='" + key + "' AND TIMESTAMPDIFF(MINUTE, date_session, NOW()) < 30;";
+		ResultSet res = MySQLTools.executeQuery(query);
+		if (!res.next()) {
+			System.out.println("Invalid session");;
+			removeSession(key);
+			return false;
+		}
+		else {
+			query = "UPDATE Session SET date_session = NOW() WHERE key_session ='" + key + "' AND TIMESTAMPDIFF(MINUTE, date_session, NOW()) < 30;";
+			MySQLTools.executeUpdate(query);
 			return true;
-		return false;
+		}
 		
 	}
 	
@@ -88,13 +91,16 @@ public class AuthTools {
 	 * @throws SQLException
 	 */
 	private static String genKey() throws SQLException {
-		ResultSet res;
-		String key;
-		do {
+		String key = "";
+		
+		String query = "SELECT key_session from Session";
+		ResultSet res = MySQLTools.executeQuery(query);
+		List<String> listKeys = new ArrayList<String>();
+		while (res.next()){
+			listKeys.add(res.getString("key_session"));
+		}
+		while (key =="" || listKeys.contains(key))
 			key = UUID.randomUUID().toString();
-			String query = "SELECT * from Session WHERE key_session='" + key + "';";
-			res = MySQLTools.executeQuery(query);
-		} while (res.next() == false);
 		return key;
 	}
 	
@@ -111,7 +117,7 @@ public class AuthTools {
 		ResultSet res = MySQLTools.executeQuery(query);
 		if (!res.next())
 			return "";
-		return res.getString("key");
+		return res.getString("key_session");
 
 	}
 	
@@ -123,7 +129,7 @@ public class AuthTools {
 	 */
 	public static int getSessionID(String key) throws SQLException {
 		
-		String query = "SELECT id_user from Session WHERE key='" + key + "';";
+		String query = "SELECT id_user from Session WHERE key_session='" + key + "';";
 		ResultSet res = MySQLTools.executeQuery(query);
 		int id = -1;
 		

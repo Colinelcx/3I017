@@ -76,6 +76,7 @@ ALTER TABLE `Friendship`
 -- Index pour la table `Session`
 --
 ALTER TABLE `Session`
+  ADD PRIMARY KEY (`id_user`),
   ADD KEY `user_exist` (`id_user`);
 
 --

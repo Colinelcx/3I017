@@ -36,7 +36,8 @@ public class MySQLTools {
 		public static ResultSet executeQuery(String query) throws SQLException {
 			Connection conn = getMySQLConnection();
 			Statement st = conn.createStatement();
-			return st.executeQuery(query);
+			ResultSet res = st.executeQuery(query);
+			return res;
 		}
 		
 		/**
@@ -48,7 +49,8 @@ public class MySQLTools {
 		public static int executeUpdate(String query) throws SQLException {
 			Connection conn = getMySQLConnection();	
 			Statement st = conn.createStatement();
-			return st.executeUpdate(query);
+			int res = st.executeUpdate(query);
+			return res;
 		}
 	}
 
