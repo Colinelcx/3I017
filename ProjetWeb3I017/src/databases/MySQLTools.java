@@ -47,9 +47,14 @@ public class MySQLTools {
 		 * @throws SQLException erreur dans la requête
 		 */
 		public static int executeUpdate(String query) throws SQLException {
-			Connection conn = getMySQLConnection();	
-			Statement st = conn.createStatement();
-			int res = st.executeUpdate(query);
+			int res = -1;
+			Connection conn = null;
+			Statement st = null;
+			conn = getMySQLConnection();	
+			st = conn.createStatement();
+			res = st.executeUpdate(query);
+			st.close();
+			conn.close();
 			return res;
 		}
 	}
