@@ -21,8 +21,9 @@ footer {
 }
 
 .header-class {
+	vertical-align: top;
 	display:inline-block;
-	height: 5em;
+	min-height: 2em;
 	border-style: solid;
     border-width: 1px;
 	text-align: center;
@@ -44,15 +45,39 @@ footer {
 	width: 20%;
 }
 
-#main {
+#all-wrapper {
+	width: 100%;
+	align-items: center;
+}
+
+#main-wrapper {
 	border-style: solid;
     border-width: 1px;
-	width: 86%;
+	width: 1300px;
+	padding: 5px;
+	margin: 5px;
+	margin: 0 auto;
+	align-items: center;
+	text-align: center
+}
+
+#main {
+	/* width: 90%; */
+}
+	
+	
+#section-wrapper {
+	border-style: solid;
+    border-width: 1px;
+	width: 50%;
 	display:inline-block;
 	padding: 5px;
 	margin: 5px;
 	text-align: center;
 	background-color: lightgreen;
+	/* margin: 0 auto; */
+	
+	
 }
 
 section {
@@ -64,6 +89,7 @@ section {
 	min-height: 5em; /* le nav est minimum 5em, mais peut etre plus grand s'il y a plus de contenu a afficher */
 	height: auto;
 	background-color: azure;
+	
 }
 
 #new-message {
@@ -78,8 +104,9 @@ nav {
     border-width: 1px;
 	min-height: 40em; /* le nav est minimum 40em, mais peut etre plus grand s'il y a plus de contenu a afficher */
 	height: auto;
-	width: 10%;
+	width: 20%;
 	padding: 5px;
 	margin: 5px;
 	background-color: lightgrey;
+	/* margin: 0 auto; */
 }
