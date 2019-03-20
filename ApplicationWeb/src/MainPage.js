@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import NavigationPanel from './NavigationPanel';
+import ConnexionForm from './ConnexionForm';
+import Profil from './Profil';
+import TimeLine from './TimeLine';
+import FooterPanel from './FooterPanel';
+
+
 
 class MainPage extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {isConnected: false, page:"connexion"};
@@ -18,13 +26,12 @@ class MainPage extends Component {
 	
 	render() {
 		return (
-			<div ClassName="MainPage"> MainPage
-			< NavigationPanel isConnected=this.isConnected getConnected=this.getConnected setLogout=this.setLogout />
-			{ this.state.page === "connexion" ? <Form />
-			  this.state.page === "profil" ? <Profil/>
-			  							   : <Mur/>
-			< FooterPanel />
-			
+			<div className="MainPage"> MainPage
+            < NavigationPanel isConnected={this.state.isConnected} setLogout={this.setLogout} getConnected={this.isConnected}/>
+            < ConnexionForm />
+            < Profil />
+            < TimeLine />
+            < FooterPanel />
 			</div>
 		)
 	}

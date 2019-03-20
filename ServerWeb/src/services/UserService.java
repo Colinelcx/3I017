@@ -1,11 +1,9 @@
 package services;
 import java.sql.SQLException;
 
-import org.json.JSONException;
 //
 import org.json.JSONObject;
 
-import tools.AuthTools;
 import tools.ServiceTools;
 import tools.UserTools;
 

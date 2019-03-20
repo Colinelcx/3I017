@@ -70,7 +70,6 @@ public class FriendService {
 				return ServiceTools.ServiceRefused("Invalid session", 1);
 			
 			int id_user1 = AuthTools.getSessionID(key);
-			
 			//Vérification des identifiants
 			boolean is_user1 = UserTools.userExists(id_user1);
 			boolean is_user2 = UserTools.userExists(id_friend);
