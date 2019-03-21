@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ConnexionForm extends Component {
+class ConnectionForm extends Component {
 
 	constructor(props) {
         super(props);
@@ -15,7 +15,12 @@ class ConnexionForm extends Component {
                 <form>
                     <div className="form-group">
                         <label for="username">Pseudo</label>
-                        <input type="text" class="form-control" id="username" placeholder="Entrez votre pseudo"/>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                            </div>
+                            <input type="text" className="form-control" id="validationDefaultUsername" placeholder="Username"></input> 
+                        </div>
                     </div>
                     <div className="form-group">
                         <label for="username">Mot de passe</label>
@@ -34,4 +39,4 @@ class ConnexionForm extends Component {
     }
 }
 
-export default ConnexionForm;
+export default ConnectionForm;

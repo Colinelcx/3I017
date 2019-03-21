@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavigationPanel from './NavigationPanel';
-import ConnexionForm from './ConnexionForm';
+import ConnectionForm from './ConnectionForm';
+import SignInForm from './SignInForm.js';
 import Profil from './Profil';
 import TimeLine from './TimeLine';
 import FooterPanel from './FooterPanel';
@@ -29,7 +30,7 @@ class MainPage extends Component {
             <div className="MainPage container-fluid height-full bg-primary">
 			 MainPage
             //< NavigationPanel isConnected={this.state.isConnected} setLogout={this.setLogout} getConnected={this.isConnected}/>
-            <div className="container col-md-4 "><ConnexionForm/></div>
+            <div className="container col-md-6 ">< SignInForm/></div>
             < Profil />
             < TimeLine />
             < FooterPanel />
