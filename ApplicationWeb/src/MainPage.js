@@ -26,13 +26,15 @@ class MainPage extends Component {
 	
 	render() {
 		return (
-			<div className="MainPage"> MainPage
-            < NavigationPanel isConnected={this.state.isConnected} setLogout={this.setLogout} getConnected={this.isConnected}/>
-            < ConnexionForm />
+            <div className="MainPage container-fluid height-full bg-primary">
+			 MainPage
+            //< NavigationPanel isConnected={this.state.isConnected} setLogout={this.setLogout} getConnected={this.isConnected}/>
+            <div className="container col-md-4 "><ConnexionForm/></div>
             < Profil />
             < TimeLine />
             < FooterPanel />
-			</div>
+
+            </div>
 		)
 	}
 }
