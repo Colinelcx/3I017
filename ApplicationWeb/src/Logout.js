@@ -7,7 +7,7 @@ class Logout extends Component {
     }
 
     render() {
-        return <p>Logout</p>
+        return <button type="submit" class="navbar-toggler btn btn-dark">Déconnexion</button>
     }
 }
 
