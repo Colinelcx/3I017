@@ -18,35 +18,33 @@ class NavigationPanel extends Component {
                             <img src={require('./medias/twistter.png')} alt="Bootstrap" class="img-responsive logo-accueil"/>
                         </div>
                         <div class="col-md-4 col-sm-7 form-center">
-                            < LoginForm getConnected={this.isConnected}/>
+                            < LoginForm getConnected={this.props.getConnected}/>
                         </div>
                     </div>
 
                 :  
                     
                 //Header 
-                <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-                    <a class="navbar-brand" href="#">Logo</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top shadow-sm">
+                    <a class="nav-link ">
+                        <img src={require('./medias/owl.png')} width="30" height="30" alt="" />
+                    </a>
 
                     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                         <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Photo</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">Accueil <span class="sr-only"></span></a>
+                            </li>
+                                <a class="navbar-brand profil rounded-circle" href="#">
+                                    <img src={require('./medias/default_profile.png')} width="30" height="30" alt=""/>
+                                </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Voir mon profil</a>
+                                    <a class="dropdown-item" href="#"><Logout setLogout={this.props.setLogout}/></a>
+                                </div>
+                            </li>
                         </ul>
                         <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>

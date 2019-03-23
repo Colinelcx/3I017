@@ -12,15 +12,15 @@ class MainPage extends Component {
 		super(props);
 		this.state = {isConnected: true, page:"mur"};
 		this.getConnected = this.getConnected.bind(this);
-		this.setlogout = this.setLogout.bind(this);
+        this.setlogout = this.setLogout.bind(this);
 	}
 	
 	getConnected() {
-		this.setState({isConnected: true, page:"mur"})
+		this.setState({isConnected: true, page:"mur"});
 	}
 	
 	setLogout() {
-		this.setState({isConnected: false, page:"connexion"})
+		this.setState({isConnected: false, page:"connexion"});
 	}
 	
 	render() {
