@@ -14,7 +14,7 @@ class NavigationPanel extends Component {
         <nav >
             {this.props.isConnected==false ?
 
-                this.props.page=="signin" ?
+                this.props.page==="signin" ?
                     //Page d'inscription
                         <div className="height-full">
                             <div class="media">
@@ -47,17 +47,16 @@ class NavigationPanel extends Component {
                     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item ">
-                                <a class="nav-link" href="#">Accueil <span class="sr-only"></span></a>
+                                <a class="nav-link" href="#" onClick={() => this.props.goToTimeLine()}>Accueil <span class="sr-only"></span></a>
                             </li>
                             <a class="navbar-brand profil rounded-circle" href="#">
                                 <img src={require('./medias/default_profile.png')} width="30" height="30" alt=""/>
                             </a>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" onClick={() =>('.dropdown-toggle').dropdown('toogle')} id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil</a>
-                                <div class="dropdown-menu" role="menu" aria-labelledby="dropdown01">
-                                    <a class="dropdown-item" href="#">Voir mon profil</a>
-                                     <a class="dropdown-item" href="#"><Logout setLogout={this.props.setLogout}/></a>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onClick={() => this.props.goToProfile()}>Voir mon profil</a>
+                            </li>
+                            <li class="nav-item"  >   
+                                <Logout setLogout={this.props.setLogout}/>
                             </li>
                         </ul>
                         <form class="form-inline my-2 my-lg-0">

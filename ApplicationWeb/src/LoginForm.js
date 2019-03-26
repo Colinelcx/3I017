@@ -32,7 +32,7 @@ class LoginForm extends Component {
                     <a href=""> Mot de passe oublié </a>
                 </div>
                 <div className="text-right">
-                    <a href=""> Pas encore inscrit ?</a>
+                    <a href="" onClick={() => this.props.goToSignIn()}> Pas encore inscrit ?</a>
                 </div>
             </div> 
        )

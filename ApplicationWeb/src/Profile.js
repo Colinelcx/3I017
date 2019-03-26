@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FluxMessages from './FluxMessages';
 
-class Profil extends Component {
+class Profile extends Component {
 
 	constructor(props) {
         super(props);
@@ -29,4 +29,4 @@ class Profil extends Component {
     }
 }
 
-export default Profil;
+export default Profile;

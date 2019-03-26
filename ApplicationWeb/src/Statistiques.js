@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FluxMessages from './FluxMessages';
 
 class Statistiques extends Component {
 
