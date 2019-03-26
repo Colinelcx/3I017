@@ -1,12 +1,19 @@
-.form-center{
+.form-login{
     margin:auto;
     height: 50vh;
     padding-top:10vh;
     float:none;  /* annule le float:left de bootstrap*/
 }
 
+.form-signin{
+    margin:auto;
+    height: 50vh;
+    padding-top:6vh;
+    float:none;  /* annule le float:left de bootstrap*/
+}
+
 .height-full {    
-    height:100vh;
+    min-height:100vh;
 
 }
 
@@ -29,12 +36,35 @@
 }
 
 .logo-accueil {
-    padding-top:3vh;
-    padding-left:37vh;
-    height:15vh;
-    width:85vh;
+    margin:auto;
+    margin-top:5vh;
+    height:100px;
+    width:400px;
 }
 
+.logo-profile {
+    padding-top:10px;
+    margin:auto;
+    height:110px;
+    width:100px;
+}
+
+
+.flux {
+    max-height: 90vh;
+}
 .profil {
     margin-left:6vh;
+}
+
+.card-profile {
+    margin-top:1vh;
+    margin-left:1vh;
+    height: 250px;
+}
+
+.card-stats {
+    margin-top:1vh;
+    margin-left:1vh;
+    height: 500px;
 }

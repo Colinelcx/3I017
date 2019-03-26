@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FluxMessages from './FluxMessages';
+import Statistiques from './Statistiques';
 
 class TimeLine extends Component {
 
@@ -7,8 +9,13 @@ class TimeLine extends Component {
     }
 
     render() {
-        return <p>flux de messages</p>
-    }
+        return (<div className="row">
+                    < Statistiques />
+                    <div className="col-md-9 flux">
+                        <FluxMessages />
+                    </div>
+                </div>
+        )}
 }
 
 export default TimeLine;

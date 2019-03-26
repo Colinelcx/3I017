@@ -30,29 +30,36 @@ class SignInForm extends Component {
                     </div>
                     <div className="form-row">
                         <div className="col">
-                            <label for="nom">Nom</label>
-                            <input type="text" class="form-control" id="nom" placeholder=""/>
+                            <label for="nom">Nom :</label>
+                            <input type="text" class="form-control" id="nom" placeholder="ex : Dupont"/>
                         </div>
                         <div className="col">
-                            <label for="prenom">Prénom</label>
-                            <input type="text" class="form-control" id="prenom" placeholder=""/>
+                            <label for="prenom">Prénom :</label>
+                            <input type="text" class="form-control" id="prenom" placeholder="ex : Alain"/>
                         </div>
                     </div>
                     <div className="form-group">
-                        <label for="password">Mot de passe</label>
+                        <label for="mail">Adresse mail :</label>
+                        <input type="mail" class="form-control" id="text" placeholder="email@example.com"/>
+                        <small id="emailHelp" class="form-text text-muted">Une adresse doit être associée à un seul compte</small>
+                    </div>
+                    <div className="form-group">
+                        <label for="password">Mot de passe :</label>
                         <input type="password" class="form-control" id="password" placeholder="Choisissez un mot de passe"/>
                     </div>
                     <div className="form-group">
-                            <label for="mail">Adresse mail</label>
-                            <input type="mail" class="form-control" id="text" placeholder="email@example.com"/>
-                            <small id="emailHelp" class="form-text text-muted">Une adresse doit être associée à un seul compte</small>
-                        </div>
-                    <div className="form-group">
-                        <label for="paswordCheck">Vérifiez votre passe</label>
+                        <label for="paswordCheck">Vérifiez votre mot de passe :</label>
                         <input type="password" class="form-control" id="password" placeholder="Ressaisissez votre mot de passe"/>
                         <small id="emailHelp" class="form-text text-muted">Attention : Le mot de passe doit être identique</small>
                     </div>
-                    <button type="submit" class="btn btn-primary">Inscription</button>
+                    <div className="form-row">
+                        <div className="col">
+                            <button type="submit" class="btn btn-primary col-md-4">Inscription</button>
+                        </div>
+                        <div className="col">
+                            <button type="submit" class="btn btn-primary col-md-4">Annuler</button>
+                        </div>
+                    </div>
                 </form>
                 <div className="text-right">
                     <a href=""> Déjà inscrit ? Connection</a>

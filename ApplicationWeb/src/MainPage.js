@@ -10,17 +10,18 @@ class MainPage extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {isConnected: true, page:"mur"};
+		this.state = {isConnected: false, page:"signin"};
 		this.getConnected = this.getConnected.bind(this);
         this.setlogout = this.setLogout.bind(this);
 	}
 	
 	getConnected() {
+        alert(test);
 		this.setState({isConnected: true, page:"mur"});
 	}
 	
 	setLogout() {
-		this.setState({isConnected: false, page:"connexion"});
+		this.setState({isConnected: false, page:"login"});
 	}
 	
 	render() {
@@ -28,8 +29,8 @@ class MainPage extends Component {
             <div className="main">
                 <div className="height-full bg-light" id="MainPage">
 
-                    {/*Panneau de navigation (Page de connexion ou header selon le cas)*/}
-                    < NavigationPanel isConnected={this.state.isConnected} setLogout={this.setLogout} getConnected={this.isConnected}/>
+                    {/*Panneau de navigation (Page de connexion, d'inscription ou header selon le cas)*/}
+                    < NavigationPanel isConnected={this.state.isConnected} page={this.state.page} setLogout={this.setLogout} getConnected={this.isConnected}/>
 
                     <div className="container-fluid content-principal">
 
@@ -43,7 +44,7 @@ class MainPage extends Component {
                     
                         //Page Timeline
                         <section>
-                            < TimeLine />
+                            < Profil />
                         </section>
             
                     : 
@@ -52,6 +53,7 @@ class MainPage extends Component {
                         
                         //Page profil
                         <section>
+                            Profil
                             < Profil />
                         </section>
         
