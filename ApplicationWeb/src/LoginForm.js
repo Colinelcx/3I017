@@ -27,7 +27,7 @@ class LoginForm extends Component {
                         <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe"/>
                     </div>
                     <button type="submit" class="btn btn-primary" onClick={() => this.props.getConnected()}>Connexion</button>
-                </form>
+                </form> 
                 <div className="text-right">
                     <a href=""> Mot de passe oublié </a>
                 </div>
