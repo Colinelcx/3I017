@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Message from './Message';
+import MessageInput from './MessageInput';
 
 class FluxMessages extends Component {
 
@@ -10,6 +11,7 @@ class FluxMessages extends Component {
     render() {
         return ( 
             <div className="overflow-auto flux">
+                <MessageInput/>
                 <Message/>
                 <Message/>
                 <Message/>

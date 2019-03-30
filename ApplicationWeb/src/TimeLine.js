@@ -10,8 +10,10 @@ class TimeLine extends Component {
 
     render() {
         return (<div className="row">
-                    < Statistiques />
-                    <div className="col-md-9 flux">
+                    <div className="col-sm-3">
+                        < Statistiques />
+                    </div>
+                    <div className="col-sm">
                         <FluxMessages />
                     </div>
                 </div>
