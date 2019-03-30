@@ -16,10 +16,6 @@ class FluxMessages extends Component {
                 <Message/>
                 <Message/>
                 <Message/>
-                <Message/>
-                <Message/>
-                <Message/>
-                <Message/>
              </div>
                
        )
