@@ -3,6 +3,7 @@ import NavigationPanel from './NavigationPanel';
 import Profile from './Profile';
 import TimeLine from './TimeLine';
 import FooterPanel from './FooterPanel';
+import ProfileTimeLine from './ProfileTimeLine';
 
 
 
@@ -72,11 +73,11 @@ class MainPage extends Component {
             
                     : 
 
-                        this.page==="profile" ? 
+                        this.state.page==="profile" ? 
                         
                         //Page profil
                         <section>
-                            < Profile />
+                            < ProfileTimeLine />
                         </section>
         
                     : 

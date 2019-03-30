@@ -4,6 +4,7 @@ import './html/style.css';
 //import './html/custom-css-bootstrap.css';
 import MainPage from './MainPage';
 import * as serviceWorker from './serviceWorker';
+import Profile from './Profile';
 
 ReactDOM.render(<MainPage />, document.getElementById('root'));
 

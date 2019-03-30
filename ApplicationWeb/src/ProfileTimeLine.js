@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import FluxMessages from './FluxMessages';
-import Statistiques from './Statistiques';
+import Profile from './Profile';
 
-class TimeLine extends Component {
+class ProfileTimeLine extends Component {
 
 	constructor(props) {
         super(props);
@@ -11,7 +11,7 @@ class TimeLine extends Component {
     render() {
         return (<div className="row justify-content-md-center">
                     <div className="col-3">
-                        < Statistiques />
+                        < Profile />
                     </div>
                     <div className="col-7">
                         <FluxMessages />
@@ -20,4 +20,4 @@ class TimeLine extends Component {
         )}
 }
 
-export default TimeLine;
+export default ProfileTimeLine;

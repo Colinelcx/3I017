@@ -12,7 +12,7 @@ class Message extends Component {
                 <div class="card-body">
                     <form >
                         <div class="row">
-                            <textarea class="form-control col-11 ml-3" id="exampleFormControlTextarea1" rows="2" placeholder="enter your message here"></textarea>
+                            <textarea class="form-control col-10 ml-3" id="exampleFormControlTextarea1" rows="2" placeholder="enter your message here"></textarea>
                             <button type="submit" class="btn btn-primary ml-3">Publier</button>
                         </div>
                     </form>

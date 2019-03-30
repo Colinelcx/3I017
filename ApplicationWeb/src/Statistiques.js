@@ -10,6 +10,8 @@ class Statistiques extends Component {
         return (
                 <div class="card bg-light shadow-sm card-stats border-primary mt-3 ml-3" >
 
+                     <img class="card-img-top" src={require('./medias/twistter.png')} alt="Card image cap"></img>
+
                     <div class="card-header">
                         <h3 class="card-title text-primary">Statistiques</h3>
                     </div>
