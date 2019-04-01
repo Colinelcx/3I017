@@ -20,9 +20,8 @@ public class FriendTools {
 		
 		String query = "SELECT * from Friendship WHERE id_user1 = " + id_user1 + " AND id_user2 = " + id_user2 + ";";
 		
-		ResultSet res = MySQLTools.executeQuery(query);
-		boolean response = res.next();
-		return response;
+		int res = MySQLTools.executeQuery(query);
+		return res==1;
 	}
 	
 	/**
@@ -63,12 +62,12 @@ public class FriendTools {
 		
 		String query = "SELECT id_user2 from Friendship WHERE id_user1 = " + id_user1 + ";";
 
-		ResultSet res = MySQLTools.executeQuery(query);
+		List<String> res = MySQLTools.executeQuery(query, "id_user2");
 		
 		ArrayList<Integer> friendsList = new ArrayList<Integer>();
 		
-		while (res.next()) {
-			friendsList.add(res.getInt("id_user2"));
+		for(String friend: res) {
+			friendsList.add(Integer.parseInt(friend));
 		}
 		
 		return friendsList;

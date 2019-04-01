@@ -1,7 +1,7 @@
 package tools;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import databases.MySQLTools;
 
@@ -16,9 +16,8 @@ public class UserTools {
 	public static boolean userExists(int id) throws SQLException {
 
 		String query = "SELECT * from User WHERE id_user=" + id + ";";
-		ResultSet res = MySQLTools.executeQuery(query);
-		boolean response = res.next();	
-		return response;
+		int res = MySQLTools.executeQuery(query);
+		return res==1;
 	}
 	 
 	/**
@@ -40,9 +39,8 @@ public class UserTools {
 	 */
 	public static boolean mailExists(String mail) throws SQLException {
 		String query = "SELECT * from User WHERE mail_user='" + mail + "';"; 
-		ResultSet res = MySQLTools.executeQuery(query);
-		boolean response = res.next();	
-		return response;
+		int res = MySQLTools.executeQuery(query);
+		return res==1;
 	}
 
 	/**
@@ -54,10 +52,10 @@ public class UserTools {
 	public static int getUserID(String login) throws SQLException {
 		
 		String query = "SELECT id_user from User WHERE login_user='" + login + "';";
-		ResultSet res = MySQLTools.executeQuery(query);
+		List<String> res = MySQLTools.executeQuery(query, "id_user");
 		int id = -1;
-		if (res.next())
-			id = res.getInt("id_user");
+		if (res.size()==1)
+			id = Integer.parseInt(res.get(0));
 		return id; // -1 si erreur
 
 	}
@@ -87,10 +85,10 @@ public class UserTools {
 	 */
 	public static String getLogin(int id) throws SQLException {
 		String query = "SELECT login_user from User WHERE id_user=" + id + ";";
-		ResultSet res = MySQLTools.executeQuery(query);
+		List<String> res = MySQLTools.executeQuery(query, "login_user");
 		String login = null;
-		if (res.next()) 
-			login = res.getString("login_user");		
+		if (res.size()==1) 
+			login = res.get(0);		
 		return login;
 	}
 	

@@ -19,22 +19,16 @@ import databases.MongoDBTools;
 
 public class MessageTools {
 	
-	public static void addMessage(int id_user, String content) {
+	public static void addMessage(int id_user, String content) throws SQLException {
 		
 		GregorianCalendar calendar = new java.util.GregorianCalendar();
 		Date date = calendar.getTime();
 		
-		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
+		MongoCollection<Document> coll = MongoDBTools.getCollection(id_user;
 		
 		Document query = new Document();
 		
-		String login = null;
-		try {
-			login = tools.UserTools.getLogin(id_user);
-		} catch (SQLException e) {
-			login = "unidentified_user";
-			e.printStackTrace();
-		}
+		String login = tools.UserTools.getLogin(id_user);
 		
 		ArrayList<Document> commentList = new ArrayList<Document>();
 		 
@@ -118,7 +112,7 @@ public class MessageTools {
 		
 	}
 
-	public static JSONObject listMessageOfId(int id_user) {
+	public static JSONObject getlistMessage(int id_user) {
 		
 		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		

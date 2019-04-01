@@ -20,9 +20,8 @@ public class AuthTools {
 	public static boolean checkPassword(int id, String password) throws SQLException {
 				
 		String query = "SELECT * from User WHERE id_user=" + id + " AND password_user='" + password + "';";
-		ResultSet res = MySQLTools.executeQuery(query);
-		boolean response = res.next(); // faux si le resultat est vide, vrai sinon
-		return response;
+		int res = MySQLTools.executeQuery(query);
+		return (res==1); // l'utilisateur est trouvé dans la base
 
 	}
 	
@@ -70,8 +69,8 @@ public class AuthTools {
 		if (key == "")
 			return false;
 		String query = "SELECT date_session FROM Session WHERE key_session ='" + key + "' AND TIMESTAMPDIFF(MINUTE, date_session, NOW()) < 30;";
-		ResultSet res = MySQLTools.executeQuery(query);
-		if (!res.next()) {
+		int res = MySQLTools.executeQuery(query);
+		if (!(res==1)) {
 			System.out.println("Invalid session");;
 			removeSession(key);
 			return false;
@@ -94,11 +93,7 @@ public class AuthTools {
 		String key = "";
 		
 		String query = "SELECT key_session from Session";
-		ResultSet res = MySQLTools.executeQuery(query);
-		List<String> listKeys = new ArrayList<String>();
-		while (res.next()){
-			listKeys.add(res.getString("key_session"));
-		}
+		List<String> listKeys = MySQLTools.executeQuery(query, "key_session");
 		while (key =="" || listKeys.contains(key))
 			key = UUID.randomUUID().toString();
 		return key;
@@ -114,10 +109,10 @@ public class AuthTools {
 	public static String getSessionKey(int id) throws SQLException {
 
 		String query = "SELECT key_session from Session WHERE id_user=" + id + ";";
-		ResultSet res = MySQLTools.executeQuery(query);
-		if (!res.next())
+		List<String> res = MySQLTools.executeQuery(query, "key_session");
+		if (!(res.size() == 1))
 			return "";
-		return res.getString("key_session");
+		return res.get(0);
 
 	}
 	
@@ -130,11 +125,11 @@ public class AuthTools {
 	public static int getSessionID(String key) throws SQLException {
 		
 		String query = "SELECT id_user from Session WHERE key_session='" + key + "';";
-		ResultSet res = MySQLTools.executeQuery(query);
+		List<String> res = MySQLTools.executeQuery(query, "id_user");
 		int id = -1;
 		
-		if (res.next())
-			id = res.getInt("id_user");
+		if (res.size()==1)
+			id = Integer.parseInt(res.get(0));
 		
 		return id;
 	}

@@ -57,6 +57,12 @@ public class FriendService {
 		}
 	}
 
+	/**
+	 * Supprime le lien d'amitié avec l'utilisateur id_friend
+	 * @param key clé de session
+	 * @param id_friend identifiant de l'ami
+	 * @return {}, ou {mesage, code} si erreur
+	 */
 	public static JSONObject removeFriend(String key, int id_friend) {
 		
 		if ((key == null) || (id_friend < 0)){

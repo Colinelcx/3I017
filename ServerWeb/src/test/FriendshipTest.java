@@ -13,7 +13,7 @@ public class FriendshipTest {
 		int user1;
 		int user2;
 		try {
-			user1 = UserTools.getUserID("collacoux2");
+			user1 = UserTools.getUserID("collacoux");
 			user2 = UserTools.getUserID("collacoux2");
 			FriendService.addFriend(AuthTools.getSessionKey(user1), user2);
 			FriendService.removeFriend(AuthTools.getSessionKey(user1), user2);
