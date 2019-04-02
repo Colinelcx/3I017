@@ -773,19 +773,7 @@ Tools are not allowed to add the non-standard information into the
 standard deployment descriptor.
 -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <display-name>TestTomcat</display-name>
-  <servlet>
-    <servlet-name>hello</servlet-name>
-    <servlet-class>HelloWorld</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>operation</servlet-name>
-    <servlet-class>OperationServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>simple</servlet-name>
-    <servlet-class>SimpleServlet</servlet-class>
-  </servlet>
+  <display-name>Twistter</display-name>
   <servlet>
     <servlet-name>addComment</servlet-name>
     <servlet-class>AddCommentServlet</servlet-class>
@@ -806,22 +794,8 @@ standard deployment descriptor.
     <servlet-name>removeFriend</servlet-name>
     <servlet-class>RemoveFriendServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>search</servlet-name>
-    <servlet-class>SearchServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>hello</servlet-name>
-    <url-pattern>/hello</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>operation</servlet-name>
-    <url-pattern>/operation</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>simple</servlet-name>
-    <url-pattern>/simple</url-pattern>
-  </servlet-mapping>
+ 
+
   <servlet-mapping>
     <servlet-name>addComment</servlet-name>
     <url-pattern>/comment/add</url-pattern>
@@ -846,8 +820,5 @@ standard deployment descriptor.
     <servlet-name>removeFriend</servlet-name>
     <url-pattern>/friends/remove</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>search</servlet-name>
-    <url-pattern>/search</url-pattern>
-  </servlet-mapping>
+ 
 </web-app>

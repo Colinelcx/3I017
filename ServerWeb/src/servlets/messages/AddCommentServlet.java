@@ -34,7 +34,7 @@ public class AddCommentServlet extends HttpServlet {
 		String id_user = request.getParameter("id_user");
 		String text = request.getParameter("text");
 		PrintWriter out = response.getWriter();
-		MessageTools.addMessage(Integer.parseInt(id_user), text);
+		//MessageTools.addMessage(Integer.parseInt(id_user), text);
 		JSONObject res = ServiceTools.ServiceAccepted("insertion message OK");
 		out.println(res);
 	}

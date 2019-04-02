@@ -24,7 +24,7 @@ public class MessageTools {
 		GregorianCalendar calendar = new java.util.GregorianCalendar();
 		Date date = calendar.getTime();
 		
-		MongoCollection<Document> coll = MongoDBTools.getCollection(id_user;
+		//MongoCollection<Document> coll = MongoDBTools.getCollection(id_user);
 		
 		Document query = new Document();
 		
@@ -38,7 +38,7 @@ public class MessageTools {
 		query.append("content", content);
 		query.append("comments", commentList);
 
-		coll.insertOne(query);
+		//coll.insertOne(query);
 		
 	}
 	
@@ -62,9 +62,9 @@ public class MessageTools {
 		
 		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		
-		Document query = new Document("_id" /*get the id of the message and insert it here */);
+		//Document query = new Document("_id" /*get the id of the message and insert it here */);
 		
-		MongoCursor<Document> cursor = coll.find(query).iterator();
+		//MongoCursor<Document> cursor = coll.find(query).iterator();
 		
 		/*while (cursor.hasNext()) {
 			Document o = cursor.next();
@@ -72,7 +72,7 @@ public class MessageTools {
 		}*/
 		/* see if we can retrieve the original document */
 		
-		if (msg.hasNext()) {
+		/*if (msg.hasNext()) {
 			Document message = msg.next(); //should map the original message to this new Document message
 			
 			Document comment = new Document();
@@ -91,7 +91,7 @@ public class MessageTools {
 			/* do we insert the modified list back into the original message? */
 		}
 		
-	}
+	//}
 	
 	
 	
@@ -146,7 +146,7 @@ public class MessageTools {
 		
 	}
 	
-	public static JSONObject listAllMessages() {
+	/*public static JSONObject listAllMessages() {
 		
 		// if above code works, reuse by doing a query on all messages
 		
@@ -173,7 +173,7 @@ public class MessageTools {
 		
 		return friendMessageListJSON;
 		
-	}
+	}*/
 
 
 }

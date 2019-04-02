@@ -21,8 +21,8 @@ public class MessageTest {
 			JSONObject json = tools.ServiceTools.ServiceRefused("Erreur de logins", 1000000);
 			System.out.println(json.toString());
 		}
-		System.out.println("Message de l'utilisateur " + user + " :");
-		System.out.println(MessageTools.getListmessages(user));
+		//System.out.println("Message de l'utilisateur " + user + " :");
+		//System.out.println(MessageTools.getListmessages(user));
 	}
 
 }
