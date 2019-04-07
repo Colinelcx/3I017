@@ -13,7 +13,7 @@ class MainPage extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {isConnected: true, page:"profile", id:"", login:"", key:""}; // not correct start values
+		this.state = {isConnected: false, page:"login", id:"", login:"", key:""}; // not correct start values
 		this.getConnected = this.getConnected.bind(this);
         this.setLogout = this.setLogout.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
@@ -91,6 +91,11 @@ class MainPage extends Component {
 
     goToProfile(){
         this.setState({isConnected:this.state.isConnected, page:"profile", id:this.state.id, login:this.state.logout, key:this.state.key});
+    }
+
+
+    postMessage () {
+
     }
 
 
