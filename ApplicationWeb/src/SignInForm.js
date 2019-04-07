@@ -54,7 +54,7 @@ class SignInForm extends Component {
                     </div>
                     <div className="form-row">
                         <div className="col">
-                            <button type="submit" class="btn btn-primary col-md-4" onClick={() => alert("test")}>Inscription</button>
+                            <button type="submit" class="btn btn-primary col-md-4" onClick={() => this.props.createAccount()}>Connexion</button>
                         </div>
                         <div className="col">
                             <button type="submit" class="btn btn-primary col-md-4">Annuler</button>
@@ -62,7 +62,7 @@ class SignInForm extends Component {
                     </div>
                 </form>
                 <div className="text-right">
-                    <a href="" > Déjà inscrit ? Connection</a>
+                    <a href="" onClick={() => this.props.goToLogin()}>Déjà inscrit ?</a>
                 </div>
             </div> 
        )
