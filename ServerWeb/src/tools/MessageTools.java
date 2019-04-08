@@ -9,6 +9,7 @@ import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -36,6 +37,35 @@ public class MessageTools {
 		
 	}
 	
+			
+	public static void deleteMessage(int id_user, String id_message) {
+		
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
+		Document query = new Document();	 
+		query.append("id_", id_user);
+		Document message = coll.find(query).first();
+		coll.deleteOne(message);
+		
+	}
+	
+	public static JSONObject getRecentMessages(int[] id_friends) {
+		JSONObject json = new JSONObject();
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
+		FindIterable<Document> messages = coll.find({"id_user": { $in :id_friends}});
+
+	}
+	
+	public List<Document> getUserMessages(int id_user)
+	
+	public static void getRecentMessages(int id_user, String id_message) {
+		
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
+		Document query = new Document();	 
+		query.append("id_", id_user);
+		Document message = coll.find(query).first();
+		coll.deleteOne(message);
+
+		}
 	
 	
 	public static void addComment(int id_user, String content) {
@@ -51,10 +81,9 @@ public class MessageTools {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 		
-		
-		
-		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
+		//MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		
 		//Document query = new Document("_id" /*get the id of the message and insert it here */);
 		
@@ -83,30 +112,14 @@ public class MessageTools {
 			commentList.add(comment);
 			
 			/* do we insert the modified list back into the original message? */
-		}
+		//}
 		
 	//}
 	
 	
-	
-	
-	
-	public static void deleteMessage(int id_user, String id_) {
-		
-		// verify that the user has the right to delete this message
-		
-		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
-			
-		Document query = new Document();
-		 
-		query.append("id_", id_);
-		
-		MongoCursor<Document> cursor = coll.find(query).iterator();
-		// supprimer le message, je ne sais pas comment
-		
-	}
 
-	public static JSONObject getlistMessage(int id_user) {
+
+	public static JSONObject getListMessage(int id_user) {
 		
 		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		
