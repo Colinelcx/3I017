@@ -31,7 +31,7 @@ public class MessageService {
 			
 			int id_user = AuthTools.getSessionID(key);
 			
-			//Vérification des identifiants
+			//Vérification de l'identifiant
 			boolean is_user = UserTools.userExists(id_user);
 			if (!is_user) 
 				return ServiceTools.ServiceRefused("unknown user " + id_user, 1);

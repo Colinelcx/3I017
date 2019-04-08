@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import services.MessageService;
 import tools.AuthTools;
-import tools.MessageTools;
 import tools.UserTools;
 
 public class MessageTest {

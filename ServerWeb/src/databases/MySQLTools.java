@@ -23,7 +23,7 @@ public class MySQLTools {
 		}
 		else {
 			if (database==null) {
-			database=new Database("jdbc/db");
+			database=new Database("jdbc/firstDB");
 			} return(database.getConnection());
 			}
 		

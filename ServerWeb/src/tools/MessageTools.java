@@ -24,21 +24,15 @@ public class MessageTools {
 		GregorianCalendar calendar = new java.util.GregorianCalendar();
 		Date date = calendar.getTime();
 		
-		//MongoCollection<Document> coll = MongoDBTools.getCollection(id_user);
+		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		
 		Document query = new Document();
-		
-		String login = tools.UserTools.getLogin(id_user);
-		
-		ArrayList<Document> commentList = new ArrayList<Document>();
 		 
 		query.append("id_user", id_user);
-		query.append("login", login);
 		query.append("date", date);
 		query.append("content", content);
-		query.append("comments", commentList);
 
-		//coll.insertOne(query);
+		coll.insertOne(query);
 		
 	}
 	

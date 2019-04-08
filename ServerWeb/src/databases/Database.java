@@ -12,7 +12,7 @@ public class Database {
 	
 	public Database(String jndiname) throws SQLException {
 		try {
-			dataSource = (DataSource) new InitialContext().lookup("java:comp/env/)" + jndiname);
+			dataSource = (DataSource) new InitialContext().lookup("java:comp/env/" + jndiname);
 		} catch (NamingException e) {
 			//Handle error that it's not configured in JNDI.
 			throw new SQLException(jndiname + " is missing in JNDI! : " + e.getMessage());

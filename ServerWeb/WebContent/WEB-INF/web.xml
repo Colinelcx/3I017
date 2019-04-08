@@ -775,29 +775,33 @@ standard deployment descriptor.
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <display-name>Twistter</display-name>
   <servlet>
-    <servlet-name>addComment</servlet-name>
-    <servlet-class>AddCommentServlet</servlet-class>
+    <servlet-name>addMessage</servlet-name>
+    <servlet-class>servlets.messages.AddMessageServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>addFriend</servlet-name>
-    <servlet-class>AddFriendServlet</servlet-class>
+    <servlet-class>serlvets.friends.AddFriendServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>createUser</servlet-name>
+    <servlet-class>servlets.users.CreateUserServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>login</servlet-name>
-    <servlet-class>LoginServlet</servlet-class>
+    <servlet-class>servlets.authentification.LoginServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>logout</servlet-name>
-    <servlet-class>LogoutServlet</servlet-class>
+    <servlet-class>servlets.authentification.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>removeFriend</servlet-name>
-    <servlet-class>RemoveFriendServlet</servlet-class>
+    <servlet-class>servlets.friends.RemoveFriendServlet</servlet-class>
   </servlet>
  
 
   <servlet-mapping>
-    <servlet-name>addComment</servlet-name>
+    <servlet-name>addMessage</servlet-name>
     <url-pattern>/comment/add</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
