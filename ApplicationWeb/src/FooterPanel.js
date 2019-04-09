@@ -8,10 +8,10 @@ class FooterPanel extends Component {
 
     render() {
         return (
-        <footer class="footer sticky fixed-bottom  mt-auto py-3 bg-primary">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4 text-muted" align="center">
+        <footer className="footer sticky fixed-bottom  mt-auto py-3 bg-primary">
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-4 text-muted" align="center">
                         Authors : Lacoux Coline Felten Charel
                     </div>
                 </div>

@@ -21,7 +21,7 @@ class LoginForm extends Component {
 
     handleSubmit(event) {
         alert(JSON.stringify(this.state));
-        this.props.getConnected(this.state) // we send the getConnected function all the necessary information to possibly login the user
+        //this.props.getConnected(this.state) // we send the getConnected function all the necessary information to possibly login the user
     }
 
    
@@ -36,22 +36,25 @@ class LoginForm extends Component {
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label for="username">Pseudo</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                        <label htmlFor="username">Pseudo</label>
+                        <div className="input-group">
+                            <div className="input-group-prepend">
+                            <span className="input-group-text" id="inputGroupPrepend2">@</span>
                             </div>
                             <input type="text" className="form-control" id="validationDefaultUsername" placeholder="Username" onChange={this.handleUsername}/>
                         </div>
                     </div>
                     <div className="form-group">
-                        <label for="username">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" onChange={this.handlePassword}/>
+                        <label htmlFor="username">Mot de passe</label>
+                        <input type="password" className="form-control" id="password" placeholder="Entrez votre mot de passe" onChange={this.handlePassword}/>
                     </div>
-                    <button type="submit" class="btn btn-primary">Connexion</button>
+                    <button type="submit" className="btn btn-primary">Connexion</button>
                 </form>
                 <div className="text-right">
-                    <a href="" onClick={() => this.props.goToSignIn()}> Pas encore inscrit ?</a>
+                    <a href="#" onClick={() => this.props.goToSignIn()}> Pas encore inscrit ?</a>
+
+                    
+
                 </div>
             </div> 
        )

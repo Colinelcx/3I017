@@ -13,7 +13,7 @@ class MainPage extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {isConnected: false, page:"login", id:"", login:"", key:""}; // not correct start values
+		this.state = {isConnected: true, page:"mur", id:"", login:"", key:"", nom:"", prenom:"", mail:""}; // not correct start values
 		this.getConnected = this.getConnected.bind(this);
         this.setLogout = this.setLogout.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
@@ -28,7 +28,7 @@ class MainPage extends Component {
 	}
     
      getConnected () {
-        const url = URLSearchParams();
+        const url = new URLSearchParams();
         url.append("username", this.refs.username); // not 100% sure how to get the username, possibly improvement needed
         url.append("password", this.refs.password);
         axios.post("http://localhost:8080/Twistter/auth/login"+url).then(response => this.getConnectedResponse(response));
@@ -41,13 +41,15 @@ class MainPage extends Component {
             alert(response.data)
         } else {
             // user logged in correctly, we update the state
-            this.setState({isConnected: true, page:"mur", id:responseObject["id"], login:responseObject["login"], key:responseObject["key"]});
+            this.setState({isConnected: true, page:"mur", id:responseObject["id"], login:responseObject["login"],
+                           key:responseObject["key"], nom:responseObject["nom"], prenom:responseObject["prenom"],
+                           mail:responseObject["mail"]});
         }
     }
 
 
     createAccount () {
-        const url = URLSearchParams();
+        const url = new URLSearchParams();
         url.append("username", this.refs.username);
         url.append("nom", this.refs.nom);
         url.append("prenom", this.refs.prenom);
@@ -71,31 +73,30 @@ class MainPage extends Component {
 
 		
 	setLogout() {
-        const url = URLSearchParams();
+        const url = new URLSearchParams();
         url.append("key", this.refs.key);
         axios.post("http://localhost:8080/Twistter/auth/logout"+url)
-		this.setState({isConnected:false, page:"login", id:"", login:"", key:""});
+		this.setState({isConnected:false, page:"login", id:"", login:"", key:"", nom:"", prenom:"", mail:""});
 	}
     
     goToLogin() {
-        this.setState({isConnected:this.state.isConnected, page:"login", id:this.state.id, login:this.state.logout, key:this.state.key});
+        this.setState({page:"login"});
     }
 
     goToSignIn(){
-        this.setState({isConnected:this.state.isConnected, page:"signin", id:this.state.id, login:this.state.logout, key:this.state.key});
+        //alert("gotosign in called");
+        console.log("test");
+        this.setState({isConnected:false, page:"signin"});
+        console.log(this.state);
     }    
 
     goToTimeLine(){
-        this.setState({isConnected:this.state.isConnected, page:"mur", id:this.state.id, login:this.state.logout, key:this.state.key});
+        alert("timeline called");
+        this.setState({page:"mur"});
     }
 
     goToProfile(){
-        this.setState({isConnected:this.state.isConnected, page:"profile", id:this.state.id, login:this.state.logout, key:this.state.key});
-    }
-
-
-    postMessage () {
-
+        this.setState({page:"profile"});
     }
 
 
@@ -106,8 +107,8 @@ class MainPage extends Component {
 
                     {/*Panneau de navigation (Page de connexion, d'inscription ou header selon le cas)*/}
                     < NavigationPanel isConnected={this.state.isConnected} page={this.state.page} setLogout={this.setLogout} 
-                    getConnected={this.getConnected} goToLogin ={this.goToLogin} gotToSignIn={this.goToSignIn}
-            goToTimeLine={this.goToTimeLine} goToProfile={this.goToProfile} createAccount={this.state.createAccount}/>
+                    getConnected={this.getConnected} goToLogin ={this.goToLogin} goToSignIn={this.goToSignIn}
+            goToTimeLine={this.goToTimeLine} goToProfile={this.goToProfile} createAccount={this.createAccount}/>
 
         <div className="container-fluid content-principal">
 

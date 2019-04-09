@@ -7,7 +7,7 @@ class Logout extends Component {
     }
 
     render() {
-        return <button type="submit" class="btn btn-secondary my-2 my-sm-0" onClick={() => this.props.setLogout()}>Déconnexion</button>
+        return <button type="submit" className="btn btn-secondary my-2 my-sm-0" onClick={() => this.props.setLogout()}>Déconnexion</button>
     }
 }
 
