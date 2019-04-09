@@ -99,6 +99,7 @@ class MainPage extends Component {
         this.setState({page:"profile"});
     }
 
+    
 
 	render() {
 		return (
