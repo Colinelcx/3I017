@@ -2,14 +2,29 @@ package services;
 
 import java.sql.SQLException;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import tools.AuthTools;
+import tools.FriendTools;
 import tools.MessageTools;
 import tools.ServiceTools;
 import tools.UserTools;
 
 public class MessageService {
+	
+	
+	public static JSONObject search(String key, String type) {
+		if ((type == null) || (key == null)){
+			return (tools.ServiceTools.ServiceRefused("Wrong web arguments", -1));
+		}
+		
+		if (type.compareTo("timeline") == 0)
+			return getRecentMessages(key);
+		if (type.compareTo("user") == 0)
+			return getUserMessages(key);
+		return null;
+	}
 
 	/**
 	 * Ajoute un message écrit par un utilisateur dans la base de données
@@ -46,5 +61,64 @@ public class MessageService {
 		}
 	}
 
+
+	public static JSONObject getUserMessages(String key) {
+		
+		if (key == null){
+			return (tools.ServiceTools.ServiceRefused("Wrong web arguments", -1));
+		}
+		
+		try {
+			//Vérification de la session
+			boolean session_OK = AuthTools.checkSession(key);
+			if (!session_OK)
+				return ServiceTools.ServiceRefused("Invalid session", 1);
+			
+			int id_user = AuthTools.getSessionID(key);
+			
+			//Vérification de l'identifiant
+			boolean is_user = UserTools.userExists(id_user);
+			if (!is_user) 
+				return ServiceTools.ServiceRefused("unknown user " + id_user, 1);
+			
+			//Récupération des messages
+			return MessageTools.getUserMessages(id_user);
+			
+		} catch (SQLException e) {
+			return ServiceTools.ServiceRefused(e.getMessage(), 1000);
+		} catch (JSONException e) {
+			return ServiceTools.ServiceRefused(e.getMessage(), 100);
+		}
+	}
+	
+	public static JSONObject getRecentMessages(String key) {
+		
+		if (key == null){
+			return (tools.ServiceTools.ServiceRefused("Wrong web arguments", -1));
+		}
+		
+		try {
+			//Vérification de la session
+			boolean session_OK = AuthTools.checkSession(key);
+			if (!session_OK)
+				return ServiceTools.ServiceRefused("Invalid session", 1);
+			
+			int id_user = AuthTools.getSessionID(key);
+			
+			//Vérification de l'identifiant
+			boolean is_user = UserTools.userExists(id_user);
+			if (!is_user) 
+				return ServiceTools.ServiceRefused("unknown user " + id_user, 1);
+			
+			//Récupération des messages
+			int[] id_friends = FriendTools.getFriendsList(id_user);
+			return MessageTools.getRecentMessages(id_friends);
+			
+		} catch (SQLException e) {
+			return ServiceTools.ServiceRefused(e.getMessage(), 1000);
+		} catch (JSONException e) {
+			return ServiceTools.ServiceRefused(e.getMessage(), 100);
+		}
+	}
+
 }
- //s

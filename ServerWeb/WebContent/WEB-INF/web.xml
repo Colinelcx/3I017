@@ -798,6 +798,10 @@ standard deployment descriptor.
     <servlet-name>removeFriend</servlet-name>
     <servlet-class>servlets.friends.RemoveFriendServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <servlet-class>servlets.search.SearchServlet</servlet-class>
+  </servlet>
  
 
   <servlet-mapping>
@@ -823,6 +827,10 @@ standard deployment descriptor.
   <servlet-mapping>
     <servlet-name>removeFriend</servlet-name>
     <url-pattern>/friends/remove</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
   </servlet-mapping>
  
 </web-app>

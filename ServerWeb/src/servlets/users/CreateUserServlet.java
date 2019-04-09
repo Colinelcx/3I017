@@ -30,7 +30,7 @@ public class CreateUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
+		String login = request.getParameter("username");
 		String password = request.getParameter("password");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");

@@ -1,6 +1,5 @@
 package tools;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class FriendTools {
 	 * @return la liste des identifiants des amis
 	 * @throws SQLException
 	 */
-	public static List<Integer> getFriendsList (int id_user1) throws SQLException {
+	public static int[] getFriendsList (int id_user1) throws SQLException {
 		
 		String query = "SELECT id_user2 from Friendship WHERE id_user1 = " + id_user1 + ";";
 
@@ -70,7 +69,12 @@ public class FriendTools {
 			friendsList.add(Integer.parseInt(friend));
 		}
 		
-		return friendsList;
+		int[] ret = new int[friendsList.size()];
+	    for (int i=0; i < ret.length; i++)
+	    {
+	        ret[i] = friendsList.get(i).intValue();
+	    }
+	    return ret;
 		
 	}
 }
