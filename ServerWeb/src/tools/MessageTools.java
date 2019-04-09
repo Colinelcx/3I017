@@ -10,12 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-
+import static com.mongodb.client.model.Filters.*;
 import databases.MongoDBTools;
 
 public class MessageTools {
@@ -42,28 +39,39 @@ public class MessageTools {
 		
 		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
 		Document query = new Document();	 
-		query.append("id_", id_user);
+		query.append("id_user", id_user);
 		Document message = coll.find(query).first();
 		coll.deleteOne(message);
 		
 	}
+
 	
-	public static JSONObject getRecentMessages(int[] id_friends) {
+	public static JSONObject getUserMessages(int id_user) throws JSONException {
+		
 		JSONObject json = new JSONObject();
 		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
-		FindIterable<Document> messages = coll.find({"id_user": { $in :id_friends}});
+		FindIterable<Document> messages = coll.find(eq("id_user",id_user));
+		MongoCursor<Document> cursor = messages.iterator();
+		while (cursor.hasNext()){
+			Document message = cursor.next();
+			json.append(message.getInteger("id_user").toString(), message.toString());
+		}
+		return json;
 
 	}
-	
-	public List<Document> getUserMessages(int id_user)
-	
-	public static void getRecentMessages(int id_user, String id_message) {
 		
+	public static JSONObject getRecentMessages(int[] id_friends) throws JSONException {
+		
+		JSONObject json = new JSONObject();
 		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
-		Document query = new Document();	 
-		query.append("id_", id_user);
-		Document message = coll.find(query).first();
-		coll.deleteOne(message);
+		FindIterable<Document> messages = coll.find(in("_id", id_friends));
+		MongoCursor<Document> cursor = messages.iterator();
+
+		while (cursor.hasNext()){
+			Document message = cursor.next();
+			json.append(message.getInteger("id_user").toString(), message.toString());
+		}
+		return json;
 
 		}
 	

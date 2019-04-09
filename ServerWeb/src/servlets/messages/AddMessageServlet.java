@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import services.MessageService;
-import tools.ServiceTools;
 
 /**
  * Servlet implementation class AddMessageServlet
@@ -35,7 +34,7 @@ public class AddMessageServlet extends HttpServlet {
 		String text = request.getParameter("text");
 		PrintWriter out = response.getWriter();	
 		MessageService.addMessage(key, text);
-		JSONObject res = ServiceTools.ServiceAccepted("AddMessage : message ajouté");
+		JSONObject res = MessageService.addMessage(key, text);
 		out.println(res);
 	}
 

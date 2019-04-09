@@ -8,13 +8,13 @@ import services.MessageService;
 import tools.AuthTools;
 import tools.UserTools;
 
-public class MessageTest {
+public class SearchTest {
 
 	public static void main(String[] args) {
 		int user;
 		try {
 			user = UserTools.getUserID("collacoux");
-			JSONObject json = MessageService.addMessage(AuthTools.getSessionKey(user), "test message");
+			JSONObject json = MessageService.getRecentMessages(AuthTools.getSessionKey(user));
 			System.out.println(json.toString());
 
 		} catch (SQLException e) {
