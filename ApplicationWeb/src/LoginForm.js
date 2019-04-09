@@ -20,8 +20,8 @@ class LoginForm extends Component {
     }
 
     handleSubmit(event) {
-        alert(JSON.stringify(this.state));
-        //this.props.getConnected(this.state) // we send the getConnected function all the necessary information to possibly login the user
+        console.log(this.state);
+        this.props.getConnected(this.state) // we send the getConnected function all the necessary information to possibly login the user
     }
 
    

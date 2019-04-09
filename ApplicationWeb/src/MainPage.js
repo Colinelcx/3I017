@@ -27,10 +27,12 @@ class MainPage extends Component {
 
 	}
     
-     getConnected () {
+     getConnected (args) {
+        console.log("test");
+        alert(args.username);
         const url = new URLSearchParams();
-        url.append("username", this.refs.username); // not 100% sure how to get the username, possibly improvement needed
-        url.append("password", this.refs.password);
+        url.append("username", args.username); // not 100% sure how to get the username, possibly improvement needed
+        url.append("password", args.password);
         axios.post("http://localhost:8080/Twistter/auth/login"+url).then(response => this.getConnectedResponse(response));
     }
 
@@ -84,14 +86,10 @@ class MainPage extends Component {
     }
 
     goToSignIn(){
-        //alert("gotosign in called");
-        console.log("test");
         this.setState({isConnected:false, page:"signin"});
-        console.log(this.state);
     }    
 
     goToTimeLine(){
-        alert("timeline called");
         this.setState({page:"mur"});
     }
 
@@ -99,7 +97,7 @@ class MainPage extends Component {
         this.setState({page:"profile"});
     }
 
-    
+
 
 	render() {
 		return (
