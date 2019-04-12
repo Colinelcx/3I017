@@ -7,6 +7,19 @@ class NavigationPanel extends Component {
 
 	constructor(props) {
         super(props);
+        this.state = {query:""};
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSearch(event) {
+        this.setState({query: event.target.value});
+    }
+
+    handleSubmit(event) {
+        console.log(this.state);
+        //this.props.findUser(this.state) // we send the getConnected function all the necessary information to possibly login the user
+        this.setState({query: ""});
     }
 
     render() {
@@ -58,11 +71,10 @@ class NavigationPanel extends Component {
                     </div>
 
                     <div className="mx-auto order-0 col-8 ">
-                        <li className="nav-item active form-inline justify-content-md-center">
-                            <input className="form-control col-lg-7 " type="text" placeholder="Search" aria-label="Search"/>
-                            <button className="btn btn-primary ml-2" type="submit" >Recherche</button>
-                        </li>
-                        
+                            <form className="nav-item active form-inline justify-content-md-center" onSubmit={this.handleSubmit}>
+                                <input className="form-control col-lg-7 " type="text" placeholder="Recherche des utilisateurs" aria-label="Search" onChange={this.handleSearch}/>
+                                <button className="btn btn-primary ml-2" type="submit" >Recherche</button>
+                            </form>       
                     </div>
 
                     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">

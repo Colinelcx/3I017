@@ -6,31 +6,28 @@ class FluxMessages extends Component {
 
 	constructor(props) {
         super(props);
+        //console.log(props);
+        //console.log(props.getMessages());
+
+        this.data = this.props.getMessages();
+        
     }
 
     render() {
         return (
-            this.props.page==="mur" ?
+            
 
                 <div className="overflow-auto flux">
-                    <MessageInput/>
-                    <Message/>
-                    <Message/>
-                    <Message/>
-                    <Message/>
+
+                    {this.props.page==="mur" ?
+                    <MessageInput/> : null}
+
+                    {/*this.data.messages.items.map((login, id, nom, prenom, date, text) =>
+                    <Message login={login} id={id} nom={nom} prenom={prenom} date ={date} text={text} />)*/
+                    <Message goToFriendProfile={this.props.goToFriendProfile} login={"colcx"} id={1234} nom={"La"} prenom={"Col"} date ={"date"} text={"sampletext"} />}
                 </div>
 
-             :
-
-                <div className="overflow-auto flux">
-                    <Message/>
-                    <Message/>
-                    <Message/>
-                    <Message/>
-                </div>
-
-
-               
+                           
        )
     }
 }

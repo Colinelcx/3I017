@@ -31,6 +31,9 @@ class MainPage extends Component {
         this.addFriend = this.addFriend.bind(this);
         this.removeFriend = this.removeFriend.bind(this);
 
+        this.getMessages = this.getMessages.bind(this);
+        this.goToFriendProfile = this.goToFriendProfile.bind(this);
+
 	}
     
      getConnected (args) {
@@ -104,8 +107,13 @@ class MainPage extends Component {
     }
 
     goToFriendProfile(){
+        // this function is called when we click on the name of a friend in the url of a message or when we succesfully search for a friend.
+        // it updates all the fields in the state that correspond to values of this friend, so we can visit that friends profile
         this.setState({page:"friendProfile"});
     }
+
+
+    
 
 
 
@@ -148,6 +156,23 @@ class MainPage extends Component {
 
 
 
+    getMessages(){
+        return [{id_messages:123456, id_user:3, login:"colcx", nom:"lacoux", prenom:"coline", date:"date", text:"this is some sample text"}];
+    }
+
+
+
+    goToFriendProfile(args){
+        this.setState({page:"friendProfile", friendId:args.id, friendLogin:args.login, isFriend:1, friendNom:args.nom, friendPrenom:args.prenom});
+    }
+
+
+
+
+
+
+
+
 
 
 	render() {
@@ -172,7 +197,9 @@ class MainPage extends Component {
                     
                         //Page Timeline
                         <section>
-                            < TimeLine page={this.state.page} messageStat={this.state.messageStat} userStat={this.state.userStat}/>
+                            < TimeLine page={this.state.page} messageStat={this.state.messageStat}
+                            userStat={this.state.userStat} getMessages={this.getMessages} 
+                            goToFriendProfile={this.goToFriendProfile}/>
                         </section>
             
                     : 
@@ -181,7 +208,9 @@ class MainPage extends Component {
                         
                         //Page profil
                         <section>
-                            < ProfileTimeLine login={this.state.login} id={this.state.id} nom={this.state.nom} prenom={this.state.prenom} isFriend={2} />
+                            < ProfileTimeLine login={this.state.login} id={this.state.id} nom={this.state.nom}
+                            prenom={this.state.prenom} isFriend={2} getMessages={this.getMessages}
+                            goToFriendProfile={this.goToFriendProfile}/>
                         </section>
         
                     :
@@ -190,7 +219,9 @@ class MainPage extends Component {
                         
                         //Page profil
                         <section>
-                            < ProfileTimeLine login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom} prenom={this.state.friendPrenom} isFriend={this.state.isFriend} />
+                            < ProfileTimeLine login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom}
+                            prenom={this.state.friendPrenom} isFriend={this.state.isFriend} getMessages={this.getMessages}
+                            goToFriendProfile={this.goToFriendProfile}/>
                         </section>
         
                     : 

@@ -11,13 +11,13 @@ class Message extends Component {
             <div className="card bg-light mb-3 shadow-sm mr-3" >
                 <div className="card-header">
                          <div className="row">
-                            <div className="card-text font-weight-bold ml-3">Charel Felten</div>
-                            <div className="card-text ml-3">@charel</div>
-                            <div className="card-text ml-3">29 mars 2019</div>
+                            <div className="card-text font-weight-bold ml-3">{this.props.prenom} {this.props.nom}</div>
+                             <a className="card-text ml-3" href="#" onClick={() => this.props.goToFriendProfile(this.props)}>@{this.props.login}</a>
+                            <div className="card-text ml-3">{this.props.date}</div>
                         </div>
                 </div>
                 <div className="card-body">
-                    <p className="card-text">Ceci est le texte du message.</p>
+                    <p className="card-text">{this.props.text}</p>
                 </div> 
             </div>
        )
@@ -25,3 +25,5 @@ class Message extends Component {
 }
 
 export default Message;
+
+//<div className="card-text ml-3">@{this.props.login}</div>
