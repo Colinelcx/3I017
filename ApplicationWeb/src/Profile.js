@@ -5,6 +5,7 @@ class Profile extends Component {
 
 	constructor(props) {
         super(props);
+        console.log(props);
     }
 
     render() {
@@ -14,15 +15,21 @@ class Profile extends Component {
                     <img className="card-img-top" src={require('./medias/owl.png')} alt="Card image cap"></img>
 
                     <div className="card-header">
-                        <h3 className="card-title text-primary">Nom Prenom</h3>
-                        <h4 className="card-title text-secondary">@Username</h4>
+                        <h4 className="card-title text-secondary">{this.props.prenom} {this.props.nom}</h4>
+                        <h3 className="card-title text-primary">@{this.props.login}</h3>
+                        {this.props.isFriend===0 ?
+                            <button className="btn btn-primary mt-2 mb-1" type="submit" onClick={() => this.props.addFriend()} >Ajouter ami</button>
+                        :
+                        this.props.isFriend===1 ?
+                            <button className="btn btn-secondary mt-2 mb-1" type="submit" onClick={() => this.props.removeFriend()} >Supprimer ami</button>
+                        : null // ceci est dans le cas ou on est sur son propre profile
+                        }
+                        
                     </div>
+
                     
-                    <ul className="list-group">
-                        <li className="list-group-item">Cras justo odio</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Vestibulum at eros</li>
-                    </ul>
+                    
+                   
                 
             </div>
         )
@@ -30,3 +37,10 @@ class Profile extends Component {
 }
 
 export default Profile;
+
+/*
+<ul className="list-group">
+                        <li className="list-group-item">Friends: {this.props.getStats(this.props.login)["friends"]} </li>
+                        <li className="list-group-item">Messages: {this.props.getStats(this.props.login)["messages"]} </li>
+                        <li className="list-group-item">Member since: {this.props.getStats(this.props.login)["date"]} </li>
+                    </ul>*/

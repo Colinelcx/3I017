@@ -9,14 +9,27 @@ class FluxMessages extends Component {
     }
 
     render() {
-        return ( 
-            <div className="overflow-auto flux">
-                <MessageInput/>
-                <Message/>
-                <Message/>
-                <Message/>
-                <Message/>
-             </div>
+        return (
+            this.props.page==="mur" ?
+
+                <div className="overflow-auto flux">
+                    <MessageInput/>
+                    <Message/>
+                    <Message/>
+                    <Message/>
+                    <Message/>
+                </div>
+
+             :
+
+                <div className="overflow-auto flux">
+                    <Message/>
+                    <Message/>
+                    <Message/>
+                    <Message/>
+                </div>
+
+
                
        )
     }

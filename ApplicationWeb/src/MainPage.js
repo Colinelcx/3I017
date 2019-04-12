@@ -13,7 +13,11 @@ class MainPage extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {isConnected: true, page:"mur", id:"", login:"", key:"", nom:"", prenom:"", mail:""}; // not correct start values
+        // this.state = {isConnected: true, page:"mur", id:"", login:"", key:"", nom:"", prenom:"", mail:"", visiting:"", friend:""}; // not correct start values
+        this.state = {isConnected:true, page:"mur", id:0, login:"chf", key:"", nom:"felten", prenom:"charel", mail:"",
+                      friendId:0, friendLogin:"colcx", isFriend:1, friendNom:"Coline", friendPrenom:"Lacoux",
+                      messageStat:0, userStat:0};
+                      // 0 = not friend, 1 = friend, 2 = myself
 		this.getConnected = this.getConnected.bind(this);
         this.setLogout = this.setLogout.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
@@ -24,12 +28,14 @@ class MainPage extends Component {
         this.getConnectedResponse = this.getConnectedResponse.bind(this); // pas sur s'il faut faire ca et aussi les mettre dans le naviation panel
         this.createAccount = this.createAccount.bind(this);
         this.createAccountResponse = this.createAccountResponse.bind(this);
+        this.addFriend = this.addFriend.bind(this);
+        this.removeFriend = this.removeFriend.bind(this);
 
 	}
     
      getConnected (args) {
-        console.log("test");
-        alert(args.username);
+        //console.log("test");
+        //alert(args.username);
         const url = new URLSearchParams();
         url.append("username", args.username); // not 100% sure how to get the username, possibly improvement needed
         url.append("password", args.password);
@@ -78,7 +84,7 @@ class MainPage extends Component {
         const url = new URLSearchParams();
         url.append("key", this.refs.key);
         axios.post("http://localhost:8080/Twistter/auth/logout"+url)
-		this.setState({isConnected:false, page:"login", id:"", login:"", key:"", nom:"", prenom:"", mail:""});
+        this.setState({isConnected:false, page:"login", id:"", login:"", key:"", nom:"", prenom:"", mail:""});
 	}
     
     goToLogin() {
@@ -96,6 +102,51 @@ class MainPage extends Component {
     goToProfile(){
         this.setState({page:"profile"});
     }
+
+    goToFriendProfile(){
+        this.setState({page:"friendProfile"});
+    }
+
+
+
+
+    addFriend() {
+        const url = new URLSearchParams();
+        url.append("key", this.state.key);
+        url.append("id_friend", this.state.friendId);
+        axios.post("http://localhost:8080/Twistter/friends/add"+url).then(response => this.addFriendResponse(response));
+    }
+
+    removeFriend() {
+        const url = new URLSearchParams();
+        url.append("key", this.state.key);
+        url.append("id_friend", this.state.friendId);
+        axios.post("http://localhost:8080/Twistter/friends/remove"+url).then(response => this.removeFriendResponse(response));
+    }
+
+    addFriendResponse (response) {
+        var responseObject = JSON.parse(response);
+        if (("message" in responseObject) && ("code" in responseObject)) {
+            // we know its an error message
+            alert(response.data)
+        } else {
+            this.setState({isFriend:1}); // added as friend, we indicate the friendship, but this is not important, as any time we visit this friends profile, we will take the values from the databases, not this field
+        }
+    }
+
+
+    removeFriendResponse (response) {
+        var responseObject = JSON.parse(response);
+        if (("message" in responseObject) && ("code" in responseObject)) {
+            // we know its an error message
+            alert(response.data)
+        } else {
+            // user account creation succesful --> user needs to login
+            this.setState({isFriend:0}); // added as friend, we indicate the friendship, but this is not important, as any time we visit this friends profile, we will take the values from the databases, not this field 
+        }
+    }
+
+
 
 
 
@@ -121,7 +172,7 @@ class MainPage extends Component {
                     
                         //Page Timeline
                         <section>
-                            < TimeLine />
+                            < TimeLine page={this.state.page} messageStat={this.state.messageStat} userStat={this.state.userStat}/>
                         </section>
             
                     : 
@@ -130,7 +181,16 @@ class MainPage extends Component {
                         
                         //Page profil
                         <section>
-                            < ProfileTimeLine />
+                            < ProfileTimeLine login={this.state.login} id={this.state.id} nom={this.state.nom} prenom={this.state.prenom} isFriend={2} />
+                        </section>
+        
+                    :
+
+                       this.state.page==="friendProfile" ? 
+                        
+                        //Page profil
+                        <section>
+                            < ProfileTimeLine login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom} prenom={this.state.friendPrenom} isFriend={this.state.isFriend} />
                         </section>
         
                     : 

@@ -11,10 +11,10 @@ class TimeLine extends Component {
     render() {
         return (<div className="row justify-content-md-center">
                     <div className="col-3">
-                        < Statistiques />
+                        < Statistiques messageStat={this.props.messageStat} userStat={this.props.userStat} />
                     </div>
                     <div className="col-7">
-                        <FluxMessages />
+                        <FluxMessages page={this.props.page} />
                     </div>
                 </div>
         )}
