@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import services.MessageService;
 
-public class SearchServlet {
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     /**
