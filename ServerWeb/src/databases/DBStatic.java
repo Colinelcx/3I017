@@ -12,6 +12,6 @@ public class DBStatic {
 	public static final String mySQLName = "lacoux_felten";
 	public static final String mySQLUser = "root";
 	public static final String mySQLPassword = "root";
-	public static final boolean mySQLPooling = false;
+	public static final boolean mySQLPooling = true;
 	
 }

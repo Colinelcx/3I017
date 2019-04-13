@@ -92,4 +92,34 @@ public class UserTools {
 		return login;
 	}
 	
+	/**
+	 * Retourne le nom de l'utilisateur en fontion de son identifiant
+	 * @param id identifiant de l'utilisateur
+	 * @return le nom de l'utilisateur, null si erreur
+	 * @throws SQLException
+	 */
+	public static String getNom(int id) throws SQLException {
+		String query = "SELECT family_name_user from User WHERE id_user=" + id + ";";
+		List<String> res = MySQLTools.executeQuery(query, "family_name_user");
+		String login = null;
+		if (res.size()==1) 
+			login = res.get(0);		
+		return login;
+	}
+	
+	/**
+	 * Retourne le prénom de l'utilisateur en fontion de son identifiant
+	 * @param id identifiant de l'utilisateur
+	 * @return le prénom de l'utilisateur, null si erreur
+	 * @throws SQLException
+	 */
+	public static String getPrenom(int id) throws SQLException {
+		String query = "SELECT first_name_user from User WHERE id_user=" + id + ";";
+		List<String> res = MySQLTools.executeQuery(query, "first_name_user");
+		String login = null;
+		if (res.size()==1) 
+			login = res.get(0);		
+		return login;
+	}
+	
 }

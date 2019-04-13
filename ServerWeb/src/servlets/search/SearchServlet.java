@@ -28,8 +28,9 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String key = request.getParameter("key");
 		String type = request.getParameter("type");
+		String user = request.getParameter("user");
 		PrintWriter out = response.getWriter();	
-		JSONObject res = MessageService.search(key, type);
+		JSONObject res = MessageService.search(key, type, user);
 		out.println(res);
 	}
 

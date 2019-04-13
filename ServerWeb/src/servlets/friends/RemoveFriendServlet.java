@@ -33,8 +33,7 @@ public class RemoveFriendServlet extends HttpServlet {
 		String key = request.getParameter("key");
 		String id_friend = request.getParameter("id_friend");
 		PrintWriter out = response.getWriter();
-		FriendService.removeFriend(key, Integer.parseInt(id_friend));
-		JSONObject res = ServiceTools.ServiceAccepted("ami supprimé");
+		JSONObject res = FriendService.removeFriend(key, Integer.parseInt(id_friend));
 		out.println(res);
 	}
 

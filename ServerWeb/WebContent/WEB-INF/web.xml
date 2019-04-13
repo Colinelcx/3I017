@@ -798,11 +798,14 @@ standard deployment descriptor.
     <servlet-name>removeFriend</servlet-name>
     <servlet-class>servlets.friends.RemoveFriendServlet</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>infosUser</servlet-name>
+    <servlet-class>servlets.users.InfosUserServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>search</servlet-name>
     <servlet-class>servlets.search.SearchServlet</servlet-class>
   </servlet>
- 
 
   <servlet-mapping>
     <servlet-name>addMessage</servlet-name>
@@ -827,6 +830,10 @@ standard deployment descriptor.
   <servlet-mapping>
     <servlet-name>removeFriend</servlet-name>
     <url-pattern>/friends/remove</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>infosUser</servlet-name>
+    <url-pattern>/user/infos</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>search</servlet-name>

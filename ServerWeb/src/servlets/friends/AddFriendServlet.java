@@ -33,8 +33,7 @@ public class AddFriendServlet extends HttpServlet {
 		String key = request.getParameter("key");
 		String id_friend = request.getParameter("id_friend");
 		PrintWriter out = response.getWriter();	
-		FriendService.addFriend(key, Integer.parseInt(id_friend));
-		JSONObject res = ServiceTools.ServiceAccepted("AddFriend : relation crée");
+		JSONObject res = FriendService.addFriend(key, Integer.parseInt(id_friend));
 		out.println(res);
 	}
 

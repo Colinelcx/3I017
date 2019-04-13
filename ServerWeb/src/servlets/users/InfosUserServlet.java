@@ -1,4 +1,4 @@
-package servlets.friends;
+package servlets.users;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import services.FriendService;
+import services.UserService;
 import tools.ServiceTools;
 
 /**
  * Servlet implementation class IsFriendServlet
  */
 
-public class IsFriendServlet extends HttpServlet {
+public class InfosUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IsFriendServlet() {
+    public InfosUserServlet() {
         super();
     }
 
@@ -31,10 +31,9 @@ public class IsFriendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String key = request.getParameter("key");
-		String id_friend = request.getParameter("id_friend");
+		String username = request.getParameter("username");
 		PrintWriter out = response.getWriter();	
-		FriendService.isFriend(key, Integer.parseInt(id_friend));
-		JSONObject res = ServiceTools.ServiceAccepted("IsFriend : relation crée");
+		JSONObject res = UserService.infosUser(key, username);
 		out.println(res);
 	}
 

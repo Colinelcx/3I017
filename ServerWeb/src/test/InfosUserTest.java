@@ -4,17 +4,17 @@ import java.sql.SQLException;
 
 import org.json.JSONObject;
 
-import services.MessageService;
+import services.UserService;
 import tools.AuthTools;
 import tools.UserTools;
 
-public class MessageTest {
+public class InfosUserTest {
 
 	public static void main(String[] args) {
 		int user;
 		try {
 			user = UserTools.getUserID("collacoux");
-			JSONObject json = MessageService.addMessage(AuthTools.getSessionKey(user), "test message collacoux2");
+			JSONObject json = UserService.infosUser(AuthTools.getSessionKey(user), "collacoux");
 			System.out.println(json.toString());
 
 		} catch (SQLException e) {

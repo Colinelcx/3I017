@@ -33,7 +33,6 @@ public class AddMessageServlet extends HttpServlet {
 		String key = request.getParameter("key");
 		String text = request.getParameter("text");
 		PrintWriter out = response.getWriter();	
-		MessageService.addMessage(key, text);
 		JSONObject res = MessageService.addMessage(key, text);
 		out.println(res);
 	}
