@@ -1,7 +1,6 @@
 package tools;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -54,7 +53,7 @@ public class MessageTools {
 		MongoCursor<Document> cursor = messages.iterator();
 		while (cursor.hasNext()){
 			Document message = cursor.next();
-			json.append(message.getInteger("id_user").toString(), message.toString());
+			json.append(message.get("_id").toString(), message.toString());
 		}
 		return json;
 
@@ -64,12 +63,14 @@ public class MessageTools {
 		
 		JSONObject json = new JSONObject();
 		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
-		FindIterable<Document> messages = coll.find(in("_id", id_friends));
-		MongoCursor<Document> cursor = messages.iterator();
-
-		while (cursor.hasNext()){
-			Document message = cursor.next();
-			json.append(message.getInteger("id_user").toString(), message.toString());
+		for (int id_f: id_friends) {
+			FindIterable<Document> messages = coll.find(eq("id_user", id_f));
+			MongoCursor<Document> cursor = messages.iterator();
+	
+			while (cursor.hasNext()){
+				Document message = cursor.next();
+				json.append(message.get("_id").toString(), message.toString());
+			}
 		}
 		return json;
 
@@ -90,105 +91,5 @@ public class MessageTools {
 			e.printStackTrace();
 		}
 	}
-		
-		//MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
-		
-		//Document query = new Document("_id" /*get the id of the message and insert it here */);
-		
-		//MongoCursor<Document> cursor = coll.find(query).iterator();
-		
-		/*while (cursor.hasNext()) {
-			Document o = cursor.next();
-			System.out.println(o);
-		}*/
-		/* see if we can retrieve the original document */
-		
-		/*if (msg.hasNext()) {
-			Document message = msg.next(); //should map the original message to this new Document message
-			
-			Document comment = new Document();
-			
-			comment.append("id_user", id_user);
-			comment.append("login", login);
-			comment.append("date", date);
-			comment.append("content", content);
-			
-			// adding our comment to the existing list of commments
-			
-			ArrayList<Document> commentList = (ArrayList<Document>) message.get("commentList");
-			
-			commentList.add(comment);
-			
-			/* do we insert the modified list back into the original message? */
-		//}
-		
-	//}
-	
-	
-
-
-	public static JSONObject getListMessage(int id_user) {
-		
-		MongoCollection<Document> coll = MongoDBTools.getCollection("messages");
-		
-		Document query = new Document();
-		JSONObject messageListJSON = new JSONObject();
-		ArrayList<Document> messages = new ArrayList<Document>();
-		
-		query.append("id_user", id_user);
-		
-		MongoCursor<Document> cursor = coll.find(query).iterator();
-		
-		
-		
-		while (cursor.hasNext()) {
-			//Document o = cursor.next();
-			//System.out.println(o);
-			
-			Document message = cursor.next(); // not sure if we also get the comments this way
-			messages.add(message);
-			
-		}
-		
-		try {
-			messageListJSON.put("messages", messages);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return messageListJSON;
-		
-	}
-	
-	/*public static JSONObject listAllMessages() {
-		
-		// if above code works, reuse by doing a query on all messages
-		
-	}
-	
-	public static JSONObject listMessagesOfFriends(int id_user) {
-	
-		int[] friendIDList = FriendTools.iDFriendsList(id_user);
-		
-		int i;
-		
-		JSONObject friendMessageListJSON = new JSONObject();
-		
-		for (i=0; i<friendIDList.length; i++) {
-			
-			try {
-				friendMessageListJSON.put("friendMessages", listMessageOfId(friendIDList[i]));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
-		return friendMessageListJSON;
-		
-	}*/
-
 
 }
