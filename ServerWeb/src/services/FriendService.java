@@ -101,4 +101,43 @@ public class FriendService {
 		}
 			
 	}
+	
+	
+	
+	public static JSONObject isFriend(String key, int id_friend) {
+		
+		if ((key == null) || (id_friend < 0)){
+			return (tools.ServiceTools.ServiceRefused("Wrong web arguments", -1));
+		}
+		
+		try {
+			//Vérification de la session
+			boolean session_OK = AuthTools.checkSession(key);
+			if (!session_OK)
+				return ServiceTools.ServiceRefused("Invalid session", 1);
+			
+			int id_user1 = AuthTools.getSessionID(key);
+			
+			//Vérification des identifiants
+			boolean is_user1 = UserTools.userExists(id_user1);
+			boolean is_user2 = UserTools.userExists(id_friend);
+			if (!is_user1) 
+				return ServiceTools.ServiceRefused("unknown user " + id_user1, 1);
+			if (!is_user2) 
+				return ServiceTools.ServiceRefused("unknown user " + id_friend, 1);
+			if (id_user1 == id_friend)
+				return ServiceTools.ServiceRefused("you can't be friend with yourself !", 1);
+			
+			//On vérifie qu'ils ne sont pas déjà amis
+			boolean friendship = FriendTools.areFriends(id_user1, id_friend);
+			if (friendship)
+				return ServiceTools.ServiceAccepted("true");
+			else
+				return ServiceTools.ServiceAccepted("false");
+			
+			
+		} catch (SQLException e) {
+			return ServiceTools.ServiceRefused(e.getMessage(), 1000);
+		}
+	}
 }

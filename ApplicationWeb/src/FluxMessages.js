@@ -24,7 +24,7 @@ class FluxMessages extends Component {
 
                     {/*this.data.messages.items.map((login, id, nom, prenom, date, text) =>
                     <Message login={login} id={id} nom={nom} prenom={prenom} date ={date} text={text} />)*/
-                    <Message goToFriendProfile={this.props.goToFriendProfile} login={"colcx"} id={1234} nom={"La"} prenom={"Col"} date ={"date"} text={"sampletext"} />}
+                    <Message goToPersonProfile={this.props.goToPersonProfile} login={"colcx"} id={1234} nom={"La"} prenom={"Col"} date ={"date"} text={"sampletext"} />}
                 </div>
 
                            

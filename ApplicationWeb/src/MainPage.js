@@ -15,7 +15,7 @@ class MainPage extends Component {
 		super(props);
         // this.state = {isConnected: true, page:"mur", id:"", login:"", key:"", nom:"", prenom:"", mail:"", visiting:"", friend:""}; // not correct start values
         this.state = {isConnected:true, page:"mur", id:0, login:"chf", key:"", nom:"felten", prenom:"charel", mail:"",
-                      friendId:0, friendLogin:"colcx", isFriend:1, friendNom:"Coline", friendPrenom:"Lacoux",
+                      friendId:0, friendLogin:"test123", isFriend:1, friendNom:"Test", friendPrenom:"Test",
                       messageStat:0, userStat:0};
                       // 0 = not friend, 1 = friend, 2 = myself
 		this.getConnected = this.getConnected.bind(this);
@@ -30,9 +30,13 @@ class MainPage extends Component {
         this.createAccountResponse = this.createAccountResponse.bind(this);
         this.addFriend = this.addFriend.bind(this);
         this.removeFriend = this.removeFriend.bind(this);
+        this.addFriendResponse = this.addFriendResponse.bind(this);
+        this.isFriend = this.isFriend.bind(this);
+        this.isFriendResponse = this.isFriendResponse.bind(this);
+        this.removeFriendResponse = this.removeFriendResponse.bind(this);
 
         this.getMessages = this.getMessages.bind(this);
-        this.goToFriendProfile = this.goToFriendProfile.bind(this);
+        this.goToPersonProfile = this.goToPersonProfile.bind(this);
 
         this.findUser = this.findUser.bind(this);
 
@@ -108,16 +112,17 @@ class MainPage extends Component {
         this.setState({page:"profile"});
     }
 
-    goToFriendProfile(){
+    goToPersonProfile(args){
         // this function is called when we click on the name of a friend in the url of a message or when we succesfully search for a friend.
         // it updates all the fields in the state that correspond to values of this friend, so we can visit that friends profile
-        this.setState({page:"friendProfile"});
+        //alert("test");
+        console.log(args);
+        this.setState({page:"friendProfile", friendId:args.id, friendLogin:args.login, isFriend:1, friendNom:args.nom, friendPrenom:args.prenom});
+        this.isFriend(); // update isFriend state
+
+        
+        
     }
-
-
-    
-
-
 
 
     addFriend() {
@@ -157,6 +162,28 @@ class MainPage extends Component {
     }
 
 
+    isFriend() {
+        const url = new URLSearchParams();
+        url.append("key", this.state.key);
+        url.append("id_friend", this.state.friendId);
+        axios.post("http://localhost:8080/Twistter/friends/is"+url).then(response => this.isFriendResponse(response));
+    }
+
+    isFriendResponse (response) {
+        var responseObject = JSON.parse(response);
+        if (("message" in responseObject) && ("code" in responseObject)) {
+            // we know its an error message
+            alert(response.data)
+        } else {
+            if (responseObject["message"]==="true") {
+                this.setState({isFriend:1});
+            } else {
+                this.setState({isFriend:0});
+            }
+        }
+    }
+
+
 
     getMessages(){
         return [{id_messages:123456, id_user:3, login:"colcx", nom:"lacoux", prenom:"coline", date:"date", text:"this is some sample text"}];
@@ -164,15 +191,23 @@ class MainPage extends Component {
 
 
 
-    goToFriendProfile(args){
-        this.setState({page:"friendProfile", friendId:args.id, friendLogin:args.login, isFriend:1, friendNom:args.nom, friendPrenom:args.prenom});
-    }
+    
 
 
 
 
     findUser(args){
-        console.log(args.query);
+        console.log(args["query"]);
+        // we now have the string of the login
+        // need a servelt where we can enter a login, and then get all the info, kind of like messages
+        // possibly even use messages, but then we have a problem if the user has not written any messages
+
+        // get friend info --> use axios.response... -> to find if we really found the user
+
+        // call goToPersonProfile(with the necessary arguments)
+
+        
+
     }
 
 
@@ -187,7 +222,8 @@ class MainPage extends Component {
                     {/*Panneau de navigation (Page de connexion, d'inscription ou header selon le cas)*/}
                     < NavigationPanel isConnected={this.state.isConnected} page={this.state.page} setLogout={this.setLogout} 
                     getConnected={this.getConnected} goToLogin ={this.goToLogin} goToSignIn={this.goToSignIn}
-            goToTimeLine={this.goToTimeLine} goToProfile={this.goToProfile} createAccount={this.createAccount}/>
+                    goToTimeLine={this.goToTimeLine} goToProfile={this.goToProfile} createAccount={this.createAccount}
+                    findUser={this.findUser}/>
 
         <div className="container-fluid content-principal">
 
@@ -203,7 +239,7 @@ class MainPage extends Component {
                         <section>
                             < TimeLine page={this.state.page} messageStat={this.state.messageStat}
                             userStat={this.state.userStat} getMessages={this.getMessages} 
-                            goToFriendProfile={this.goToFriendProfile}/>
+                            goToPersonProfile={this.goToPersonProfile}/>
                         </section>
             
                     : 
@@ -214,18 +250,18 @@ class MainPage extends Component {
                         <section>
                             < ProfileTimeLine login={this.state.login} id={this.state.id} nom={this.state.nom}
                             prenom={this.state.prenom} isFriend={2} getMessages={this.getMessages}
-                            goToFriendProfile={this.goToFriendProfile}/>
+                            goToPersonProfile={this.goToPersonProfile}/>
                         </section>
         
                     :
 
-                       this.state.page==="friendProfile" ? 
+                       this.state.page==="personProfile" ? 
                         
                         //Page profil
                         <section>
                             < ProfileTimeLine login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom}
                             prenom={this.state.friendPrenom} isFriend={this.state.isFriend} getMessages={this.getMessages}
-                            goToFriendProfile={this.goToFriendProfile}/>
+                            goToPersonProfile={this.goToPersonProfile}/>
                         </section>
         
                     : 
