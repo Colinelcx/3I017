@@ -9,7 +9,7 @@ class FluxMessages extends Component {
         //console.log(props);
         //console.log(props.getMessages());
 
-        //this.data = this.props.getMessages();
+        this.messageArray = this.messageArray.bind(this);
         
     }
 
@@ -32,14 +32,11 @@ class FluxMessages extends Component {
                     {this.props.page==="mur" ?
                     <MessageInput/> : null}
 
-                    {/*messageArray().map((key,value) =>
-                        obj = JSON.parse(key))
-                        
-                        
-                        
-                        this.data.messages.items.map((login, id, nom, prenom, date, text) =>
-                    <Message login={login} id={id} nom={nom} prenom={prenom} date ={date} text={text} />)*/}
-                    <Message findUser={this.props.findUser} login={"colcx"} id={1234} nom={"La"} prenom={"Col"} date ={"date"} text={"sampletext"} />}
+                    {/*this.messageArray()*/
+                    {"123":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"],"111":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"]}.map((key,value) =>
+                    <Message login={JSON.parse(value)["username"]} id={JSON.parse(value)["id_user"]} nom={JSON.parse(value)["nom"]}
+                    prenom={JSON.parse(value)["prenom"]} date ={JSON.parse(value)["date"]} text={JSON.parse(value)["text"]} />)}
+                    
                 </div>
 
                            
@@ -48,3 +45,7 @@ class FluxMessages extends Component {
 }
 
 export default FluxMessages;
+
+//<Message findUser={this.props.findUser} login={"colcx"} id={1234} nom={"La"} prenom={"Col"} date ={"date"} text={"sampletext"} />}
+
+//{"123":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text:'123'}"],"111":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"]}
