@@ -7,19 +7,19 @@ class NavigationPanel extends Component {
 
 	constructor(props) {
         super(props);
-        this.state = {query:""};
+        this.state = {login:""};
         this.handleSearch = this.handleSearch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSearch(event) {
-        this.setState({query: event.target.value});
+        this.setState({login: event.target.value});
     }
 
     handleSubmit(event) {
         console.log(this.state);
-        this.props.findUser(this.state) // we send the getConnected function all the necessary information to possibly login the user
-        this.setState({query: ""});
+        this.props.findUser(this.state.login) // we send the getConnected function all the necessary information to possibly login the user
+        this.setState({login: ""});
     }
 
     render() {

@@ -14,7 +14,7 @@ class ProfileTimeLine extends Component {
                         < Profile login={this.props.login} id={this.props.id} nom={this.props.nom} prenom={this.props.prenom} isFriend={this.props.isFriend} />
                     </div>
                     <div className="col-7">
-                        <FluxMessages page={this.props.page} getMessages={this.props.getMessages} goToPersonProfile={this.props.goToPersonProfile}/>
+                        <FluxMessages page={this.props.page} getMessages={this.props.getMessages} findUser={this.props.findUser} getMessages={this.props.getMessages} />
                     </div>
                 </div>
         )}

@@ -9,8 +9,18 @@ class FluxMessages extends Component {
         //console.log(props);
         //console.log(props.getMessages());
 
-        this.data = this.props.getMessages();
+        //this.data = this.props.getMessages();
         
+    }
+
+
+    messageArray () {
+        if (this.props.page === "mur") {
+            var ma = this.props.getMessages("user", this.props.login);
+        } else {
+            var ma = this.props.getMessages("timeline", this.props.login);
+        }
+        return ma;
     }
 
     render() {
@@ -22,9 +32,14 @@ class FluxMessages extends Component {
                     {this.props.page==="mur" ?
                     <MessageInput/> : null}
 
-                    {/*this.data.messages.items.map((login, id, nom, prenom, date, text) =>
-                    <Message login={login} id={id} nom={nom} prenom={prenom} date ={date} text={text} />)*/
-                    <Message goToPersonProfile={this.props.goToPersonProfile} login={"colcx"} id={1234} nom={"La"} prenom={"Col"} date ={"date"} text={"sampletext"} />}
+                    {/*messageArray().map((key,value) =>
+                        obj = JSON.parse(key))
+                        
+                        
+                        
+                        this.data.messages.items.map((login, id, nom, prenom, date, text) =>
+                    <Message login={login} id={id} nom={nom} prenom={prenom} date ={date} text={text} />)*/}
+                    <Message findUser={this.props.findUser} login={"colcx"} id={1234} nom={"La"} prenom={"Col"} date ={"date"} text={"sampletext"} />}
                 </div>
 
                            
