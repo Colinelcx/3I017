@@ -14,7 +14,7 @@ public class SearchTest {
 		int user;
 		try {
 			user = UserTools.getUserID("collacoux");
-			JSONObject json = MessageService.getUserMessages(AuthTools.getSessionKey(user));
+			JSONObject json = MessageService.getUserMessages(AuthTools.getSessionKey(user), "collacoux");
 			System.out.println(json.toString());
 
 		} catch (SQLException e) {
