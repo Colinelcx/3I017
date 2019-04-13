@@ -34,6 +34,8 @@ class MainPage extends Component {
         this.getMessages = this.getMessages.bind(this);
         this.goToFriendProfile = this.goToFriendProfile.bind(this);
 
+        this.findUser = this.findUser.bind(this);
+
 	}
     
      getConnected (args) {
@@ -169,7 +171,9 @@ class MainPage extends Component {
 
 
 
-
+    findUser(args){
+        console.log(args.query);
+    }
 
 
 

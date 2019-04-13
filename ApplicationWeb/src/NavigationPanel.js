@@ -18,7 +18,7 @@ class NavigationPanel extends Component {
 
     handleSubmit(event) {
         console.log(this.state);
-        //this.props.findUser(this.state) // we send the getConnected function all the necessary information to possibly login the user
+        this.props.findUser(this.state) // we send the getConnected function all the necessary information to possibly login the user
         this.setState({query: ""});
     }
 
