@@ -19,7 +19,6 @@ class NavigationPanel extends Component {
     handleSubmit(event) {
         console.log(this.state);
         this.props.findUser(this.state.login) // we send the getConnected function all the necessary information to possibly login the user
-        this.setState({login: ""});
     }
 
     render() {
@@ -34,7 +33,7 @@ class NavigationPanel extends Component {
                                 <img src={require('./medias/twistter.png')} alt="Bootstrap" className="img-responsive logo-accueil"/>
                             </div>
                             <div className="col-md-6 col-sm-7 form-signin">
-                                < SignInForm goToLogin={this.props.goToLogin}/>
+                                < SignInForm createAccount={this.props.createAccount} goToLogin={this.props.goToLogin}/>
                             </div>
                         </div>
                     :

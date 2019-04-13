@@ -37,7 +37,7 @@ public class CreateUserServlet extends HttpServlet {
 		String email = request.getParameter("mail");
 
 		PrintWriter out = response.getWriter();
-		JSONObject res = UserService.createUser(nom, prenom, login, password, email);
+		JSONObject res = UserService.createUser(login, nom, prenom, password, email);
 		out.println(res);
 	}
 

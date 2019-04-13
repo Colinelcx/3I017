@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import services.FriendService;
-import tools.ServiceTools;
 
 /**
  * Servlet implementation class AddFriendServlet
@@ -32,7 +31,7 @@ public class AddFriendServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String key = request.getParameter("key");
 		String id_friend = request.getParameter("id_friend");
-		PrintWriter out = response.getWriter();	
+		PrintWriter out = response.getWriter();
 		JSONObject res = FriendService.addFriend(key, Integer.parseInt(id_friend));
 		out.println(res);
 	}
@@ -41,6 +40,7 @@ public class AddFriendServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

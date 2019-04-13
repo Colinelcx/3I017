@@ -71,14 +71,25 @@ public class UserService {
 				return ServiceTools.ServiceRefused("unknown user " + username, 1);
 			int id_user2 = UserTools.getUserID(username);
 			
-			//On vérifie qu'ils ne sont pas déjà amis
-			boolean friendship = FriendTools.areFriends(id_user1, id_user2);
+			int friend;
+			if (id_user1 == id_user2) {
+				friend = 2;
+			}
+			else {
+				boolean friendship = FriendTools.areFriends(id_user1, id_user2);
+				if (friendship==true) {
+					friend = 1;
+				}
+				else {
+					friend = 0;
+				}
+			}
 			JSONObject json = new JSONObject();
 			json.put("id_user", id_user2);
 			json.put("username", username);
 			json.put("nom", UserTools.getPrenom(id_user2));
 			json.put("prenom", UserTools.getNom(id_user2));
-			json.put("friend", friendship);
+			json.put("friend", friend);
 
 			return json;
 			

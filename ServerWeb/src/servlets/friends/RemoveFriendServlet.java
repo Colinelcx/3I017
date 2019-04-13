@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import services.FriendService;
-import tools.ServiceTools;
 
 /**
  * Servlet implementation class RemoveFriendServlet

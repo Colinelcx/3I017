@@ -11,14 +11,14 @@ import axios from 'axios';
 
 class MainPage extends Component {
 
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
         // this.state = {isConnected: true, page:"mur", id:"", login:"", key:"", nom:"", prenom:"", mail:"", visiting:"", friend:""}; // not correct start values
-        this.state = {isConnected:true, page:"mur", id:0, login:"chf", key:"", nom:"felten", prenom:"charel", mail:"",
+        this.state = {isConnected:false, page:"login", id:0, login:"chf", key:"", nom:"felten", prenom:"charel", mail:"",
                       friendId:0, friendLogin:"test123", isFriend:1, friendNom:"Test", friendPrenom:"Test",
                       messageStat:0, userStat:0};
                       // 0 = not friend, 1 = friend, 2 = myself
-		this.getConnected = this.getConnected.bind(this);
+        this.getConnected = this.getConnected.bind(this);
         this.setLogout = this.setLogout.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.goToSignIn = this.goToSignIn.bind(this);
@@ -42,22 +42,23 @@ class MainPage extends Component {
         this.findUserResponse = this.findUserResponse.bind(this);
         this.getMessagesResponse = this.getMessagesResponse.bind(this);
 
-	}
+    }
     
-     getConnected (args) {
-        //console.log("test");
-        //alert(args.username);
+    
+    
+     
+    getConnected (args) {
         const url = new URLSearchParams();
-        url.append("username", args.username); // not 100% sure how to get the username, possibly improvement needed
+        url.append("username", args.username);
         url.append("password", args.password);
-        axios.post("http://localhost:8080/Twistter/auth/login"+url).then(response => this.getConnectedResponse(response));
+        axios.post("http://localhost:8080/ServerWeb/auth/login?" + url).then(response => this.getConnectedResponse(response));
     }
 
     getConnectedResponse (response) {
-        var responseObject = JSON.parse(response);
+        var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
-            alert(response.data)
+            alert(JSON.stringify(responseObject))
         } else {
             // user logged in correctly, we update the state
             this.setState({isConnected: true, page:"mur", id:responseObject["id"], login:responseObject["login"],
@@ -67,22 +68,23 @@ class MainPage extends Component {
     }
 
 
-    createAccount () {
+    createAccount (args) {
         const url = new URLSearchParams();
-        url.append("username", this.refs.username);
-        url.append("nom", this.refs.nom);
-        url.append("prenom", this.refs.prenom);
-        url.append("password", this.refs.password);
-        url.append("mail", this.refs.mail);
-        axios.post("http://localhost:8080/Twistter/user/create"+url).then(response => this.createAccountResponse(response));
+	alert(args.username)
+        url.append("username", args.username);
+        url.append("nom", args.nom);
+        url.append("prenom", args.prenom);
+        url.append("password", args.password);
+        url.append("mail", args.mail);
+        axios.post("http://localhost:8080/ServerWeb/user/create?"+url).then(response => this.createAccountResponse(response));
     }
 
 
     createAccountResponse (response) {
-        var responseObject = JSON.parse(response);
+        var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
-            alert(response.data)
+            alert(JSON.stringify(responseObject))
         } else {
             // user account creation succesful --> user needs to login
             this.goToLogin() 
@@ -90,13 +92,15 @@ class MainPage extends Component {
     }
 
 
-		
-	setLogout() {
+        
+    
+    
+    setLogout() { 
         const url = new URLSearchParams();
-        url.append("key", this.refs.key);
-        axios.post("http://localhost:8080/Twistter/auth/logout"+url)
+        url.append("key", this.state.key);
+        axios.get('http://localhost:8080/ServerWeb/auth/logout?'+url).catch((error)=> console.log(error));
         this.setState({isConnected:false, page:"login", id:"", login:"", key:"", nom:"", prenom:"", mail:""});
-	}
+    }
     
     goToLogin() {
         this.setState({page:"login"});
@@ -131,21 +135,21 @@ class MainPage extends Component {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("id_friend", this.state.friendId);
-        axios.post("http://localhost:8080/Twistter/friends/add"+url).then(response => this.addFriendResponse(response));
+        axios.post("http://localhost:8080/ServerWeb/friends/add?"+url).then(response => this.addFriendResponse(response));
     }
 
     removeFriend() {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("id_friend", this.state.friendId);
-        axios.post("http://localhost:8080/Twistter/friends/remove"+url).then(response => this.removeFriendResponse(response));
-    }
+        axios.post("http://localhost:8080/ServerWeb/friends/remove?"+url).then(response => this.removeFriendResponse(response));
+    } 
 
     addFriendResponse (response) {
-        var responseObject = JSON.parse(response);
+        var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
-            alert(response.data)
+            alert(JSON.stringify(responseObject))
         } else {
             this.setState({isFriend:1}); // added as friend, we indicate the friendship, but this is not important, as any time we visit this friends profile, we will take the values from the databases, not this field
         }
@@ -153,10 +157,10 @@ class MainPage extends Component {
 
 
     removeFriendResponse (response) {
-        var responseObject = JSON.parse(response);
+        var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
-            alert(response.data)
+            alert(JSON.stringify(responseObject))
         } else {
             // user account creation succesful --> user needs to login
             this.setState({isFriend:0}); // added as friend, we indicate the friendship, but this is not important, as any time we visit this friends profile, we will take the values from the databases, not this field 
@@ -168,7 +172,7 @@ class MainPage extends Component {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("id_friend", this.state.friendId);
-        axios.post("http://localhost:8080/Twistter/friends/is"+url).then(response => this.isFriendResponse(response));
+        axios.post("http://localhost:8080/ServerWeb/friends/is"+url).then(response => this.isFriendResponse(response));
     }
 
     isFriendResponse (response) {
@@ -193,16 +197,16 @@ class MainPage extends Component {
         url.append("key", this.state.key);
         url.append("type", type);
         url.append("username", login);
-        axios.post("http://localhost:8080/Twistter/search"+url).then(response => this.getMessagesResponse(response));
+        axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => this.getMessagesResponse(response));
 
         //return [{id_messages:123456, id_user:3, login:"colcx", nom:"lacoux", prenom:"coline", date:"date", text:"this is some sample text"}];
     }
 
     getMessagesResponse (response) {
-        var responseObject = JSON.parse(response);
+        var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
-            alert(response.data)
+            alert(JSON.stringify(responseObject))
         } else {
             return responseObject;
         }
@@ -221,14 +225,14 @@ class MainPage extends Component {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("username", login);
-        axios.post("http://localhost:8080/Twistter/user/infos"+url).then(response => this.findUserResponse(response));
+        axios.post("http://localhost:8080/ServerWeb/user/infos?"+url).then(response => this.findUserResponse(response));
     }
 
     findUserResponse (response) {
-        var responseObject = JSON.parse(response);
+        var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
-            alert(response.data)
+            alert(JSON.stringify(responseObject))
         } else {
             this.setState({page:"personProfile", friendId:responseObject["id_user"], friendLogin:responseObject["username"],
             isFriend:responseObject["friend"], friendNom:responseObject["nom"], friendPrenom:responseObject["prenom"]});
@@ -240,8 +244,8 @@ class MainPage extends Component {
 
 
 
-	render() {
-		return (
+    render() {
+        return (
             <div className="main">
                 <div className="height-full bg-light" id="MainPage">
 
@@ -274,7 +278,7 @@ class MainPage extends Component {
                         
                         //Page profil
                         <section>
-                            < ProfileTimeLine login={this.state.login} id={this.state.id} nom={this.state.nom}
+                            < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.login} id={this.state.id} nom={this.state.nom}
                             prenom={this.state.prenom} isFriend={2} getMessages={this.getMessages}
                             findUser={this.findUser} getMessages={this.getMessages} />
                         </section>
@@ -285,7 +289,7 @@ class MainPage extends Component {
                         
                         //Page profil
                         <section>
-                            < ProfileTimeLine login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom}
+                            < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom}
                             prenom={this.state.friendPrenom} isFriend={this.state.isFriend} getMessages={this.getMessages}
                             findUser={this.findUser} getMessages={this.getMessages} />
                         </section>
@@ -299,7 +303,7 @@ class MainPage extends Component {
                     </div>
                 </div>
             </div>
-		)
+        )
 
     }
 }
