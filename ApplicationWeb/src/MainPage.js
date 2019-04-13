@@ -117,8 +117,9 @@ class MainPage extends Component {
         // it updates all the fields in the state that correspond to values of this friend, so we can visit that friends profile
         //alert("test");
         console.log(args);
-        this.setState({page:"friendProfile", friendId:args.id, friendLogin:args.login, isFriend:1, friendNom:args.nom, friendPrenom:args.prenom});
-        this.isFriend(); // update isFriend state
+        this.setState({page:"personProfile"});
+        //this.setState({page:"personProfile", friendId:args.id, friendLogin:args.login, isFriend:1, friendNom:args.nom, friendPrenom:args.prenom});
+        //this.isFriend(); // update isFriend state
 
         
         
