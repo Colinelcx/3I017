@@ -14,7 +14,7 @@ class TimeLine extends Component {
                         < Statistiques messageStat={this.props.messageStat} userStat={this.props.userStat} />
                     </div>
                     <div className="col-7">
-                        <FluxMessages page={this.props.page} getMessages={this.props.getMessages} goToPersonProfile={this.props.goToPersonProfile}/>
+                        <FluxMessages page={this.props.page} getMessages={this.props.getMessages} findUser={this.props.findUser} getMessages={this.props.getMessages}/>
                     </div>
                 </div>
         )}

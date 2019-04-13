@@ -31,14 +31,16 @@ class MainPage extends Component {
         this.addFriend = this.addFriend.bind(this);
         this.removeFriend = this.removeFriend.bind(this);
         this.addFriendResponse = this.addFriendResponse.bind(this);
-        this.isFriend = this.isFriend.bind(this);
-        this.isFriendResponse = this.isFriendResponse.bind(this);
+        //this.isFriendResponse = this.isFriendResponse.bind(this);
         this.removeFriendResponse = this.removeFriendResponse.bind(this);
 
         this.getMessages = this.getMessages.bind(this);
-        this.goToPersonProfile = this.goToPersonProfile.bind(this);
+        //this.goToPersonProfile = this.goToPersonProfile.bind(this);
 
         this.findUser = this.findUser.bind(this);
+        this.getMessages = this.getMessages.bind(this);
+        this.findUserResponse = this.findUserResponse.bind(this);
+        this.getMessagesResponse = this.getMessagesResponse.bind(this);
 
 	}
     
@@ -112,6 +114,7 @@ class MainPage extends Component {
         this.setState({page:"profile"});
     }
 
+    /*
     goToPersonProfile(args){
         // this function is called when we click on the name of a friend in the url of a message or when we succesfully search for a friend.
         // it updates all the fields in the state that correspond to values of this friend, so we can visit that friends profile
@@ -121,10 +124,8 @@ class MainPage extends Component {
         //this.setState({page:"personProfile", friendId:args.id, friendLogin:args.login, isFriend:1, friendNom:args.nom, friendPrenom:args.prenom});
         //this.isFriend(); // update isFriend state
 
-        
-        
     }
-
+    */
 
     addFriend() {
         const url = new URLSearchParams();
@@ -162,7 +163,7 @@ class MainPage extends Component {
         }
     }
 
-
+    /*
     isFriend() {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
@@ -183,33 +184,57 @@ class MainPage extends Component {
             }
         }
     }
+    */
 
 
 
-    getMessages(){
-        return [{id_messages:123456, id_user:3, login:"colcx", nom:"lacoux", prenom:"coline", date:"date", text:"this is some sample text"}];
+    getMessages(type, login){
+        const url = new URLSearchParams();
+        url.append("key", this.state.key);
+        url.append("type", type);
+        url.append("username", login);
+        axios.post("http://localhost:8080/Twistter/search"+url).then(response => this.getMessagesResponse(response));
+
+        //return [{id_messages:123456, id_user:3, login:"colcx", nom:"lacoux", prenom:"coline", date:"date", text:"this is some sample text"}];
+    }
+
+    getMessagesResponse (response) {
+        var responseObject = JSON.parse(response);
+        if (("message" in responseObject) && ("code" in responseObject)) {
+            // we know its an error message
+            alert(response.data)
+        } else {
+            return responseObject;
+        }
     }
 
 
-
+    
     
 
 
 
 
-    findUser(args){
-        console.log(args["query"]);
+    findUser(login){
+        console.log(login);
         // we now have the string of the login
-        // need a servelt where we can enter a login, and then get all the info, kind of like messages
-        // possibly even use messages, but then we have a problem if the user has not written any messages
-
-        // get friend info --> use axios.response... -> to find if we really found the user
-
-        // call goToPersonProfile(with the necessary arguments)
-
-        
-
+        const url = new URLSearchParams();
+        url.append("key", this.state.key);
+        url.append("username", login);
+        axios.post("http://localhost:8080/Twistter/user/infos"+url).then(response => this.findUserResponse(response));
     }
+
+    findUserResponse (response) {
+        var responseObject = JSON.parse(response);
+        if (("message" in responseObject) && ("code" in responseObject)) {
+            // we know its an error message
+            alert(response.data)
+        } else {
+            this.setState({page:"personProfile", friendId:responseObject["id_user"], friendLogin:responseObject["username"],
+            isFriend:responseObject["friend"], friendNom:responseObject["nom"], friendPrenom:responseObject["prenom"]});
+        }
+    }
+
 
 
 
@@ -240,7 +265,7 @@ class MainPage extends Component {
                         <section>
                             < TimeLine page={this.state.page} messageStat={this.state.messageStat}
                             userStat={this.state.userStat} getMessages={this.getMessages} 
-                            goToPersonProfile={this.goToPersonProfile}/>
+                            findUser={this.findUser} getMessages={this.getMessages} />
                         </section>
             
                     : 
@@ -251,7 +276,7 @@ class MainPage extends Component {
                         <section>
                             < ProfileTimeLine login={this.state.login} id={this.state.id} nom={this.state.nom}
                             prenom={this.state.prenom} isFriend={2} getMessages={this.getMessages}
-                            goToPersonProfile={this.goToPersonProfile}/>
+                            findUser={this.findUser} getMessages={this.getMessages} />
                         </section>
         
                     :
@@ -262,7 +287,7 @@ class MainPage extends Component {
                         <section>
                             < ProfileTimeLine login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom}
                             prenom={this.state.friendPrenom} isFriend={this.state.isFriend} getMessages={this.getMessages}
-                            goToPersonProfile={this.goToPersonProfile}/>
+                            findUser={this.findUser} getMessages={this.getMessages} />
                         </section>
         
                     : 

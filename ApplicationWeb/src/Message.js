@@ -12,7 +12,7 @@ class Message extends Component {
                 <div className="card-header">
                          <div className="row">
                             <div className="card-text font-weight-bold ml-3">{this.props.prenom} {this.props.nom}</div>
-                             <a className="card-text ml-3" href="#" onClick={() => this.props.goToPersonProfile(this.props)}>@{this.props.login}</a>
+                             <a className="card-text ml-3" href="#" onClick={() => this.props.findUser(this.props.login)}>@{this.props.login}</a>
                             <div className="card-text ml-3">{this.props.date}</div>
                         </div>
                 </div>
@@ -22,6 +22,7 @@ class Message extends Component {
             </div>
        )
     }
+    
 }
 
 export default Message;
