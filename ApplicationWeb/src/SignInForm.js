@@ -4,13 +4,14 @@ class SignInForm extends Component {
 
 	constructor(props) {
         super(props);
-        this.state = {username:"", password:"", nom:"", prenom:"", mail:""};
+        this.state = {username:"", password:"", nom:"", prenom:"", mail:"", password2:""};
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleNom = this.handleNom.bind(this);
         this.handlePrenom = this.handlePrenom.bind(this);
         this.handleMail = this.handleMail.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePassword2 = this.handlePassword2.bind(this);
     }
 
     handleUsername(event) {
@@ -19,6 +20,10 @@ class SignInForm extends Component {
 
     handlePassword(event) {
         this.setState({password: event.target.value});
+    }
+
+    handlePassword2(event) {
+        this.setState({password2: event.target.value});
     }
 
     handleNom(event) {
@@ -34,9 +39,13 @@ class SignInForm extends Component {
     }
 
     handleSubmit(event) {
-        console.log(JSON.stringify(this.state));
-        this.props.createAccount(this.state) 
-        //onClick={() => this.props.createAccount()}
+        if (this.state.password !== this.state.password2) {
+            alert("passwords must match!");
+        } else {
+            console.log(JSON.stringify(this.state));
+            this.props.createAccount(this.state) 
+            //onClick={() => this.props.createAccount()}
+        }
     }
 
     render() {
@@ -75,6 +84,10 @@ class SignInForm extends Component {
                     <div className="form-group">
                         <label htmlFor="password">Mot de passe :</label>
                         <input type="password" className="form-control" id="password" onChange={this.handlePassword} placeholder="Choisissez un mot de passe"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Confirmation du mot de passe :</label>
+                        <input type="password" className="form-control" id="password" onChange={this.handlePassword2} placeholder="Verifiez votre mot de passe"/>
                     </div>
                     <div className="form-row">
                         <div className="col">
