@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import NavigationPanel from './NavigationPanel';
-import Profile from './Profile';
+// import Profile from './Profile';
 import TimeLine from './TimeLine';
-import FooterPanel from './FooterPanel';
+// import FooterPanel from './FooterPanel';
 import ProfileTimeLine from './ProfileTimeLine';
 import axios from 'axios';
 
@@ -301,7 +301,7 @@ s
                         //Page Timeline
                         <section>
                             < TimeLine page={this.state.page} messageStat={this.state.messageStat}
-                            userStat={this.state.userStat} getMessages={this.getMessages} 
+                            userStat={this.state.userStat}
                             findUser={this.findUser} getMessages={this.getMessages}
                             addMessage={this.addMessage} login={this.state.login}/>
                         </section>
@@ -312,8 +312,9 @@ s
                         
                         //Page profil
                         <section>
-                            < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.login} id={this.state.id} nom={this.state.nom}
-                            prenom={this.state.prenom} isFriend={2} getMessages={this.getMessages}
+                            < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.login}
+                            id={this.state.id} nom={this.state.nom}
+                            prenom={this.state.prenom} isFriend={2}
                             findUser={this.findUser} getMessages={this.getMessages} page={this.state.page}/>
                         </section>
         
@@ -323,8 +324,9 @@ s
                         
                         //Page profil
                         <section>
-                            < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom}
-                            prenom={this.state.friendPrenom} isFriend={this.state.isFriend} getMessages={this.getMessages}
+                            < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.friendLogin}
+                            id={this.state.friendId} nom={this.state.friendNom}
+                            prenom={this.state.friendPrenom} isFriend={this.state.isFriend}
                             findUser={this.findUser} getMessages={this.getMessages} page={this.state.page} />
                         </section>
         

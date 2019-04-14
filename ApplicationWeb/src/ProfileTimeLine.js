@@ -16,7 +16,7 @@ class ProfileTimeLine extends Component {
                     </div>
                     <div className="col-7">
                         <FluxMessages page={this.props.page} getMessages={this.props.getMessages} findUser={this.props.findUser}
-                        getMessages={this.props.getMessages} login={this.props.login}/>
+                        login={this.props.login}/>
                     </div>
                 </div>
         )}

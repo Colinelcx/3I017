@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FluxMessages from './FluxMessages';
+// import FluxMessages from './FluxMessages';
 
 class Profile extends Component {
 
@@ -12,7 +12,7 @@ class Profile extends Component {
         return (
              <div className="card bg-light shadow-sm border-primary mt-3 ml-3" >
 
-                    <img className="card-img-top" src={require('./medias/owl.png')} alt="Card image cap"></img>
+                    <img className="card-img-top" src={require('./medias/owl.png')} alt="owl"></img>
 
                     <div className="card-header">
                         <h4 className="card-title text-secondary">{this.props.prenom} {this.props.nom}</h4>
@@ -25,7 +25,7 @@ class Profile extends Component {
                         : null // ceci est dans le cas ou on est sur son propre profile
                         }
                         
-                        
+
                     </div>
 
                     

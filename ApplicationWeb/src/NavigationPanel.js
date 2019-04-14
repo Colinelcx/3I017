@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm';
-import Logout from './Logout';
+// import Logout from './Logout';
 import SignInForm from './SignInForm';
 
 class NavigationPanel extends Component {
@@ -24,7 +24,7 @@ class NavigationPanel extends Component {
     render() {
         return (
         <nav >
-            {this.props.isConnected==false ?
+            {this.props.isConnected===false ?
 
                 this.props.page==="signin" ?
                     //Page d'inscription
