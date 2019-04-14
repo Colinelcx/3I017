@@ -53,7 +53,13 @@ public class MessageTools {
 		MongoCursor<Document> cursor = messages.iterator();
 		while (cursor.hasNext()){
 			Document message = cursor.next();
-			json.append(message.get("_id").toString(), message.toString());
+			StringBuilder messageString = new StringBuilder();
+			messageString.append('{');
+			for (String key : message.keySet()) {
+				messageString.append(key+":"+message.getString(key) + ", ");
+			}
+			messageString.setCharAt(messageString.length()-1, '}');
+			json.append(message.get("_id").toString(), messageString);
 		}
 		return json;
 
@@ -69,6 +75,12 @@ public class MessageTools {
 	
 			while (cursor.hasNext()){
 				Document message = cursor.next();
+				StringBuilder messageString = new StringBuilder();
+				messageString.append('{');
+				for (String key : message.keySet()) {
+					messageString.append(key+":"+message.getString(key) + ", ");
+				}
+				messageString.setCharAt(messageString.length()-1, '}');
 				json.append(message.get("_id").toString(), message.toString());
 			}
 		}
