@@ -45,10 +45,12 @@
 .logo-profile {
     padding-top:10px;
     margin:auto;
-    height:110px;
-    width:100px;
+    height:200px;
+    width:200px;
 }
-
+.messsages-profile {
+    padding-top:30px;
+}
 
 .flux {
     max-height: 90vh;
@@ -62,7 +64,6 @@
     margin-left:1vh;
     height: 250px;
 }
-
 .card-stats {
     margin-top:1vh;
     margin-left:1vh;

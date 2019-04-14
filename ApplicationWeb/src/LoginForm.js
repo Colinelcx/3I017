@@ -41,7 +41,7 @@ class LoginForm extends Component {
                             <div className="input-group-prepend">
                             <span className="input-group-text" id="inputGroupPrepend2">@</span>
                             </div>
-                            <input type="text" className="form-control" id="validationDefaultUsername" placeholder="Username" onChange={this.handleUsername}/>
+                            <input type="text" className="form-control" id="validationDefaultUsername" placeholder="Entrez votre pseudo" onChange={this.handleUsername}/>
                         </div>
                     </div>
                     <div className="form-group">

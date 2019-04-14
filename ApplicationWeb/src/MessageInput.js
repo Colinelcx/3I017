@@ -21,11 +21,11 @@ class MessageInput extends Component {
 
     render() {
         return (
-            <div className="card bg-light border-secondary mt-3 mb-3 shadow-sm mr-3" >
+            <div className="card bg-light mt-3 mb-3 shadow-sm border-dark mr-3" >
                 <div className="card-body">
                     <form onSubmit={this.handleSubmit}>
                         <div className="row">
-                            <textarea className="form-control col-10 ml-3" id="messageText" rows="2" placeholder="enter your message here" onChange={this.handleText}></textarea>
+                            <textarea className="form-control col-10 " id="messageText" rows="2" placeholder="Quoi de neuf ?" onChange={this.handleText}></textarea>
                             <button type="submit" className="btn btn-primary ml-3" >Publier</button>
                         </div>
                     </form>

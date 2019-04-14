@@ -10,13 +10,14 @@ class Profile extends Component {
 
     render() {
         return (
-             <div className="card bg-light shadow-sm border-primary mt-3 ml-3" >
+             <div className="card bg-light berder-secondary shadow mt-3 ml-3" >
 
-                    <img className="card-img-top" src={require('./medias/owl.png')} alt="owl"></img>
+                    <img className="card-img-top logo-profile" src={require('./medias/owl.png')} alt="owl"></img>
 
-                    <div className="card-header">
-                        <h4 className="card-title text-secondary">{this.props.prenom} {this.props.nom}</h4>
-                        <h3 className="card-title text-primary">@{this.props.login}</h3>
+                    <div className="card-header bg-white ">
+                        <h3 className="card-title text-secondary">{this.props.prenom} {this.props.nom}</h3>
+                        <h4 className="card-title text-primary">@{this.props.login}</h4>
+                        <h5 className="card-title text-secondary">mail :{this.props.mail}</h5>
                         {this.props.isFriend===0 ?
                             <button className="btn btn-primary mt-2 mb-1" type="submit" onClick={() => this.props.addFriend()} >Ajouter ami</button>
                         :

@@ -13,7 +13,7 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isConnected:true, page:"mur", id:12345, login:"chf", key:"1231236jgaduta", nom:"felten", prenom:"charel", mail:"",
+        this.state = {isConnected:false, page:"login", id:12345, login:"chf", key:"1231236jgaduta", nom:"felten", prenom:"charel", mail:"",
                       friendId:0, friendLogin:"test123", isFriend:1, friendNom:"Test", friendPrenom:"Test",
                       messageStat:0, userStat:0};
                       // 0 = not friend, 1 = friend, 2 = myself
@@ -288,7 +288,7 @@ s
                     goToTimeLine={this.goToTimeLine} goToProfile={this.goToProfile} createAccount={this.createAccount}
                     findUser={this.findUser}/>
 
-        <div className="container-fluid content-principal">
+        <div className="container-fluid content-principal ">
 
                     { this.state.page==="connexion" ? 
 

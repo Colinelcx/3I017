@@ -8,12 +8,12 @@ class Statistiques extends Component {
 
     render() {
         return (
-                <div className="card bg-light shadow-sm card-stats border-primary mt-3 ml-3" >
+                <div className="card bg-white shadow card-stats mt-3 ml-3" >
 
-                     <img className="card-img-top" src={require('./medias/twistter.png')} alt="twister"></img>
+                     <img className="card-img-top bg-light " src={require('./medias/twistter.png')} alt="twister"></img>
 
-                    <div className="card-header">
-                        <h3 className="card-title text-primary">Statistiques</h3>
+                    <div className="card-header border-secondary">
+                        <h3 className="card-title text-secondary">Statistiques : </h3>
                     </div>
                     
                     <ul className="list-group">

@@ -8,7 +8,7 @@ class Message extends Component {
 
     render() {
         return ( 
-            <div className="card bg-light mb-3 shadow-sm mr-3" >
+            <div className="card bg-white mb-3 shadow-sm mr-3" >
                 <div className="card-header">
                          <div className="row">
                             <div className="card-text font-weight-bold ml-3">{this.props.prenom} {this.props.nom}</div>

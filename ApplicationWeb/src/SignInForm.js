@@ -40,7 +40,7 @@ class SignInForm extends Component {
 
     handleSubmit(event) {
         if (this.state.password !== this.state.password2) {
-            alert("passwords must match!");
+            alert("Erreur ! Les deux mots de passes doivent être identiques.");
         } else {
             console.log(JSON.stringify(this.state));
             this.props.createAccount(this.state) 
@@ -88,6 +88,7 @@ class SignInForm extends Component {
                     <div className="form-group">
                         <label htmlFor="password">Confirmation du mot de passe :</label>
                         <input type="password" className="form-control" id="password" onChange={this.handlePassword2} placeholder="Verifiez votre mot de passe"/>
+                        <small id="passwordlHelp" className="form-text text-muted">Attention ! les deux mots de passes doivent être identiques</small>
                     </div>
                     <div className="form-row">
                         <div className="col">
