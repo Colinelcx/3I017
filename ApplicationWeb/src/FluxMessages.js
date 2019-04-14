@@ -37,7 +37,7 @@ class FluxMessages extends Component {
                     <MessageInput addMessage={this.props.addMessage} /> : null}
 
                     {Object.keys(a).map(idm =>
-                    <Message findUser={this.props.findUser} login={a[idm]["username"]} id={a[idm]["id"]} nom={a[idm]["nom"]}
+                    <Message key={idm} findUser={this.props.findUser} login={a[idm]["username"]} id={a[idm]["id"]} nom={a[idm]["nom"]}
                     prenom={a[idm]["prenom"]} date={a[idm]["date"]} text={a[idm]["text"]} />)
 
                     /*<Message findUser={this.props.findUser} login={item["username"]} id={item["id"]} nom={item["nom"]}
