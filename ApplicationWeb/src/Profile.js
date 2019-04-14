@@ -25,6 +25,7 @@ class Profile extends Component {
                         : null // ceci est dans le cas ou on est sur son propre profile
                         }
                         
+                        
                     </div>
 
                     
