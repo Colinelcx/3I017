@@ -14,7 +14,7 @@ class MainPage extends Component {
     constructor(props) {
         super(props);
         // this.state = {isConnected: true, page:"mur", id:"", login:"", key:"", nom:"", prenom:"", mail:"", visiting:"", friend:""}; // not correct start values
-        this.state = {isConnected:false, page:"login", id:0, login:"chf", key:"", nom:"felten", prenom:"charel", mail:"",
+        this.state = {isConnected:true, page:"mur", id:12345, login:"chf", key:"1231236jgaduta", nom:"felten", prenom:"charel", mail:"",
                       friendId:0, friendLogin:"test123", isFriend:1, friendNom:"Test", friendPrenom:"Test",
                       messageStat:0, userStat:0};
                       // 0 = not friend, 1 = friend, 2 = myself
@@ -41,6 +41,8 @@ class MainPage extends Component {
         this.getMessages = this.getMessages.bind(this);
         this.findUserResponse = this.findUserResponse.bind(this);
         this.getMessagesResponse = this.getMessagesResponse.bind(this);
+        this.addMessage = this.addMessage.bind(this);
+        this.addMessageResponse = this.addMessageResponse.bind(this);
 
     }
     
@@ -70,7 +72,7 @@ class MainPage extends Component {
 
     createAccount (args) {
         const url = new URLSearchParams();
-	alert(args.username)
+	    alert(args.username)
         url.append("username", args.username);
         url.append("nom", args.nom);
         url.append("prenom", args.prenom);
@@ -191,6 +193,25 @@ class MainPage extends Component {
     */
 
 
+    addMessage(text) {
+        const url = new URLSearchParams();
+        url.append("id_user", this.state.id);
+        url.append("text", text);
+        axios.post("http://localhost:8080/ServerWeb/comment/add?"+url).then(response => this.addMessage(response));
+    }
+
+    addMessageResponse (response) {
+        var responseObject = response.data
+        if (("message" in responseObject) && ("code" in responseObject)) {
+            // we know its an error message
+            alert(JSON.stringify(responseObject))
+        } else {
+            // either do nothing or call getMessages to see the newly added message
+            this.getMessages("timeline", this.state.login);
+        }
+    }
+
+
 
     getMessages(type, login){
         const url = new URLSearchParams();
@@ -269,7 +290,8 @@ class MainPage extends Component {
                         <section>
                             < TimeLine page={this.state.page} messageStat={this.state.messageStat}
                             userStat={this.state.userStat} getMessages={this.getMessages} 
-                            findUser={this.findUser} getMessages={this.getMessages} />
+                            findUser={this.findUser} getMessages={this.getMessages}
+                            addMessage={this.addMessage} />
                         </section>
             
                     : 

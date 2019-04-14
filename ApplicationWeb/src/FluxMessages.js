@@ -30,12 +30,12 @@ class FluxMessages extends Component {
                 <div className="overflow-auto flux">
 
                     {this.props.page==="mur" ?
-                    <MessageInput/> : null}
+                    <MessageInput addMessage={this.props.addMessage} /> : null}
 
                     {/*this.messageArray()*/
-                    {"123":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"],"111":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"]}.map((key,value) =>
+                    /*{"123":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"],"111":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"]}.map((key,value) =>
                     <Message login={JSON.parse(value)["username"]} id={JSON.parse(value)["id_user"]} nom={JSON.parse(value)["nom"]}
-                    prenom={JSON.parse(value)["prenom"]} date ={JSON.parse(value)["date"]} text={JSON.parse(value)["text"]} />)}
+                    prenom={JSON.parse(value)["prenom"]} date ={JSON.parse(value)["date"]} text={JSON.parse(value)["text"]} />)*/}
                     
                 </div>
 

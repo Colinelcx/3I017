@@ -14,7 +14,8 @@ class MessageInput extends Component {
     }
 
     handleSubmit(event) {
-        alert(this.state.text);
+        console.log(this.state.text);
+        this.props.addMessage(this.state.text);
 
     }
 
