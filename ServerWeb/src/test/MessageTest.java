@@ -13,7 +13,7 @@ public class MessageTest {
 	public static void main(String[] args) {
 		int user;
 		try {
-			user = UserTools.getUserID("collacoux2");
+			user = UserTools.getUserID("collacoux");
 			JSONObject json = MessageService.addMessage(AuthTools.getSessionKey(user), "test message collacoux2");
 			System.out.println(json.toString());
 

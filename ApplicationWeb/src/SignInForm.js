@@ -34,7 +34,7 @@ class SignInForm extends Component {
     }
 
     handleSubmit(event) {
-        alert(JSON.stringify(this.state));
+        console.log(JSON.stringify(this.state));
         this.props.createAccount(this.state) 
         //onClick={() => this.props.createAccount()}
     }

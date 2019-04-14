@@ -14,15 +14,15 @@ import tools.UserTools;
 public class MessageService {
 	
 	
-	public static JSONObject search(String key, String type) {
-		if ((type == null) || (key == null)){
+	public static JSONObject search(String key, String type, String user) {
+		if ((type == null) || (key == null)|| (user == null)){
 			return (tools.ServiceTools.ServiceRefused("Wrong web arguments", -1));
 		}
 		
 		if (type.compareTo("timeline") == 0)
 			return getRecentMessages(key);
 		if (type.compareTo("user") == 0)
-			return getUserMessages(key);
+			return getUserMessages(key, user);
 		return null;
 	}
 
@@ -62,7 +62,7 @@ public class MessageService {
 	}
 
 
-	public static JSONObject getUserMessages(String key) {
+	public static JSONObject getUserMessages(String key, String username) {
 		
 		if (key == null){
 			return (tools.ServiceTools.ServiceRefused("Wrong web arguments", -1));
@@ -74,10 +74,10 @@ public class MessageService {
 			if (!session_OK)
 				return ServiceTools.ServiceRefused("Invalid session", 1);
 			
-			int id_user = AuthTools.getSessionID(key);
+			int id_user = UserTools.getUserID(username);
 			
 			//Vérification de l'identifiant
-			boolean is_user = UserTools.userExists(id_user);
+			boolean is_user = UserTools.userExists(username);
 			if (!is_user) 
 				return ServiceTools.ServiceRefused("unknown user " + id_user, 1);
 			

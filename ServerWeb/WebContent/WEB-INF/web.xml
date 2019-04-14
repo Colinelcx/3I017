@@ -780,7 +780,7 @@ standard deployment descriptor.
   </servlet>
   <servlet>
     <servlet-name>addFriend</servlet-name>
-    <servlet-class>serlvets.friends.AddFriendServlet</servlet-class>
+    <servlet-class>servlets.friends.AddFriendServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>createUser</servlet-name>
@@ -798,11 +798,14 @@ standard deployment descriptor.
     <servlet-name>removeFriend</servlet-name>
     <servlet-class>servlets.friends.RemoveFriendServlet</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>infosUser</servlet-name>
+    <servlet-class>servlets.users.InfosUserServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>search</servlet-name>
     <servlet-class>servlets.search.SearchServlet</servlet-class>
   </servlet>
- 
 
   <servlet-mapping>
     <servlet-name>addMessage</servlet-name>
@@ -829,8 +832,21 @@ standard deployment descriptor.
     <url-pattern>/friends/remove</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>infosUser</servlet-name>
+    <url-pattern>/user/infos</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>search</servlet-name>
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
- 
+  
+  <filter>
+  	<filter-name>CorsFilter</filter-name>
+  	<filter-class>servlets.CORSFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CorsFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>
