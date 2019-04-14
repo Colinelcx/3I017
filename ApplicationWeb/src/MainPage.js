@@ -13,7 +13,6 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = {isConnected: true, page:"mur", id:"", login:"", key:"", nom:"", prenom:"", mail:"", visiting:"", friend:""}; // not correct start values
         this.state = {isConnected:true, page:"mur", id:12345, login:"chf", key:"1231236jgaduta", nom:"felten", prenom:"charel", mail:"",
                       friendId:0, friendLogin:"test123", isFriend:1, friendNom:"Test", friendPrenom:"Test",
                       messageStat:0, userStat:0};
@@ -214,15 +213,25 @@ class MainPage extends Component {
 
 
     getMessages(type, login){
+        console.log(type, login);
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("type", type);
         url.append("username", login);
-        axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => this.getMessagesResponse(response));
+        // axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => this.getMessagesResponse(response));
 
         //return [{id_messages:123456, id_user:3, login:"colcx", nom:"lacoux", prenom:"coline", date:"date", text:"this is some sample text"}];
-    }
 
+        // This must be the output:
+        // a string like this, with these exact quotes: '[{"a":1}, {"a":"c"}]'
+
+        // more precisely:
+        // msg = '[{"id_message":"123456", "username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},
+        //   {"id_message":"23444", "username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}]'
+        // which we can then iterate over as follows: JSON.parse(msgs).map(item => alert(item["id"]));
+        return '[{"id_message":"123456", "username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},{"id_message":"23444", "username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}]'
+    }
+s
     getMessagesResponse (response) {
         var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
@@ -291,7 +300,7 @@ class MainPage extends Component {
                             < TimeLine page={this.state.page} messageStat={this.state.messageStat}
                             userStat={this.state.userStat} getMessages={this.getMessages} 
                             findUser={this.findUser} getMessages={this.getMessages}
-                            addMessage={this.addMessage} />
+                            addMessage={this.addMessage} login={this.state.login}/>
                         </section>
             
                     : 

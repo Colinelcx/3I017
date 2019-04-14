@@ -60,6 +60,10 @@ public class MessageService {
 			return ServiceTools.ServiceRefused(e.getMessage(), 1000);
 		}
 	}
+	
+	// all kind of message queries need to return JSON in the following string form:
+	//	'[{"id_message":"123456", "username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},
+    //   {"id_message":"23444", "username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}]'
 
 
 	public static JSONObject getUserMessages(String key, String username) {

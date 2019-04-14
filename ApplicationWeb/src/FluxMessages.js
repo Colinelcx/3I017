@@ -15,12 +15,13 @@ class FluxMessages extends Component {
 
 
     messageArray () {
+        // alert(this.props.login);
         if (this.props.page === "mur") {
-            var ma = this.props.getMessages("user", this.props.login);
-        } else {
             var ma = this.props.getMessages("timeline", this.props.login);
+        } else {
+            var ma = this.props.getMessages("mur", this.props.login);
         }
-        return ma;
+        return JSON.parse(ma);
     }
 
     render() {
@@ -31,6 +32,10 @@ class FluxMessages extends Component {
 
                     {this.props.page==="mur" ?
                     <MessageInput addMessage={this.props.addMessage} /> : null}
+
+                    {this.messageArray().map(item =>
+                    <Message findUser={this.props.findUser} login={item["username"]} id={item["id"]} nom={item["nom"]}
+                    prenom={item["prenom"]} date={item["date"]} text={item["text"]} />)}
 
                     {/*this.messageArray()*/
                     /*{"123":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"],"111":["Document{username:'test', id:234, nom:'testn', prenom:'testpn', date:'123', text='123'}"]}.map((key,value) =>
