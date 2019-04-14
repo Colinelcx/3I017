@@ -13,7 +13,7 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isConnected:false, page:"signin", id:12345, login:"chf", key:"1231236jgaduta", nom:"felten", prenom:"charel", mail:"",
+        this.state = {isConnected:true, page:"mur", id:12345, login:"chf", key:"1231236jgaduta", nom:"felten", prenom:"charel", mail:"",
                       friendId:0, friendLogin:"test123", isFriend:1, friendNom:"Test", friendPrenom:"Test",
                       messageStat:0, userStat:0};
                       // 0 = not friend, 1 = friend, 2 = myself
@@ -212,6 +212,14 @@ class MainPage extends Component {
 
 
     getMessages(type, login){
+
+        // on convertit type mur --> timeline et type profile --> user pour le servlet
+        if (type === "mur") {
+            type = "timeline";
+        } else {
+            type = "user";
+        }
+
         console.log(type, login);
         const url = new URLSearchParams();
         url.append("key", this.state.key);
@@ -219,16 +227,12 @@ class MainPage extends Component {
         url.append("username", login);
         // axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => this.getMessagesResponse(response));
 
-        //return [{id_messages:123456, id_user:3, login:"colcx", nom:"lacoux", prenom:"coline", date:"date", text:"this is some sample text"}];
-
-        // This must be the output:
-        // a string like this, with these exact quotes: '[{"a":1}, {"a":"c"}]'
-
-        // more precisely:
-        // msg = '[{"id_message":"123456", "username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},
-        //   {"id_message":"23444", "username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}]'
+        
+        // this form must the output have, with these exact fields, brackets, quotes
+        // '{"123":{"username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},
+        // "456":{"username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}}'
         // which we can then iterate over as follows: JSON.parse(msgs).map(item => alert(item["id"]));
-        return '[{"id_message":"123456", "username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},{"id_message":"23444", "username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}]'
+        return '{"123":{"username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"}, "456":{"username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}}'
     }
 s
     getMessagesResponse (response) {
@@ -310,7 +314,7 @@ s
                         <section>
                             < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.login} id={this.state.id} nom={this.state.nom}
                             prenom={this.state.prenom} isFriend={2} getMessages={this.getMessages}
-                            findUser={this.findUser} getMessages={this.getMessages} />
+                            findUser={this.findUser} getMessages={this.getMessages} page={this.state.page}/>
                         </section>
         
                     :
@@ -321,7 +325,7 @@ s
                         <section>
                             < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.friendLogin} id={this.state.friendId} nom={this.state.friendNom}
                             prenom={this.state.friendPrenom} isFriend={this.state.isFriend} getMessages={this.getMessages}
-                            findUser={this.findUser} getMessages={this.getMessages} />
+                            findUser={this.findUser} getMessages={this.getMessages} page={this.state.page} />
                         </section>
         
                     : 
