@@ -24,7 +24,7 @@ class MessageInput extends Component {
                 <div className="card-body">
                     <form onSubmit={this.handleSubmit}>
                         <div className="row">
-                            <textarea className="form-control col-10 " id="messageText" rows="2" placeholder="Quoi de neuf ?" onChange={this.handleText}></textarea>
+                            <input className="form-control col-10 " id="messageText" rows="2" placeholder="Quoi de neuf ?" onChange={this.handleText}></input>
                             <button type="submit" className="btn btn-primary ml-3" >Publier</button>
                         </div>
                     </form>

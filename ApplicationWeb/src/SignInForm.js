@@ -92,7 +92,7 @@ class SignInForm extends Component {
                     </div>
                     <div className="form-row">
                         <div className="col">
-                            <button type="submit" className="btn btn-primary" >Connexion</button>
+                            <button type="submit" className="btn btn-primary" >Inscription</button>
                         </div>
                         <div className="col">
                             <button type="reset" className="btn btn-primary">Annuler</button>

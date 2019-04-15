@@ -13,7 +13,7 @@ class Statistiques extends Component {
                      <img className="card-img-top bg-light " src={require('./medias/twistter.png')} alt="twister"></img>
 
                     <div className="card-header border-secondary">
-                        <h3 className="card-title text-secondary">Statistiques : </h3>
+                        <h3 className="card-title text-secondary">Statistiques </h3>
                     </div>
                     
                     <ul className="list-group">

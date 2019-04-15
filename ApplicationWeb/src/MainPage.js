@@ -13,9 +13,9 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isConnected:false, page:"login", id:12345, login:"chf", key:"1231236jgaduta", nom:"felten", prenom:"charel", mail:"",
-                      friendId:0, friendLogin:"test123", isFriend:1, friendNom:"Test", friendPrenom:"Test",
-                      messageStat:0, userStat:0};
+        this.state = {isConnected:false, page:"login", id:-1, login:"", key:"", nom:"", prenom:"", mail:"",
+                      friendId:0, friendLogin:"", isFriend:1, friendNom:"", friendPrenom:"", friendMail:"",
+                      messageStat:0, userStat:0, messages:{}}
                       // 0 = not friend, 1 = friend, 2 = myself
         this.getConnected = this.getConnected.bind(this);
         this.setLogout = this.setLogout.bind(this);
@@ -33,7 +33,7 @@ class MainPage extends Component {
         //this.isFriendResponse = this.isFriendResponse.bind(this);
         this.removeFriendResponse = this.removeFriendResponse.bind(this);
 
-        this.getMessages = this.getMessages.bind(this);
+        //this.getMessages = this.getMessages.bind(this);
         //this.goToPersonProfile = this.goToPersonProfile.bind(this);
 
         this.findUser = this.findUser.bind(this);
@@ -52,6 +52,7 @@ class MainPage extends Component {
         const url = new URLSearchParams();
         url.append("username", args.username);
         url.append("password", args.password);
+        console.log("login");
         axios.post("http://localhost:8080/ServerWeb/auth/login?" + url).then(response => this.getConnectedResponse(response));
     }
 
@@ -111,38 +112,28 @@ class MainPage extends Component {
     }    
 
     goToTimeLine(){
+    	this.getMessages("mur", this.state.login);
         this.setState({page:"mur"});
     }
 
     goToProfile(){
+    	this.getMessages("user", this.state.login);
         this.setState({page:"profile"});
     }
 
-    /*
-    goToPersonProfile(args){
-        // this function is called when we click on the name of a friend in the url of a message or when we succesfully search for a friend.
-        // it updates all the fields in the state that correspond to values of this friend, so we can visit that friends profile
-        //alert("test");
-        console.log(args);
-        this.setState({page:"personProfile"});
-        //this.setState({page:"personProfile", friendId:args.id, friendLogin:args.login, isFriend:1, friendNom:args.nom, friendPrenom:args.prenom});
-        //this.isFriend(); // update isFriend state
-
-    }
-    */
 
     addFriend() {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("id_friend", this.state.friendId);
-        axios.post("http://localhost:8080/ServerWeb/friends/add?"+url).then(response => this.addFriendResponse(response));
+        axios.post("http://localhost:8080/ServerWeb/friends/add?"+url).then(response => 			this.addFriendResponse(response));
     }
 
     removeFriend() {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("id_friend", this.state.friendId);
-        axios.post("http://localhost:8080/ServerWeb/friends/remove?"+url).then(response => this.removeFriendResponse(response));
+        axios.post("http://localhost:8080/ServerWeb/friends/remove?"+url).then(response => 				this.removeFriendResponse(response));
     } 
 
     addFriendResponse (response) {
@@ -167,50 +158,23 @@ class MainPage extends Component {
         }
     }
 
-    /*
-    isFriend() {
-        const url = new URLSearchParams();
-        url.append("key", this.state.key);
-        url.append("id_friend", this.state.friendId);
-        axios.post("http://localhost:8080/ServerWeb/friends/is"+url).then(response => this.isFriendResponse(response));
-    }
-
-    isFriendResponse (response) {
-        var responseObject = JSON.parse(response);
-        if (("message" in responseObject) && ("code" in responseObject)) {
-            // we know its an error message
-            alert(response.data)
-        } else {
-            if (responseObject["message"]==="true") {
-                this.setState({isFriend:1});
-            } else {
-                this.setState({isFriend:0});
-            }
-        }
-    }
-    */
-
 
     addMessage(text) {
     	console.log(text);
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("text", text);
-        axios.post("http://localhost:8080/ServerWeb/comment/add?"+url).then(response => this.addMessage(response));
+        axios.post("http://localhost:8080/ServerWeb/comment/add?"+url).then(response => 			this.addMessageResponse(response));
     }
 
     addMessageResponse (response) {
-    	console.log(response);
+    	console.log(response.data);
         var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
             alert(JSON.stringify(responseObject))
-        } else {
-            // either do nothing or call getMessages to see the newly added message
-            //this.getMessages("timeline", this.state.login);
         }
     }
-
 
 
     getMessages(type, login){
@@ -221,29 +185,28 @@ class MainPage extends Component {
         } else {
             type = "user";
         }
+		    console.log("get messages ", login, type);
+		    const url = new URLSearchParams();
+		    url.append("key", this.state.key);
+		    url.append("type", type);
+		    url.append("user", login);
+		    console.log(type, login);
+		    axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => 				this.getMessagesResponse(response));
 
-        console.log(type, login);
-        const url = new URLSearchParams();
-        url.append("key", this.state.key);
-        url.append("type", type);
-        url.append("user", login);
-        return axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => this.getMessagesResponse(response));
 
-        
-        // this form must the output have, with these exact fields, brackets, quotes
-        // '{"123":{"username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},
-        // "456":{"username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}}'
-        // which we can then iterate over as follows: JSON.parse(msgs).map(item => alert(item["id"]));
-        //return '{"123":{"username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"}, "456":{"username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}}'
-    }
-s
+	}
+
+
     getMessagesResponse (response) {
+    	console.log(response );
         var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
             alert(JSON.stringify(responseObject))
         } else {
-            return responseObject;
+        	console.log("response ", responseObject);
+        	this.setState({messages:responseObject});
+
         }
     }
 
@@ -256,6 +219,7 @@ s
 
     findUser(login){
         console.log(login);
+        this.getMessages("user", login);
         // we now have the string of the login
         const url = new URLSearchParams();
         url.append("key", this.state.key);
@@ -269,8 +233,9 @@ s
             // we know its an error message
             alert(JSON.stringify(responseObject))
         } else {
+        	
             this.setState({page:"personProfile", friendId:responseObject["id_user"], friendLogin:responseObject["username"],
-            isFriend:responseObject["friend"], friendNom:responseObject["nom"], friendPrenom:responseObject["prenom"]});
+            isFriend:responseObject["friend"], friendNom:responseObject["nom"], friendPrenom:responseObject["prenom"], friendMail:responseObject["mail"],});
         }
     }
 
@@ -304,9 +269,9 @@ s
                         //Page Timeline
                         <section>
                             < TimeLine page={this.state.page} messageStat={this.state.messageStat}
-                            userStat={this.state.userStat}
+                            userStat={this.state.userStat} 
                             findUser={this.findUser} getMessages={this.getMessages}
-                            addMessage={this.addMessage} login={this.state.login}/>
+                            addMessage={this.addMessage} login={this.state.login} messages={this.state.messages}/>
                         </section>
             
                     : 
@@ -318,7 +283,8 @@ s
                             < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.login}
                             id={this.state.id} nom={this.state.nom}
                             prenom={this.state.prenom} isFriend={2}
-                            findUser={this.findUser} getMessages={this.getMessages} page={this.state.page}/>
+                            mail={this.state.mail}
+                            findUser={this.findUser} getMessages={this.getMessages} page={this.state.page} messages={this.state.messages}/>
                         </section>
         
                     :
@@ -330,7 +296,8 @@ s
                             < ProfileTimeLine addFriend={this.addFriend} removeFriend={this.removeFriend} login={this.state.friendLogin}
                             id={this.state.friendId} nom={this.state.friendNom}
                             prenom={this.state.friendPrenom} isFriend={this.state.isFriend}
-                            findUser={this.findUser} getMessages={this.getMessages} page={this.state.page} />
+                            findUser={this.findUser} 
+                            mail={this.mailFriend} getMessages={this.getMessages} page={this.state.page} messages={this.state.messages}/> 
                         </section>
         
                     : 

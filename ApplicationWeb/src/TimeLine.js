@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FluxMessages from './FluxMessages';
 import Statistiques from './Statistiques';
-
+import MessageInput from './MessageInput';
 class TimeLine extends Component {
 
 	constructor(props) {
@@ -14,8 +14,10 @@ class TimeLine extends Component {
                         < Statistiques messageStat={this.props.messageStat} userStat={this.props.userStat} />
                     </div>
                     <div className="col-9">
+                    	<MessageInput addMessage={this.props.addMessage} />
                         <FluxMessages page={this.props.page} getMessages={this.props.getMessages} findUser={this.props.findUser}
-                        addMessage={this.props.addMessage} login={this.props.login} />
+                        addMessage={this.props.addMessage} login={this.props.login}
+                        messages={this.props.messages} />
                     </div>
                 </div>
         )}

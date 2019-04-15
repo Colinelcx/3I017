@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Message extends Component {
 
 	constructor(props) {
         super(props);
+        console.log(this.props.key);
+        this.state = {nom:"", prenom:""};
     }
-
+	
     render() {
         return ( 
             <div className="card bg-white mb-3 shadow-sm mr-3" >

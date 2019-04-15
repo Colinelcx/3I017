@@ -90,6 +90,7 @@ public class UserService {
 			json.put("nom", UserTools.getPrenom(id_user2));
 			json.put("prenom", UserTools.getNom(id_user2));
 			json.put("friend", friend);
+			json.put("mail", UserTools.getMail(id_user2));
 
 			return json;
 			

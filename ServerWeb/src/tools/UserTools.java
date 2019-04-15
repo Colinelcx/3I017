@@ -121,5 +121,19 @@ public class UserTools {
 			login = res.get(0);		
 		return login;
 	}
-	
+
+	/**
+	 * Retourne le mail de l'utilisateur en fontion de son identifiant
+	 * @param id identifiant de l'utilisateur
+	 * @return le prénom de l'utilisateur, null si erreur
+	 * @throws SQLException
+	 */
+	public static String getMail(int id) throws SQLException {
+		String query = "SELECT mail_user from User WHERE id_user=" + id + ";";
+		List<String> res = MySQLTools.executeQuery(query, "mail_user");
+		String mail = null;
+		if (res.size()==1) 
+			mail = res.get(0);		
+		return mail;
+	}
 }

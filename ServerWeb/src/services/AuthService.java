@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import databases.DBStatic;
 import tools.AuthTools;
 import tools.ServiceTools;
+import tools.UserTools;
 
 
 public class AuthService {
@@ -54,6 +55,9 @@ public class AuthService {
 			retour.put("id", id);
 			retour.put("login", login);
 			retour.put("key", key);
+			retour.put("nom", UserTools.getPrenom(id));
+			retour.put("prenom", UserTools.getNom(id));
+			retour.put("mail", UserTools.getMail(id));
 			
 			return retour;
 			

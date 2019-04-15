@@ -25,7 +25,14 @@ public class MessageTools {
 		
 		Document query = new Document();
 		 
+		String login = UserTools.getLogin(id_user);
+		String nom = UserTools.getNom(id_user);
+		String prenom = UserTools.getPrenom(id_user);
+
 		query.append("id_user", id_user);
+		query.append("login", login);
+		query.append("nom", nom);
+		query.append("prenom", prenom);
 		query.append("date", date);
 		query.append("content", content);
 
@@ -53,13 +60,7 @@ public class MessageTools {
 		MongoCursor<Document> cursor = messages.iterator();
 		while (cursor.hasNext()){
 			Document message = cursor.next();
-			StringBuilder messageString = new StringBuilder();
-			messageString.append('{');
-			for (String key : message.keySet()) {
-				messageString.append(key+":"+message.getString(key) + ", ");
-			}
-			messageString.setCharAt(messageString.length()-1, '}');
-			json.append(message.get("_id").toString(), messageString);
+			json.append(message.get("_id").toString(), message.toJson());
 		}
 		return json;
 
@@ -75,13 +76,7 @@ public class MessageTools {
 	
 			while (cursor.hasNext()){
 				Document message = cursor.next();
-				StringBuilder messageString = new StringBuilder();
-				messageString.append('{');
-				for (String key : message.keySet()) {
-					messageString.append(key+":"+message.getString(key) + ", ");
-				}
-				messageString.setCharAt(messageString.length()-1, '}');
-				json.append(message.get("_id").toString(), message.toString());
+				json.append(message.get("_id").toString(), message.toJson());
 			}
 		}
 		return json;
