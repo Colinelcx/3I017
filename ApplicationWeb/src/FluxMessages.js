@@ -26,7 +26,8 @@ class FluxMessages extends Component {
 
     render() {
         
-        const a = JSON.parse(this.props.getMessages(this.props.page, this.props.login));
+        const a = this.props.getMessages(this.props.page, this.props.login);
+        console.log("what fluxmsgs receives", a);
 
         return (
             

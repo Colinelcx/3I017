@@ -192,20 +192,22 @@ class MainPage extends Component {
 
 
     addMessage(text) {
+    	console.log(text);
         const url = new URLSearchParams();
-        url.append("id_user", this.state.id);
+        url.append("key", this.state.key);
         url.append("text", text);
         axios.post("http://localhost:8080/ServerWeb/comment/add?"+url).then(response => this.addMessage(response));
     }
 
     addMessageResponse (response) {
+    	console.log(response);
         var responseObject = response.data
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
             alert(JSON.stringify(responseObject))
         } else {
             // either do nothing or call getMessages to see the newly added message
-            this.getMessages("timeline", this.state.login);
+            //this.getMessages("timeline", this.state.login);
         }
     }
 
@@ -224,15 +226,15 @@ class MainPage extends Component {
         const url = new URLSearchParams();
         url.append("key", this.state.key);
         url.append("type", type);
-        url.append("username", login);
-        // axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => this.getMessagesResponse(response));
+        url.append("user", login);
+        return axios.post("http://localhost:8080/ServerWeb/search?"+url).then(response => this.getMessagesResponse(response));
 
         
         // this form must the output have, with these exact fields, brackets, quotes
         // '{"123":{"username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"},
         // "456":{"username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}}'
         // which we can then iterate over as follows: JSON.parse(msgs).map(item => alert(item["id"]));
-        return '{"123":{"username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"}, "456":{"username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}}'
+        //return '{"123":{"username":"test", "id":234, "nom":"testn", "prenom":"testpn", "date":"123", "text":"123"}, "456":{"username":"secondusername", "id":888, "nom":"secondn", "prenom":"seconpn", "date":"987", "text":"second text"}}'
     }
 s
     getMessagesResponse (response) {
@@ -278,6 +280,7 @@ s
 
 
     render() {
+    	console.log("mainpage.js: ", this.state);
         return (
             <div className="main">
                 <div className="height-full bg-light" id="MainPage">
