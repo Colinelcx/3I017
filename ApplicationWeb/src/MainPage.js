@@ -88,6 +88,9 @@ class MainPage extends Component {
             alert(JSON.stringify(responseObject))
         } else {
             // user account creation succesful --> user needs to login
+        	var i = this.state.userStat;
+        	i += 1;
+        	this.setState({userStat:i});
             this.goToLogin() 
         }
     }
@@ -173,6 +176,10 @@ class MainPage extends Component {
         if (("message" in responseObject) && ("code" in responseObject)) {
             // we know its an error message
             alert(JSON.stringify(responseObject))
+        } else {
+        	var j = this.state.messageStat;
+        	j += 1;
+        	this.setState({userStat:j});
         }
     }
 
