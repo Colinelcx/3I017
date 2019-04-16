@@ -17,8 +17,8 @@ class Statistiques extends Component {
                     </div>
                     
                     <ul className="list-group">
-                        <li className="list-group-item">Users: {this.props.messageStat} </li>
-                        <li className="list-group-item">Messages: {this.props.userStat} </li>
+                        <li className="list-group-item">Users: {this.props.userStat} </li>
+                        <li className="list-group-item">Messages: {this.props.messageStat} </li>
                     </ul>
                 </div>
         )
